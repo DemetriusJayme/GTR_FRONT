@@ -8,10 +8,8 @@ function HomePage() {
   console.log(loggedInUser);
 
   return (
-    <div
-      style={{ height: "100vh" }}
-      className="d-flex justify-content-center align-items-center"
-    >
+    <div>
+      <h1 className="text-3xl font-bold underline">TailWind Rodando</h1>
       <button className="p-4 me-4" variant="dark" size="lg">
         <Link className="nav-link" to="/sign-up">
           Cadastrar no sistema
