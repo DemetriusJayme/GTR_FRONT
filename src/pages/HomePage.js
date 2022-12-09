@@ -1,4 +1,3 @@
-import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
@@ -9,29 +8,29 @@ function HomePage() {
   console.log(loggedInUser);
 
   return (
-    <Container
+    <div
       style={{ height: "100vh" }}
       className="d-flex justify-content-center align-items-center"
     >
-      <Button className="p-4 me-4" variant="dark" size="lg">
+      <button className="p-4 me-4" variant="dark" size="lg">
         <Link className="nav-link" to="/sign-up">
           Cadastrar no sistema
         </Link>
-      </Button>
-      <Button className="p-4" variant="dark" size="lg">
+      </button>
+      <button className="p-4" variant="dark" size="lg">
         <Link className="nav-link" to="/login">
           Entrar no sistema
         </Link>
-      </Button>
+      </button>
 
       {loggedInUser && (
-        <Button className="p-4 ms-4" variant="dark" size="lg">
+        <button className="p-4 ms-4" variant="dark" size="lg">
           <Link className="nav-link" to="/profile">
             Vá para o Perfil
           </Link>
-        </Button>
+        </button>
       )}
-    </Container>
+    </div>
   );
 }
 

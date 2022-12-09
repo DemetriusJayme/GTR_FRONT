@@ -1,4 +1,3 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
@@ -7,12 +6,12 @@ function NavBar() {
   const { loggedInUser } = useContext(AuthContext);
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <Navbar.Brand>Enap 92 - WD</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+    <div bg="dark" variant="dark" expand="lg">
+      <div>
+        <div>Enap 92 - WD</div>
+
+        <div id="basic-navbar-nav">
+          <nav className="me-auto">
             {/* Se o usuário estiver logado */}
             {loggedInUser && (
               <>
@@ -44,10 +43,10 @@ function NavBar() {
                 </Link>
               </>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          </nav>
+        </div>
+      </div>
+    </div>
   );
 }
 

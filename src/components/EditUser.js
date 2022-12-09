@@ -1,4 +1,3 @@
-import { Modal, Button, Form } from "react-bootstrap";
 import { useState } from "react";
 import api from "../api/api";
 
@@ -17,7 +16,7 @@ function EditUser({ form, setForm, reload, setReload }) {
     try {
       await api.put("/user/edit", form);
       setShow(false);
-      setReload(!reload)
+      setReload(!reload);
     } catch (error) {
       console.log(error);
       alert("Algo deu errado");
@@ -26,34 +25,34 @@ function EditUser({ form, setForm, reload, setReload }) {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
+      <div variant="primary" onClick={handleShow}>
         Editar Usuário
-      </Button>
+      </div>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="mb-3">
-            <Form.Label>Nome do Usuário</Form.Label>
-            <Form.Control
+      <div show={show} onHide={handleClose}>
+        <div closediv>
+          <div>Modal heading</div>
+        </div>
+        <div>
+          <div className="mb-3">
+            <label>Nome do Usuário</label>
+            <input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
             />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          </div>
+        </div>
+        <div>
+          <div variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          </div>
+          <div variant="primary" onClick={handleSubmit}>
             Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

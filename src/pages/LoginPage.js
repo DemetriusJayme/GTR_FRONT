@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
@@ -22,7 +21,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await api.post("/user/login", form);
-      
+
       //validar se o usuário confirmou o email dele
 
       //setItem -> coloca algo dentro do localStorage
@@ -46,37 +45,37 @@ function LoginPage() {
   }
 
   return (
-    <Container
+    <div
       style={{ height: "100vh" }}
       className="d-flex flex-column align-items-center justify-content-center"
     >
-      <Form onSubmit={handleSubmit} className="w-50">
-        <Form.Group className="mb-3">
-          <Form.Label>Endereço de e-mail</Form.Label>
-          <Form.Control
+      <div onSubmit={handleSubmit} className="w-50">
+        <div className="mb-3">
+          <label>Endereço de e-mail</label>
+          <input
             type="email"
             name="email"
             value={form.email}
             onChange={handleChange}
             placeholder="Insira o endereço de e-mail cadastrado"
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label>Senha</label>
+          <input
             type="password"
             name="password"
             value={form.password}
             onChange={handleChange}
             placeholder="Insira a senha cadastrada"
           />
-        </Form.Group>
-        <Button className="my-3" variant="dark" type="submit">
+        </div>
+        <button className="my-3" variant="dark" type="submit">
           Entrar no sistema
-        </Button>
-      </Form>
-      <Form.Text>
+        </button>
+      </div>
+      <div>
         Ainda não possui cadastro? Faça já o
         <Link
           className="text-warning fw-bold text-decoration-none"
@@ -86,8 +85,8 @@ function LoginPage() {
           cadastro
         </Link>
         .
-      </Form.Text>
-    </Container>
+      </div>
+    </div>
   );
 }
 

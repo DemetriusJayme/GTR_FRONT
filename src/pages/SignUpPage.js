@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
 
@@ -23,19 +22,18 @@ function SignUpPage() {
   function handleImage(e) {
     //console.log(e.target.files[0]);
     setImg(e.target.files[0]);
-
   }
 
   async function handleUpload(e) {
     try {
       const uploadData = new FormData();
-      uploadData.append("picture", img)
+      uploadData.append("picture", img);
 
-      const response = await api.post("/uploadImage/upload", uploadData )
+      const response = await api.post("/uploadImage/upload", uploadData);
 
       console.log(uploadData);
 
-      return response.data.url
+      return response.data.url;
     } catch (error) {
       console.log(error);
     }
@@ -51,11 +49,11 @@ function SignUpPage() {
     }
 
     //vou chamar a função handleUpload()
-    
-    const imgURL = await handleUpload()
+
+    const imgURL = await handleUpload();
     //disparo a requisição de cadastro para o meu servidor
     try {
-      await api.post("/user/sign-up", {...form, profilePic: imgURL});
+      await api.post("/user/sign-up", { ...form, profilePic: imgURL });
 
       navigate("/login");
     } catch (error) {
@@ -64,73 +62,73 @@ function SignUpPage() {
   }
 
   return (
-    <Container
+    <div
       style={{ height: "100vh" }}
       className="d-flex flex-column align-items-center justify-content-center"
     >
-      <Form className="w-50" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Nome completo</Form.Label>
-          <Form.Control
+      <div className="w-50" onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label>Nome completo</label>
+          <input
             type="text"
             placeholder="Insira um nome para identificação"
             name="name"
             value={form.name}
             onChange={handleChange}
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Endereço de e-mail</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label>Endereço de e-mail</label>
+          <input
             type="email"
             placeholder="Insira o seu melhor endereço de e-mail"
             name="email"
             value={form.email}
             onChange={handleChange}
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Senha</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label>Senha</label>
+          <input
             type="password"
             placeholder="Insira uma senha válida"
             name="password"
             value={form.password}
             onChange={handleChange}
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Confirmar senha</Form.Label>
-          <Form.Control
+        <div className="mb-3">
+          <label>Confirmar senha</label>
+          <input
             type="password"
             placeholder="Confirme a senha válida criada anteriormente"
             name="confirmPassword"
             value={form.confirmPassword}
             onChange={handleChange}
           />
-        </Form.Group>
+        </div>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Foto de Perfil</Form.Label>
-          <Form.Control type="file" onChange={handleImage} />
-        </Form.Group>
+        <div className="mb-3">
+          <label>Foto de Perfil</label>
+          <input type="file" onChange={handleImage} />
+        </div>
 
-        <Button className="my-3" variant="dark" type="submit">
+        <button className="my-3" variant="dark" type="submit">
           Cadastrar usuário
-        </Button>
-      </Form>
-      <Form.Text>
+        </button>
+      </div>
+      <div>
         Já possui cadastro? Faça já o
         <Link className="text-warning fw-bold text-decoration-none" to="/login">
           {" "}
           login
         </Link>
         .
-      </Form.Text>
-    </Container>
+      </div>
+    </div>
   );
 }
 

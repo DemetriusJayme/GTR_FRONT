@@ -1,4 +1,3 @@
-import { Button, Col, Container, Card, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../contexts/authContext";
@@ -51,45 +50,45 @@ function ProfilePage() {
 
   return (
     <div>
-      <Container className="mt-5">
-        <Row className="align-items-center mb-5">
-          <Col>
-            <Card>
+      <div className="mt-5">
+        <div className="align-items-center mb-5">
+          <div>
+            <div>
               <h1>{user.name}</h1>
               <p>{user.email}</p>
-            </Card>
-          </Col>
-          <Col>
+            </div>
+          </div>
+          <div>
             <img src={user.profilePic} alt="profile Pic" className="rounded" />
-          </Col>
-        </Row>
+          </div>
+        </div>
 
-        <Row>
-          <Col>
+        <div>
+          <div>
             <EditUser
               form={form}
               setForm={setForm}
               setReload={setReload}
               reload={reload}
             />
-          </Col>
-          <Col>
-            <Button variant="danger" onClick={handleDeleteUser}>
+          </div>
+          <div>
+            <button variant="danger" onClick={handleDeleteUser}>
               Excluir perfil
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="dark" onClick={signOut}>
+            </button>
+          </div>
+          <div>
+            <button variant="dark" onClick={signOut}>
               Sign Out
-            </Button>
-          </Col>
-          <Col>
+            </button>
+          </div>
+          <div>
             <Link to="/tasks">
-              <Button variant="dark">Minhas Tarefas</Button>
+              <button variant="dark">Minhas Tarefas</button>
             </Link>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

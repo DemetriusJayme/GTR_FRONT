@@ -1,4 +1,3 @@
-import { Container, Form, Button, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import api from "../api/api";
 
@@ -59,78 +58,71 @@ function TasksPage() {
 
   return (
     <div>
-      <Container className="border rounded mt-3">
-        <Form>
-          <Form.Group className="mt-3">
-            <Form.Label>Tarefa</Form.Label>
-            <Form.Control
+      <div className="border rounded mt-3">
+        <div>
+          <div className="mt-3">
+            <label>Tarefa</label>
+            <input
               type="text"
               placeholder="Escreva sua tarefa"
               name="details"
               value={form.details}
               onChange={handleChange}
             />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Data de Finalização</Form.Label>
-            <Form.Control
+          </div>
+          <div className="mt-3">
+            <label>Data de Finalização</label>
+            <input
               type="date"
               name="dateFin"
               value={form.dateFin}
               onChange={handleChange}
             />
-          </Form.Group>
-          <Button variant="primary" className="m-3" onClick={handleSubmit}>
+          </div>
+          <button variant="primary" className="m-3" onClick={handleSubmit}>
             Salvar Tarefa
-          </Button>
-        </Form>
-      </Container>
+          </button>
+        </div>
+      </div>
 
-      <Container className="border rounded mt-3">
+      <div className="border rounded mt-3">
         <h1 className="mt-3">Tarefas</h1>
         {tasks.map((task) => {
           return (
-            <Card key={task._id} className="m-4">
-              <Card.Body>
+            <div key={task._id} className="m-4">
+              <div>
                 <p>{task.details}</p>
 
                 {!task.complete && (
-                  <Form.Select
+                  <input
+                    type="select"
                     defaultValue={form.status}
                     onChange={(e) => handleSelect(e, task._id)}
                   >
                     <option value="aberto">Em Aberto</option>
                     <option value="andamento">Em Andamento</option>
                     <option value="finalizando">Finalizando</option>
-                  </Form.Select>
+                  </input>
                 )}
-              </Card.Body>
-              <Card.Footer>
+              </div>
+              <div>
                 {task.complete ? (
                   <p>Tarefa finalizada no dia: {task.dateFin.slice(0, 10)}</p>
                 ) : (
                   <p>Data final esperada: {task.dateFin.slice(0, 10)}</p>
                 )}
 
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={(e) => handleDeleteTask(e, task._id)}
-                >
+                <button onClick={(e) => handleDeleteTask(e, task._id)}>
                   Excluir Task
-                </Button>
-                <Button
-                  variant="success"
-                  size="sm"
-                  onClick={(e) => handleTaskComplete(e, task._id)}
-                >
+                </button>
+                <button onClick={(e) => handleTaskComplete(e, task._id)}>
                   Concluir Task
-                </Button>
-              </Card.Footer>
-            </Card>
+                </button>
+              </div>
+            </div>
           );
         })}
-      </Container>
+      </div>
     </div>
   );
 }

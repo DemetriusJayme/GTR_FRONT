@@ -1,4 +1,3 @@
-import { Container, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import api from "../api/api";
 
@@ -20,18 +19,18 @@ function NotificationPage() {
   }, []);
 
   return (
-    <Container className="mt-5">
+    <div className="mt-5">
       {!isLoading &&
         logs
           .map((log) => {
             return (
-              <Card className="mb-3">
+              <div className="mb-3">
                 {log.status} - Data: {log.date.slice(0, 10)}
-              </Card>
+              </div>
             );
           })
           .reverse()}
-    </Container>
+    </div>
   );
 }
 
