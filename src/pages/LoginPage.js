@@ -57,6 +57,7 @@ function LoginPage() {
             value={form.email}
             onChange={handleChange}
             placeholder="Insira o endereço de e-mail cadastrado"
+            required
           />
           <label>Senha</label>
           <input
@@ -65,6 +66,7 @@ function LoginPage() {
             value={form.password}
             onChange={handleChange}
             placeholder="Insira a senha cadastrada"
+            required
           />
           <button type="submit">Entrar no sistema</button>
           <div>
