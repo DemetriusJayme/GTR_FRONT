@@ -1,8 +1,20 @@
+import { Link } from "react-router-dom";
+
 import { ArrowLeftIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 function SideBar() {
   const [open, setOpen] = useState(true);
+
+  const navigation = [
+    { name: "Dashboard", to: "/", current: true },
+    { name: "Login", to: "/login", current: false },
+    { name: "Sign-Up", to: "/sign-up", current: false },
+    { name: "Model-form", to: "/model-form", current: false },
+  ];
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
   return (
     <div className="invisible w-0 md:visible md:w-auto">
       <div
@@ -28,6 +40,30 @@ function SideBar() {
           >
             Cadastro de Usuários
           </h1>
+        </div>
+        <div className="inline-flex flex-col">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              to={item.to}
+              className={classNames(
+                item.current
+                  ? "bg-gray-900 text-white"
+                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                `px-3 py-2 items-center w-60 rounded-md text-sm font-medium inline-flex  mb-3
+                ${!open && "bg-white"}`
+              )}
+              aria-current={item.current ? "page" : undefined}
+            >
+              <h1
+                className={`text-white duration-300 scale-1 ${
+                  !open && "scale-0"
+                }`}
+              >
+                {item.name}
+              </h1>
+            </Link>
+          ))}
         </div>
         {/*  Cadastro de Tarefas
         Minhas Tarefas
