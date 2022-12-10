@@ -50,8 +50,9 @@ function LoginPage() {
     <>
       <StyledForm onSubmit={handleSubmit}>
         <form>
-          <label>Endereço de e-mail</label>
+          <label htmlFor="email">Endereço de e-mail</label>
           <input
+            id="email"
             type="email"
             name="email"
             value={form.email}
@@ -59,8 +60,9 @@ function LoginPage() {
             placeholder="Insira o endereço de e-mail cadastrado"
             required
           />
-          <label>Senha</label>
+          <label htmlFor="password">Senha</label>
           <input
+            id="password"
             type="password"
             name="password"
             value={form.password}
