@@ -1,3 +1,5 @@
+import StyledForm from "../styles";
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
@@ -62,12 +64,9 @@ function SignUpPage() {
   }
 
   return (
-    <div
-      style={{ height: "100vh" }}
-      className="d-flex flex-column align-items-center justify-content-center"
-    >
-      <div className="w-50" onSubmit={handleSubmit}>
-        <div className="mb-3">
+    <>
+      <StyledForm onSubmit={handleSubmit}>
+        <form>
           <label>Nome completo</label>
           <input
             type="text"
@@ -76,9 +75,7 @@ function SignUpPage() {
             value={form.name}
             onChange={handleChange}
           />
-        </div>
 
-        <div className="mb-3">
           <label>Endereço de e-mail</label>
           <input
             type="email"
@@ -87,9 +84,6 @@ function SignUpPage() {
             value={form.email}
             onChange={handleChange}
           />
-        </div>
-
-        <div className="mb-3">
           <label>Senha</label>
           <input
             type="password"
@@ -98,9 +92,6 @@ function SignUpPage() {
             value={form.password}
             onChange={handleChange}
           />
-        </div>
-
-        <div className="mb-3">
           <label>Confirmar senha</label>
           <input
             type="password"
@@ -109,26 +100,16 @@ function SignUpPage() {
             value={form.confirmPassword}
             onChange={handleChange}
           />
-        </div>
-
-        <div className="mb-3">
           <label>Foto de Perfil</label>
           <input type="file" onChange={handleImage} />
-        </div>
 
-        <button className="my-3" variant="dark" type="submit">
-          Cadastrar usuário
-        </button>
-      </div>
-      <div>
-        Já possui cadastro? Faça já o
-        <Link className="text-warning fw-bold text-decoration-none" to="/login">
-          {" "}
-          login
-        </Link>
-        .
-      </div>
-    </div>
+          <button type="submit">Cadastrar usuário</button>
+        </form>
+        <div>
+          Já possui cadastro? Faça já o<Link to="/login">login</Link>
+        </div>
+      </StyledForm>
+    </>
   );
 }
 

@@ -10,6 +10,8 @@ function HomePage() {
   return (
     <div>
       <h1 className="text-3xl font-bold underline">TailWind Rodando</h1>
+
+      <div className="divtest"> valeu</div>
       <button className="p-4 me-4" variant="dark" size="lg">
         <Link className="nav-link" to="/sign-up">
           Cadastrar no sistema

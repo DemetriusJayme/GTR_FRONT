@@ -1,3 +1,5 @@
+import StyledForm from "../styles";
+
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
@@ -45,12 +47,9 @@ function LoginPage() {
   }
 
   return (
-    <div
-      style={{ height: "100vh" }}
-      className="d-flex flex-column align-items-center justify-content-center"
-    >
-      <div onSubmit={handleSubmit} className="w-50">
-        <div className="mb-3">
+    <>
+      <StyledForm onSubmit={handleSubmit}>
+        <form>
           <label>Endereço de e-mail</label>
           <input
             type="email"
@@ -59,9 +58,6 @@ function LoginPage() {
             onChange={handleChange}
             placeholder="Insira o endereço de e-mail cadastrado"
           />
-        </div>
-
-        <div className="mb-3">
           <label>Senha</label>
           <input
             type="password"
@@ -70,23 +66,14 @@ function LoginPage() {
             onChange={handleChange}
             placeholder="Insira a senha cadastrada"
           />
-        </div>
-        <button className="my-3" variant="dark" type="submit">
-          Entrar no sistema
-        </button>
-      </div>
-      <div>
-        Ainda não possui cadastro? Faça já o
-        <Link
-          className="text-warning fw-bold text-decoration-none"
-          to="/sign-up"
-        >
-          {" "}
-          cadastro
-        </Link>
-        .
-      </div>
-    </div>
+          <button type="submit">Entrar no sistema</button>
+          <div>
+            Ainda não possui cadastro? Faça já o{" "}
+            <Link to="/sign-up">cadastro</Link>
+          </div>
+        </form>
+      </StyledForm>
+    </>
   );
 }
 
