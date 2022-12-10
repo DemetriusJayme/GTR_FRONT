@@ -55,7 +55,7 @@ function SignUpPage() {
     const imgURL = await handleUpload();
     //disparo a requisição de cadastro para o meu servidor
     try {
-      await api.post("/user/sign-up", { ...form, profilePic: imgURL });
+      await api.post("/user/create", { ...form, profilePic: imgURL });
 
       navigate("/login");
     } catch (error) {
@@ -74,6 +74,7 @@ function SignUpPage() {
             name="name"
             value={form.name}
             onChange={handleChange}
+            required
           />
 
           <label>Endereço de e-mail</label>
@@ -83,6 +84,7 @@ function SignUpPage() {
             name="email"
             value={form.email}
             onChange={handleChange}
+            required
           />
           <label>Senha</label>
           <input
@@ -91,6 +93,7 @@ function SignUpPage() {
             name="password"
             value={form.password}
             onChange={handleChange}
+            required
           />
           <label>Confirmar senha</label>
           <input
@@ -99,6 +102,7 @@ function SignUpPage() {
             name="confirmPassword"
             value={form.confirmPassword}
             onChange={handleChange}
+            required
           />
           <label>Foto de Perfil</label>
           <input type="file" onChange={handleImage} />
