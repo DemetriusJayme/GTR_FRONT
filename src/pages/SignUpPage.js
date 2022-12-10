@@ -1,4 +1,4 @@
-import StyledForm from "../styles";
+import { StyledForm, StyledSection } from "../styles";
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -68,58 +68,61 @@ function SignUpPage() {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
-        <form>
-          <label htmlFor="name">Nome completo</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Insira um nome para identificação"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
+      <h1 className="text-3xl mb-2">Sign-Up</h1>
+      <StyledSection>
+        <StyledForm onSubmit={handleSubmit}>
+          <form>
+            <label htmlFor="name">Nome completo</label>
+            <input
+              id="name"
+              type="text"
+              placeholder="Insira um nome para identificação"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
 
-          <label htmlFor="email">Endereço de e-mail</label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Insira o seu melhor endereço de e-mail"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Insira uma senha válida"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="confirmPassword">Confirmar senha</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            placeholder="Confirme a senha válida criada anteriormente"
-            name="confirmPassword"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="profilePicture">Foto de Perfil</label>
-          <input id="profilePicture" type="file" onChange={handleImage} />
+            <label htmlFor="email">Endereço de e-mail</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Insira o seu melhor endereço de e-mail"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="password">Senha</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Insira uma senha válida"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="confirmPassword">Confirmar senha</label>
+            <input
+              id="confirmPassword"
+              type="password"
+              placeholder="Confirme a senha válida criada anteriormente"
+              name="confirmPassword"
+              value={form.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="profilePicture">Foto de Perfil</label>
+            <input id="profilePicture" type="file" onChange={handleImage} />
 
-          <button type="submit">Cadastrar usuário</button>
-        </form>
-        <div>
-          Já possui cadastro? Faça já o<Link to="/login">login</Link>
-        </div>
-      </StyledForm>
+            <button type="submit">Cadastrar usuário</button>
+          </form>
+          <div>
+            Já possui cadastro? Faça já o<Link to="/login">login</Link>
+          </div>
+        </StyledForm>
+      </StyledSection>
     </>
   );
 }

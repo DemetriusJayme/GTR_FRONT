@@ -1,4 +1,4 @@
-import StyledForm from "../styles";
+import { StyledForm, StyledSection } from "../styles";
 
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -48,35 +48,38 @@ function LoginPage() {
 
   return (
     <>
-      <StyledForm onSubmit={handleSubmit}>
-        <form>
-          <label htmlFor="email">Endereço de e-mail</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Insira o endereço de e-mail cadastrado"
-            required
-          />
-          <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Insira a senha cadastrada"
-            required
-          />
-          <button type="submit">Entrar no sistema</button>
-          <div>
-            Ainda não possui cadastro? Faça já o{" "}
-            <Link to="/sign-up">cadastro</Link>
-          </div>
-        </form>
-      </StyledForm>
+      <h1 className="text-3xl mb-2">Login</h1>
+      <StyledSection>
+        <StyledForm onSubmit={handleSubmit}>
+          <form>
+            <label htmlFor="email">Endereço de e-mail</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Insira o endereço de e-mail cadastrado"
+              required
+            />
+            <label htmlFor="password">Senha</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Insira a senha cadastrada"
+              required
+            />
+            <button type="submit">Entrar no sistema</button>
+            <div>
+              Ainda não possui cadastro? Faça já o{" "}
+              <Link to="/sign-up">cadastro</Link>
+            </div>
+          </form>
+        </StyledForm>
+      </StyledSection>
     </>
   );
 }

@@ -9,7 +9,7 @@ function NavBar() {
   const { loggedInUser } = useContext(AuthContext);
 
   const navigation = [
-    { name: "Dashboard", to: "/", current: true },
+    { name: "Dashboard", to: "/", current: false },
     { name: "Login", to: "/login", current: false },
     { name: "Sign-Up", to: "/sign-up", current: false },
     { name: "Model-form", to: "/model-form", current: false },
@@ -104,7 +104,7 @@ function NavBar() {
                                 : "text-gray-300 hover:bg-gray-700 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium"
                             )}
-                            aria-current={item.current ? "page" : undefined}
+                            aria-current={item.current ? "true" : undefined}
                           >
                             {item.name}
                           </Link>

@@ -11,6 +11,7 @@ import {
   DocumentChartBarIcon,
   ArrowUpTrayIcon,
   CodeBracketIcon,
+  MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
@@ -69,18 +70,32 @@ function SideBar() {
   return (
     <div className="invisible w-0 md:visible md:w-auto">
       <div
-        className={`bg-dark-grey h-screen p-5  relative duration-300 ${
+        className={`bg-blue h-screen p-5  relative duration-300 ${
           open ? "w-72" : "w-20"
         }`}
       >
         <Bars3Icon
-          className={`bg-white  text-dark-grey text-2xl rounded-full absolute -right-3  border border-dark-grey h-6 w-6 p-1 cursor-pointer  ${
+          className={`bg-white  text-dark-blue text-2xl rounded-full absolute -right-3  border border-dark-blue h-6 w-6 p-1 cursor-pointer  ${
             !open && "rotate-180"
           }`}
           aria-hidden="true"
           onClick={() => setOpen(!open)}
         />
 
+        <div className="flex items-center rounded-md bg-white mb-4  border-none">
+          <MagnifyingGlassIcon
+            className={`h-6 w-6 ml-2 mr-2 duration-75 ${
+              !open && "h-10 w-10 m-0"
+            }`}
+          />
+          <input
+            type={"search"}
+            placeholder="Search"
+            className={`bg-transparent w-full focus:outline-none  border-none text-sm font-medium ${
+              !open && "hidden"
+            }`}
+          />
+        </div>
         <div className="inline-flex flex-col w-full">
           {navigation.map((item) => (
             <Link
@@ -88,10 +103,9 @@ function SideBar() {
               to={item.to}
               className={classNames(
                 item.current
-                  ? "bg-gray-900 text-white "
-                  : "text-gray-300 hover:bg-white",
+                  ? "bg-dark-blue text-white hover:bg-dark-grey"
+                  : "text-white hover:bg-dark-grey",
                 ` text-sm font-medium
-                text-white   hover:text-dark-grey hover:stroke-dark-grey
                 ${
                   open
                     ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
@@ -104,7 +118,7 @@ function SideBar() {
                 className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
                 aria-hidden="true"
               />
-              <div className={`${!open && "scale-0"}`}>{item.name}</div>
+              <div className={`${!open && "hidden"}`}>{item.name}</div>
             </Link>
           ))}
         </div>
