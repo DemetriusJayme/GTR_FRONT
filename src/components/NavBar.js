@@ -9,7 +9,7 @@ function NavBar() {
   const { loggedInUser } = useContext(AuthContext);
 
   const navigation = [
-    { name: "Login", to: "/login", current: false },
+    { name: "Login", to: "/login", current: true },
     { name: "Sign-Up", to: "/sign-up", current: false },
     { name: "Model-form", to: "/model-form", current: false },
   ];
