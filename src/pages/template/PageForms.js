@@ -2,9 +2,9 @@
 function PageForms() {
   return (
     <>
-      <h1 className="h1">Modelos de forms</h1>
-      <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="mt-5 md:col-span-2 md:mt-0">
+      <h1 className="text-3xl mb-2">Modelos de forms</h1>
+      <div className="md:grid  md:gap-12">
+        <div className="mt-5 md:mt-0">
           <form action="#" method="POST">
             <div className="shadow sm:overflow-hidden sm:rounded-md">
               <div className="space-y-6 bg-white px-4 py-5 sm:p-6">

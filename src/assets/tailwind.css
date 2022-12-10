@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.divtest {
-  background: red;
-  display: block;
+.app {
+  background: #2f4050;
+  color: #676a6c;
 }
