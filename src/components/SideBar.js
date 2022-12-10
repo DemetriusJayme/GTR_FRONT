@@ -88,8 +88,8 @@ function SideBar() {
               to={item.to}
               className={classNames(
                 item.current
-                  ? "bg-gray-900 "
-                  : "text-gray-300 hover:bg-white hover:text-white hover:svg-stroke-dark-grey",
+                  ? "bg-gray-900 text-white "
+                  : "text-gray-300 hover:bg-white",
                 ` text-sm font-medium
                 text-white   hover:text-dark-grey hover:stroke-dark-grey
                 ${
