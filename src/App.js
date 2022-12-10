@@ -10,6 +10,8 @@ import NavBar from "./components/NavBar";
 import TasksPage from "./pages/TasksPage";
 import NotificationPage from "./pages/NotificationPage";
 
+import PageForms from "./pages/template/PageForms";
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/model-form" element={<PageForms />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route
