@@ -75,7 +75,7 @@ function SideBar() {
         }`}
       >
         <Bars3Icon
-          className={`bg-white  text-dark-blue text-2xl rounded-full absolute -right-3  border border-dark-blue h-6 w-6 p-1 cursor-pointer  ${
+          className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-0.5 hover:bg-orange ${
             !open && "rotate-180"
           }`}
           aria-hidden="true"
@@ -104,7 +104,7 @@ function SideBar() {
               className={classNames(
                 item.current
                   ? "bg-dark-blue text-white hover:bg-dark-grey"
-                  : "text-white hover:bg-dark-grey",
+                  : "text-white hover:bg-orange",
                 ` text-sm font-medium
                 ${
                   open

@@ -10,7 +10,7 @@ function PageForms() {
             htmlFor="company-website"
             className="block text-sm font-medium text-gray-700"
           >
-            Website
+            Model - Input (Type:url)
           </label>
           <div className="mt-1 flex rounded-md shadow-sm">
             <span className="url">http://</span>
@@ -28,7 +28,7 @@ function PageForms() {
               htmlFor="about"
               className="block text-sm font-medium text-gray-700"
             >
-              About
+              Model - Textarea
             </label>
             <div className="mt-1">
               <textarea
@@ -51,20 +51,20 @@ function PageForms() {
           <div className="mt-1 flex items-center">
             <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
               <svg
-                className="h-full w-full text-gray-300"
+                className="h-full w-full text-gray-300 mr-2"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </span>
-            <button type="button" className="">
+            <button type="button" className="ml-2">
               Change
             </button>
           </div>
 
           <label className="block text-sm font-medium text-gray-700">
-            Cover photo
+            Model - Input (Type:file)
           </label>
           <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
             <div className="space-y-1 text-center">
@@ -82,11 +82,8 @@ function PageForms() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="flex text-sm text-gray-600">
-                <label
-                  htmlFor="file-upload"
-                  className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
-                >
+              <div className="">
+                <label htmlFor="file-upload" className="">
                   <span>Upload a file</span>
                   <input
                     id="file-upload"
@@ -95,9 +92,9 @@ function PageForms() {
                     className="sr-only"
                   />
                 </label>
-                <p className="pl-1">or drag and drop</p>
+                <p className="">or drag and drop</p>
               </div>
-              <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              <p className="">PNG, JPG, GIF up to 10MB</p>
             </div>
           </div>
 
@@ -106,7 +103,7 @@ function PageForms() {
               htmlFor="last-name"
               className="block text-sm font-medium text-gray-700"
             >
-              Last name
+              Model - Input (Type:Text)
             </label>
             <input
               type="text"
@@ -118,27 +115,21 @@ function PageForms() {
           </div>
 
           <div className="col-span-6 sm:col-span-4">
-            <label
-              htmlFor="email-address"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email address
+            <label htmlFor="email-address" className="">
+              Model - Input (Type:Email)
             </label>
             <input
-              type="text"
+              type="email"
               name="email-address"
               id="email-address"
               autoComplete="email"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              className=""
             />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="country"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Country
+            <label htmlFor="country" className="">
+              Model - Select
             </label>
             <select id="country" name="country" autoComplete="country-name">
               <option>United States</option>
@@ -147,189 +138,48 @@ function PageForms() {
             </select>
           </div>
 
-          <div className="col-span-6">
-            <label
-              htmlFor="street-address"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Street address
-            </label>
-            <input
-              type="text"
-              name="street-address"
-              id="street-address"
-              autoComplete="street-address"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-            <label
-              htmlFor="city"
-              className="block text-sm font-medium text-gray-700"
-            >
-              City
-            </label>
-            <input
-              type="text"
-              name="city"
-              id="city"
-              autoComplete="address-level2"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-            <label
-              htmlFor="region"
-              className="block text-sm font-medium text-gray-700"
-            >
-              State / Province
-            </label>
-            <input
-              type="text"
-              name="region"
-              id="region"
-              autoComplete="address-level1"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
-          <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-            <label
-              htmlFor="postal-code"
-              className="block text-sm font-medium text-gray-700"
-            >
-              ZIP / Postal code
-            </label>
-            <input
-              type="text"
-              name="postal-code"
-              id="postal-code"
-              autoComplete="postal-code"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-
           <fieldset>
             <legend className="sr-only">By Email</legend>
-            <div
-              className="text-base font-medium text-gray-900"
-              aria-hidden="true"
-            >
-              By Email
-            </div>
-            <div className="mt-4 space-y-4">
+            <div className="text-base font-medium text-gray-900">By Email</div>
+            <div className="mt-4">
               <div className="flex items-start">
-                <div className="flex h-5 items-center">
-                  <input
-                    id="comments"
-                    name="comments"
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                  />
+                <div>
+                  <input id="comments" name="comments" type="checkbox" />
                 </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="comments"
-                    className="font-medium text-gray-700"
-                  >
-                    Comments
-                  </label>
-                  <p className="text-gray-500">
-                    Get notified when someones posts a comment on a posting.
-                  </p>
-                </div>
+
+                <label htmlFor="comments" className="inner">
+                  Comments
+                </label>
               </div>
               <div className="flex items-start">
-                <div className="flex h-5 items-center">
-                  <input
-                    id="candidates"
-                    name="candidates"
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                  />
+                <div>
+                  <input id="candidates" name="candidates" type="checkbox" />
                 </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="candidates"
-                    className="font-medium text-gray-700"
-                  >
-                    Candidates
-                  </label>
-                  <p className="text-gray-500">
-                    Get notified when a candidate applies for a job.
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start">
-                <div className="flex h-5 items-center">
-                  <input
-                    id="offers"
-                    name="offers"
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor="offers" className="font-medium text-gray-700">
-                    Offers
-                  </label>
-                  <p className="text-gray-500">
-                    Get notified when a candidate accepts or rejects an offer.
-                  </p>
-                </div>
+
+                <label htmlFor="candidates" className="inner">
+                  Candidates
+                </label>
               </div>
             </div>
           </fieldset>
           <fieldset>
-            <legend className="contents text-base font-medium text-gray-900">
-              Push Notifications
-            </legend>
-            <p className="text-sm text-gray-500">
-              These are delivered via SMS to your mobile phone.
-            </p>
-            <div className="mt-4 space-y-4">
+            <legend>Push Notifications</legend>
+            <p>These are delivered via SMS to your mobile phone.</p>
+            <div className="mt-4">
               <div className="flex items-center">
                 <input
                   id="push-everything"
                   name="push-notifications"
                   type="radio"
-                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
-                <label
-                  htmlFor="push-everything"
-                  className="ml-3 block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="push-everything" className="inner">
                   Everything
                 </label>
               </div>
               <div className="flex items-center">
-                <input
-                  id="push-email"
-                  name="push-notifications"
-                  type="radio"
-                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="push-email"
-                  className="ml-3 block text-sm font-medium text-gray-700"
-                >
+                <input id="push-email" name="push-notifications" type="radio" />
+                <label htmlFor="push-email" className="inner">
                   Same as email
-                </label>
-              </div>
-              <div className="flex items-center">
-                <input
-                  id="push-nothing"
-                  name="push-notifications"
-                  type="radio"
-                  className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                />
-                <label
-                  htmlFor="push-nothing"
-                  className="ml-3 block text-sm font-medium text-gray-700"
-                >
-                  No push notifications
                 </label>
               </div>
             </div>

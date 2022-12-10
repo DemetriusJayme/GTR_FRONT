@@ -13,6 +13,9 @@ const StyledForm = styled.main.attrs({
     label {
       ${tw`block text-sm font-medium text-gray-700 mb-1 mt-3`}
     }
+    label.inner {
+      ${tw`mt-1 ml-2`}
+    }
     input {
       ${tw`focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm`}
     }
@@ -57,7 +60,7 @@ const StyledForm = styled.main.attrs({
       ${tw`bg-gray-50 px-4 py-3 text-right sm:px-6`}
     }
     button {
-      ${tw`bg-dark-blue text-light-grey inline-flex justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium  shadow-sm hover:bg-blue focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
+      ${tw`bg-dark-blue text-light-grey inline-flex justify-center rounded-md border border-transparent py-2 px-4  mt-2 mb-2 text-sm font-medium  shadow-sm hover:bg-orange focus:outline-none `}
     }
   }
 `;
