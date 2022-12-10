@@ -61,8 +61,9 @@ function TasksPage() {
       <div className="border rounded mt-3">
         <div>
           <div className="mt-3">
-            <label>Tarefa</label>
+            <label htmlFor="detais">Tarefa</label>
             <input
+              id="detais"
               type="text"
               placeholder="Escreva sua tarefa"
               name="details"
@@ -71,8 +72,9 @@ function TasksPage() {
             />
           </div>
           <div className="mt-3">
-            <label>Data de Finalização</label>
+            <label htmlFor="dateFin">Data de Finalização</label>
             <input
+              id="dateFIn"
               type="date"
               name="dateFin"
               value={form.dateFin}

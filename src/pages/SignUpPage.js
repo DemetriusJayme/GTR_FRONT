@@ -31,7 +31,7 @@ function SignUpPage() {
       const uploadData = new FormData();
       uploadData.append("picture", img);
 
-      const response = await api.post("/uploadImage/upload", uploadData);
+      const response = await api.post("/fileUpload/upload", uploadData);
 
       console.log(uploadData);
 
@@ -50,9 +50,12 @@ function SignUpPage() {
       return;
     }
 
+    let imgURL = "";
     //vou chamar a função handleUpload()
+    if (e.target.profilePicture.value) {
+      imgURL = await handleUpload();
+    }
 
-    const imgURL = await handleUpload();
     //disparo a requisição de cadastro para o meu servidor
     try {
       await api.post("/user/create", { ...form, profilePic: imgURL });
@@ -67,8 +70,9 @@ function SignUpPage() {
     <>
       <StyledForm onSubmit={handleSubmit}>
         <form>
-          <label>Nome completo</label>
+          <label htmlFor="name">Nome completo</label>
           <input
+            id="name"
             type="text"
             placeholder="Insira um nome para identificação"
             name="name"
@@ -77,8 +81,9 @@ function SignUpPage() {
             required
           />
 
-          <label>Endereço de e-mail</label>
+          <label htmlFor="email">Endereço de e-mail</label>
           <input
+            id="email"
             type="email"
             placeholder="Insira o seu melhor endereço de e-mail"
             name="email"
@@ -86,8 +91,9 @@ function SignUpPage() {
             onChange={handleChange}
             required
           />
-          <label>Senha</label>
+          <label htmlFor="password">Senha</label>
           <input
+            id="password"
             type="password"
             placeholder="Insira uma senha válida"
             name="password"
@@ -95,8 +101,9 @@ function SignUpPage() {
             onChange={handleChange}
             required
           />
-          <label>Confirmar senha</label>
+          <label htmlFor="confirmPassword">Confirmar senha</label>
           <input
+            id="confirmPassword"
             type="password"
             placeholder="Confirme a senha válida criada anteriormente"
             name="confirmPassword"
@@ -104,8 +111,8 @@ function SignUpPage() {
             onChange={handleChange}
             required
           />
-          <label>Foto de Perfil</label>
-          <input type="file" onChange={handleImage} />
+          <label htmlFor="profilePicture">Foto de Perfil</label>
+          <input id="profilePicture" type="file" onChange={handleImage} />
 
           <button type="submit">Cadastrar usuário</button>
         </form>
