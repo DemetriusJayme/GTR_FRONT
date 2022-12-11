@@ -17,8 +17,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "build:css": "postcss src/assets/tailwind.css -o src/assets/styles.css",
-    "watch:css": "postcss src/assets/tailwind.css -o src/assets/styles.css",
+    "build:css": "postcss src/assets/css/tailwind.css -o src/build/styles.css",
+    "watch:css": "postcss src/assets/css/tailwind.css -o src/build/styles.css",
     "start": "npm run watch:css & react-scripts start",
     "build": "npm run build:css & react-scripts build && echo '/* /index.html  200' | cat >build/_redirects",
     "test": "react-scripts test",
