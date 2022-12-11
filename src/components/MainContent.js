@@ -11,11 +11,9 @@ import NotificationPage from "../pages/NotificationPage";
 import PageForms from "../pages/template/PageForms";
 import ProtectRoute from "./ProtectRoute";
 
-import Footer from "./Footer";
-
 function MainContent() {
   return (
-    <div className="w-full p-7 bg-gray-100">
+    <main className="w-full p-7 h-max pb-20	bg-gray-100">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/model-form" element={<PageForms />} />
@@ -32,8 +30,7 @@ function MainContent() {
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-      <Footer />
-    </div>
+    </main>
   );
 }
 

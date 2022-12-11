@@ -1,6 +1,7 @@
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
 import MainContent from "./components/MainContent";
+import FooterBar from "./components/FooterBar";
 
 import { AuthContextComponent } from "./contexts/authContext";
 
@@ -13,6 +14,7 @@ function App() {
           <SideBar />
           <MainContent />
         </div>
+        <FooterBar />
       </AuthContextComponent>
     </div>
   );

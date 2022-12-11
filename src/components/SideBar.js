@@ -33,7 +33,7 @@ function SideBar() {
     {
       name: "SubMenu",
       icon: Cog6ToothIcon,
-      to: "/task-up",
+      to: "",
       submenu: true,
       submenuItems: [
         {
@@ -90,11 +90,12 @@ function SideBar() {
     return classes.filter(Boolean).join(" ");
   }
   return (
-    <div className="invisible w-0 md:visible md:w-auto">
+    <div className="invisible w-0 md:visible md:w-auto bg-gray-100">
       <div
-        className={`bg-blue h-screen p-5  relative duration-300 ${
+        className={`bg-blue rounded-br-lg  p-5 pt-10  relative duration-300 ${
           open ? "w-72" : "w-20"
-        }`}>
+        }`}
+      >
         <Bars3Icon
           className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-0.5 hover:bg-orange ${
             !open && "rotate-180"
@@ -142,7 +143,8 @@ function SideBar() {
                   (() => {
                     setOpenSubmenu(!openSubmenu);
                   })
-                }>
+                }
+              >
                 <div className="flex items-center">
                   <item.icon
                     className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
@@ -170,7 +172,8 @@ function SideBar() {
                 enterTo="transform scale-100 opacity-100"
                 leave="transition duration-75 ease-out"
                 leaveFrom="transform scale-100 opacity-100"
-                leaveTo="transform scale-95 opacity-0">
+                leaveTo="transform scale-95 opacity-0"
+              >
                 <>
                   {item.submenu && openSubmenu && open && (
                     <>
@@ -190,7 +193,8 @@ function SideBar() {
                          : "mb-3 h-10 rounded-md "
                      }`
                             )
-                          }>
+                          }
+                        >
                           <submenuItems.icon
                             className={`h-6 w-6 mr-2 ${
                               !open && "h-10 w-10 m-0 p-2"
