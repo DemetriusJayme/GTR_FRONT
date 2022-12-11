@@ -6,17 +6,17 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function NavBar() {
-  const { loggedInUser } = useContext(AuthContext);
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
 
   const navigation = [
-    { name: "Login", to: "/login", current: true },
-    { name: "Sign-Up", to: "/sign-up", current: false },
-    { name: "Model-form", to: "/model-form", current: false },
+    { name: "Login", to: "/login" },
+    { name: "Sign-Up", to: "/sign-up" },
+    { name: "Model-form", to: "/model-form" },
   ];
   const navigationLogged = [
-    { name: "Profile", to: "/profile", current: false },
-    { name: "Tasks", to: "/tasks", current: false },
-    { name: "Tasks", to: "/notification", current: false },
+    { name: "Profile", to: "/profile" },
+    { name: "Tasks", to: "/tasks" },
+    { name: "Tasks", to: "/notification" },
   ];
 
   function classNames(...classes) {
@@ -49,8 +49,7 @@ function NavBar() {
                         height="24"
                         viewBox="0 0 70 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           fill-rule="evenodd"
                           clip-rule="evenodd"
@@ -63,8 +62,7 @@ function NavBar() {
                         height="24"
                         viewBox="0 0 70 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           fill-rule="evenodd"
                           clip-rule="evenodd"
@@ -75,10 +73,10 @@ function NavBar() {
                   </Link>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {loggedInUser &&
-                        navigationLogged.map((item) => (
+                      {[navigationLogged, navigation][+!!loggedInUser].map(
+                        (item) => (
                           <NavLink
-                            key={item.name}
+                            key={item.name + item.to}
                             to={item.to}
                             className={({ isActive }) =>
                               classNames(
@@ -90,31 +88,15 @@ function NavBar() {
                             }>
                             {item.name}
                           </NavLink>
-                        ))}
-                      {!loggedInUser &&
-                        navigation.map((item) => (
-                          <NavLink
-                            key={item.name}
-                            to={item.to}
-                            className={({ isActive }) =>
-                              classNames(
-                                isActive
-                                  ? "bg-gray-900 text-white"
-                                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                "px-3 py-2 rounded-md text-sm font-medium"
-                              )
-                            }>
-                            {item.name}
-                          </NavLink>
-                        ))}
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
@@ -138,8 +120,7 @@ function NavBar() {
                       enterTo="transform opacity-100 scale-100"
                       leave="transition ease-in duration-75"
                       leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
+                      leaveTo="transform opacity-0 scale-95">
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
@@ -148,8 +129,7 @@ function NavBar() {
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
+                              )}>
                               Your Profile
                             </Link>
                           )}
@@ -161,8 +141,7 @@ function NavBar() {
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
+                              )}>
                               Settings
                             </Link>
                           )}
@@ -174,9 +153,22 @@ function NavBar() {
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Sign out
+                              )}>
+                              <div
+                                className="flex justify-between items-center"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setLoggedInUser(!loggedInUser);
+                                }}>
+                                <span>Sign {loggedInUser ? "out" : "in"}</span>
+                                <span
+                                  className="rounded-full w-4 h-4 inline-block"
+                                  style={{
+                                    backgroundColor: loggedInUser
+                                      ? "green"
+                                      : "red",
+                                  }}></span>
+                              </div>
                             </Link>
                           )}
                         </Menu.Item>
@@ -200,8 +192,7 @@ function NavBar() {
                         : "text-gray-300 hover:bg-gray-700 hover:text-white",
                       "block px-3 py-2 rounded-md text-base font-medium"
                     )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
+                    aria-current={item.current ? "page" : undefined}>
                     {item.name}
                   </Disclosure.Button>
                 ))}
