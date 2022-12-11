@@ -145,6 +145,9 @@ function SideBar() {
                 }`
                 )}
                 aria-current={item.current ? "page" : undefined}
+                onClick={() => {
+                  setOpenSubmenu(!openSubmenu);
+                }}
               >
                 <div className="flex items-center">
                   <item.icon
