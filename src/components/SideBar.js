@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { Transition } from "@headlessui/react";
+import { useState } from "react";
 
 import {
   Bars3Icon,
@@ -15,7 +17,6 @@ import {
   ChevronUpIcon,
   Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
 
 function SideBar() {
   const [open, setOpen] = useState(true);
@@ -95,6 +96,7 @@ function SideBar() {
       current: false,
     },
   ];
+
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
@@ -161,6 +163,7 @@ function SideBar() {
 
                   <div className={`${!open && "hidden"}`}>{item.name}</div>
                 </div>
+
                 {item.submenu && open && (
                   <ChevronUpIcon
                     className={`h-4 w-4 mr-2 duration-300 ${
@@ -172,39 +175,55 @@ function SideBar() {
                   />
                 )}
               </Link>
-              {item.submenu && openSubmenu && open && (
+              <Transition
+                show={openSubmenu}
+                enter="transition duration-1000 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+              >
                 <>
-                  {item.submenuItems.map((submenuItems, index) => (
-                    <Link
-                      key={submenuItems.name}
-                      to={submenuItems.to}
-                      className={classNames(
-                        item.current
-                          ? "bg-dark-blue text-white hover:bg-dark-grey"
-                          : "bg-blue2 text-white hover:bg-orange",
-                        ` text-sm font-medium px-6 
+                  {item.submenu && openSubmenu && open && (
+                    <>
+                      {item.submenuItems.map((submenuItems, index) => (
+                        <>
+                          <Link
+                            key={submenuItems.name}
+                            to={submenuItems.to}
+                            className={classNames(
+                              item.current
+                                ? "bg-dark-blue text-white hover:bg-dark-grey"
+                                : "bg-blue2 text-white hover:bg-orange",
+                              ` text-sm font-medium px-6 w-full 
                      ${
                        open
                          ? "px-3 py-2 items-center rounded-md mb-1 inline-flex"
                          : "mb-3 h-10 rounded-md "
                      }`
-                      )}
-                      aria-current={submenuItems.current ? "page" : undefined}
-                    >
-                      <submenuItems.icon
-                        className={`h-6 w-6 mr-2 ${
-                          !open && "h-10 w-10 m-0 p-2"
-                        }`}
-                        aria-hidden="true"
-                      />
+                            )}
+                            aria-current={
+                              submenuItems.current ? "page" : undefined
+                            }
+                          >
+                            <submenuItems.icon
+                              className={`h-6 w-6 mr-2 ${
+                                !open && "h-10 w-10 m-0 p-2"
+                              }`}
+                              aria-hidden="true"
+                            />
 
-                      <div className={`${!open && "hidden"}`}>
-                        {submenuItems.name}
-                      </div>
-                    </Link>
-                  ))}
+                            <div className={`${!open && "hidden"}`}>
+                              {submenuItems.name}
+                            </div>
+                          </Link>
+                        </>
+                      ))}
+                    </>
+                  )}
                 </>
-              )}
+              </Transition>
             </>
           ))}
         </div>
