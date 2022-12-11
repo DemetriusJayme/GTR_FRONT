@@ -117,9 +117,9 @@ function SideBar() {
             }`}
           />
         </div>
-        <div className="inline-flex flex-col w-full">
+        <div>
           {navigation.map((item) => (
-            <div key={item.name}>
+            <div key={item.name} className="inline-flex flex-col w-full">
               <NavLink
                 key={item.name}
                 to={item.to}
