@@ -13,7 +13,12 @@ import {
   ArrowUpTrayIcon,
   CodeBracketIcon,
   MagnifyingGlassIcon,
-  Cog6ToothIcon,
+  ChevronUpIcon,
+  UsersIcon,
+  UserGroupIcon,
+  PresentationChartLineIcon,
+  DocumentPlusIcon,
+  ClockIcon,
 } from "@heroicons/react/24/outline";
 import SubMenu from "./SubMenu";
 
@@ -21,40 +26,68 @@ function SideBar() {
   const [open, setOpen] = useState(true);
 
   const navigation = [
-    { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
-    { name: "Add User", icon: UserPlusIcon, to: "/user" },
     {
-      name: "Task",
+      name: "Modelos - Form",
+      icon: CodeBracketIcon,
+      to: "/model-form",
+    },
+    { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
+    {
+      name: "All Tasks",
       icon: ClipboardDocumentListIcon,
       to: "/task-up",
     },
     {
-      name: "SubMenu",
-      icon: Cog6ToothIcon,
+      name: "All Users",
+      icon: UsersIcon,
+      to: "/all-users",
       submenu: true,
       submenuItems: [
         {
-          name: "Sub Menu 1",
-          icon: Cog6ToothIcon,
-          to: "/report1",
+          name: "Add User",
+          icon: UserPlusIcon,
+          to: "/add-user",
         },
         {
-          name: "Sub Menu 2",
-          icon: Cog6ToothIcon,
-          to: "/report2",
+          name: "Creat Group",
+          icon: UserGroupIcon,
+          to: "/group-user",
         },
         {
-          name: "Sub Menu 3",
-          icon: Cog6ToothIcon,
-          to: "/report3",
+          name: "Statistic Users",
+          icon: PresentationChartLineIcon,
+          to: "/statistic-users",
         },
       ],
     },
-
+    {
+      name: "My Agenda",
+      icon: CalendarDaysIcon,
+      to: "/calendar",
+      submenu: true,
+      submenuItems: [
+        {
+          name: "Add Event",
+          icon: DocumentPlusIcon,
+          to: "/add-event",
+        },
+        {
+          name: "Deadline",
+          icon: ClockIcon,
+          to: "/event-deadline",
+        },
+      ],
+    },
     {
       name: "Report",
       icon: DocumentChartBarIcon,
       to: "/report",
+    },
+
+    {
+      name: "Upload",
+      icon: ArrowUpTrayIcon,
+      to: "/fileUpload",
     },
     {
       name: "Chatbot",
@@ -65,21 +98,6 @@ function SideBar() {
       name: "Log-out",
       icon: ArrowLeftOnRectangleIcon,
       to: "/log",
-    },
-    {
-      name: "Upload",
-      icon: ArrowUpTrayIcon,
-      to: "/fileUpload",
-    },
-    {
-      name: "Calendar",
-      icon: CalendarDaysIcon,
-      to: "/calendar",
-    },
-    {
-      name: "Modelos - Form",
-      icon: CodeBracketIcon,
-      to: "/model-form",
     },
   ];
 

@@ -60,7 +60,7 @@ const StyledForm = styled.main.attrs({
       ${tw`bg-gray-50 px-4 py-3 text-right sm:px-6`}
     }
     button {
-      ${tw`bg-dark-blue text-light-grey inline-flex justify-center rounded-md border border-transparent py-2 px-4  mt-2 mb-2 text-sm font-medium  shadow-sm hover:bg-orange focus:outline-none `}
+      ${tw`bg-blue2 text-light-grey inline-flex justify-center rounded-md border border-transparent py-2 px-4  mt-2 mb-2 text-sm font-medium  shadow-sm hover:bg-orange focus:outline-none border-8`}
     }
   }
 `;

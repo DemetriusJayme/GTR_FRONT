@@ -98,10 +98,10 @@ function HomePage() {
       </div>
       <StyledSection>
         <StyledForm>
-          <button className="mr-2">
+          <button className="mr-2 bg-dark-blue">
             <Link to="/sign-up">Cadastrar no sistema</Link>
           </button>
-          <button className="mr-2">
+          <button className="mr-2 bg-dark-blue">
             <Link to="/login">Entrar no sistema</Link>
           </button>
           {loggedInUser && (

@@ -904,6 +904,9 @@ select {
 .border {
   border-width: 1px;
 }
+.border-8 {
+  border-width: 8px;
+}
 .border-2 {
   border-width: 2px;
 }
@@ -945,14 +948,14 @@ select {
 }
 .bg-dark-blue {
   --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 .bg-transparent {
   background-color: transparent;
 }
 .bg-blue2 {
   --tw-bg-opacity: 1;
-  background-color: rgb(12 62 77 / var(--tw-bg-opacity));
+  background-color: rgb(44 91 109 / var(--tw-bg-opacity));
 }
 .bg-gray-50 {
   --tw-bg-opacity: 1;
@@ -1083,7 +1086,7 @@ select {
 }
 .text-blue2 {
   --tw-text-opacity: 1;
-  color: rgb(12 62 77 / var(--tw-text-opacity));
+  color: rgb(44 91 109 / var(--tw-text-opacity));
 }
 .text-gray-500 {
   --tw-text-opacity: 1;

@@ -6,12 +6,7 @@ function PageForms() {
       <h1 className="text-3xl mb-2">Modelos de forms</h1>
       <StyledSection>
         <StyledForm action="#" method="POST">
-          <label
-            htmlFor="company-website"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Model - Input (Type:url)
-          </label>
+          <label htmlFor="company-website">Model - Input (Type:url)</label>
           <div className="mt-1 flex rounded-md shadow-sm">
             <span className="url">http://</span>
             <input
