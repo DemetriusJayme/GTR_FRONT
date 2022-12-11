@@ -9554,6 +9554,11 @@
     "@types/trusted-types" "^2.0.2"
     "workbox-core" "6.5.4"
 
+"wow.js@^1.2.2":
+  "integrity" "sha512-YTW9eiZimHCJDWofsiz2507txaPteUiQD461I/D8533AiRAn3+Y68/1LDuQ3OTgPjagGZLPYKrpoSgjzeQrO6A=="
+  "resolved" "https://registry.npmjs.org/wow.js/-/wow.js-1.2.2.tgz"
+  "version" "1.2.2"
+
 "wrap-ansi@^7.0.0":
   "integrity" "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q=="
   "resolved" "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz"

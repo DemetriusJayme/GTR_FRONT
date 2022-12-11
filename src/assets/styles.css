@@ -662,9 +662,6 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
-.float-right {
-  float: right;
-}
 .m-0 {
   margin: 0px;
 }
@@ -696,6 +693,9 @@ select {
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -707,9 +707,6 @@ select {
 }
 .mt-3 {
   margin-top: 0.75rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
 }
 .mt-1 {
   margin-top: 0.25rem;
@@ -843,11 +840,6 @@ select {
   margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
 }
-.space-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -925,6 +917,10 @@ select {
 .bg-transparent {
   background-color: transparent;
 }
+.bg-blue2 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(12 62 77 / var(--tw-bg-opacity));
+}
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -964,9 +960,9 @@ select {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-.px-7 {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 .py-3 {
   padding-top: 0.75rem;
@@ -975,10 +971,6 @@ select {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 .pr-2 {
   padding-right: 0.5rem;
@@ -1099,6 +1091,9 @@ select {
 }
 .duration-300 {
   transition-duration: 300ms;
+}
+.duration-200 {
+  transition-duration: 200ms;
 }
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);

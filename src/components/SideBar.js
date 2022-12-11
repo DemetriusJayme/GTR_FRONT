@@ -137,7 +137,7 @@ function SideBar() {
                   item.current
                     ? "bg-dark-blue text-white hover:bg-dark-grey"
                     : "text-white hover:bg-orange",
-                  ` text-sm font-medium flex space-x-2 justify-content:space-between
+                  ` text-sm font-medium flex justify-between
                 ${
                   open
                     ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
@@ -145,9 +145,13 @@ function SideBar() {
                 }`
                 )}
                 aria-current={item.current ? "page" : undefined}
-                onClick={() => {
-                  setOpenSubmenu(!openSubmenu);
-                }}
+                onClick={
+                  item.submenu &&
+                  open &&
+                  (() => {
+                    setOpenSubmenu(!openSubmenu);
+                  })
+                }
               >
                 <div className="flex items-center">
                   <item.icon
@@ -159,7 +163,7 @@ function SideBar() {
                 </div>
                 {item.submenu && open && (
                   <ChevronUpIcon
-                    className={`h-4 w-4 mr-2 duration-100 float-right	 ${
+                    className={`h-4 w-4 mr-2 duration-300 ${
                       !openSubmenu && "rotate-180"
                     }`}
                     onClick={() => {
@@ -177,12 +181,12 @@ function SideBar() {
                       className={classNames(
                         item.current
                           ? "bg-dark-blue text-white hover:bg-dark-grey"
-                          : "text-white hover:bg-orange",
-                        ` text-sm font-medium px-6 duration-100
+                          : "bg-blue2 text-white hover:bg-orange",
+                        ` text-sm font-medium px-6 
                      ${
                        open
-                         ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
-                         : "mb-3 h-10 rounded-md "
+                         ? "px-3 py-2 items-center rounded-md mb-1"
+                         : "mb-3 h-10 rounded-md"
                      }`
                       )}
                       aria-current={submenuItems.current ? "page" : undefined}
