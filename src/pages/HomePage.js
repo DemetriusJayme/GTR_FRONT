@@ -97,14 +97,14 @@ function HomePage() {
       </div>
       <section>
         <form>
-          <button className="mr-2 bg-dark-blue">
+          <button className="btn mr-2">
             <Link to="/sign-up">Cadastrar no sistema</Link>
           </button>
-          <button className="mr-2 bg-dark-blue">
+          <button className="btn  mr-2">
             <Link to="/login">Entrar no sistema</Link>
           </button>
           {loggedInUser && (
-            <button className="mr-2">
+            <button className="btn  mr-2">
               <Link to="/profile">Vá para o Perfil</Link>
             </button>
           )}
