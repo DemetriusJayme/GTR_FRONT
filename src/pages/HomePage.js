@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
-import { StyledForm, StyledSection } from "../styles";
 
 import {
   BriefcaseIcon,
@@ -96,8 +95,8 @@ function HomePage() {
           </span>
         </div>
       </div>
-      <StyledSection>
-        <StyledForm>
+      <section>
+        <form>
           <button className="mr-2 bg-dark-blue">
             <Link to="/sign-up">Cadastrar no sistema</Link>
           </button>
@@ -109,8 +108,8 @@ function HomePage() {
               <Link to="/profile">Vá para o Perfil</Link>
             </button>
           )}
-        </StyledForm>
-      </StyledSection>
+        </form>
+      </section>
     </>
   );
 }

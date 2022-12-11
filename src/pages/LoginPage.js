@@ -1,5 +1,3 @@
-import { StyledForm, StyledSection } from "../styles";
-
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../api/api.js";
@@ -49,8 +47,8 @@ function LoginPage() {
   return (
     <>
       <h1 className="text-3xl mb-2">Login</h1>
-      <StyledSection>
-        <StyledForm onSubmit={handleSubmit}>
+      <section>
+        <form onSubmit={handleSubmit}>
           <form>
             <label htmlFor="email">Endereço de e-mail</label>
             <input
@@ -72,14 +70,16 @@ function LoginPage() {
               placeholder="Insira a senha cadastrada"
               required
             />
-            <button type="submit">Entrar no sistema</button>
+            <button className="btn" type="submit">
+              Entrar no sistema
+            </button>
             <div>
               Ainda não possui cadastro? Faça já o{" "}
               <Link to="/sign-up">cadastro</Link>
             </div>
           </form>
-        </StyledForm>
-      </StyledSection>
+        </form>
+      </section>
     </>
   );
 }

@@ -1,11 +1,9 @@
-import { StyledForm, StyledSection } from "../../styles";
-
 function PageForms() {
   return (
-    <>
+    <div>
       <h1 className="text-3xl mb-2">Modelos de forms</h1>
-      <StyledSection>
-        <StyledForm action="#" method="POST">
+      <section>
+        <form action="#" method="POST">
           <label htmlFor="company-website">Model - Input (Type:url)</label>
           <div className="mt-1 flex rounded-md shadow-sm">
             <span className="url">http://</span>
@@ -34,9 +32,7 @@ function PageForms() {
             </p>
           </div>
 
-          <label className="block text-sm font-medium text-gray-700">
-            Photo
-          </label>
+          <label>Photo</label>
           <div className="mt-1 flex items-center">
             <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
               <svg
@@ -47,7 +43,7 @@ function PageForms() {
                 <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </span>
-            <button type="button" className="ml-2">
+            <button type="button" className="ml-2 btn">
               Change
             </button>
           </div>
@@ -55,6 +51,7 @@ function PageForms() {
           <label className="block text-sm font-medium text-gray-700">
             Model - Input (Type:file)
           </label>
+
           <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
             <div className="space-y-1 text-center">
               <svg
@@ -71,18 +68,15 @@ function PageForms() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="">
-                <label htmlFor="file-upload" className="">
+
+              <div>
+                <label htmlFor="file-upload">
                   <span>Upload a file</span>
-                  <input
-                    id="file-upload"
-                    name="file-upload"
-                    type="file"
-                    className="sr-only"
-                  />
+                  <input id="file-upload" name="file-upload" type="file" />
                 </label>
                 <p className="">or drag and drop</p>
               </div>
+
               <p className="">PNG, JPG, GIF up to 10MB</p>
             </div>
           </div>
@@ -175,13 +169,13 @@ function PageForms() {
           </fieldset>
 
           <div className="area-button">
-            <button type="submit" className="">
+            <button type="submit" className="btn">
               Save
             </button>
           </div>
-        </StyledForm>
-      </StyledSection>
-    </>
+        </form>
+      </section>
+    </div>
   );
 }
 
