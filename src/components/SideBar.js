@@ -185,8 +185,8 @@ function SideBar() {
                         ` text-sm font-medium px-6 
                      ${
                        open
-                         ? "px-3 py-2 items-center rounded-md mb-1"
-                         : "mb-3 h-10 rounded-md"
+                         ? "px-3 py-2 items-center rounded-md mb-1 inline-flex"
+                         : "mb-3 h-10 rounded-md "
                      }`
                       )}
                       aria-current={submenuItems.current ? "page" : undefined}
@@ -208,9 +208,6 @@ function SideBar() {
             </>
           ))}
         </div>
-        {/*  Cadastro de Tarefas
-        Minhas Tarefas
-        Relatorios */}
       </div>
     </div>
   );
