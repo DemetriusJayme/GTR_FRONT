@@ -904,6 +904,9 @@ select {
 .border {
   border-width: 1px;
 }
+.border-8 {
+  border-width: 8px;
+}
 .border-2 {
   border-width: 2px;
 }
