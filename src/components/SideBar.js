@@ -119,7 +119,7 @@ function SideBar() {
         </div>
         <div className="inline-flex flex-col w-full">
           {navigation.map((item) => (
-            <>
+            <div key={item.name}>
               <NavLink
                 key={item.name}
                 to={item.to}
@@ -175,41 +175,39 @@ function SideBar() {
                   {item.submenu && openSubmenu && open && (
                     <>
                       {item.submenuItems.map((submenuItems, index) => (
-                        <>
-                          <NavLink
-                            key={submenuItems.name}
-                            to={submenuItems.to}
-                            className={({ isActive }) =>
-                              classNames(
-                                isActive
-                                  ? "bg-dark-blue text-white hover:bg-dark-grey"
-                                  : "bg-blue2 text-white hover:bg-orange",
-                                ` text-sm font-medium px-6 w-full 
+                        <NavLink
+                          key={submenuItems.name}
+                          to={submenuItems.to}
+                          className={({ isActive }) =>
+                            classNames(
+                              isActive
+                                ? "bg-dark-blue text-white hover:bg-dark-grey"
+                                : "bg-blue2 text-white hover:bg-orange",
+                              ` text-sm font-medium px-6 w-full 
                      ${
                        open
                          ? "px-3 py-2 items-center rounded-md mb-1 inline-flex"
                          : "mb-3 h-10 rounded-md "
                      }`
-                              )
-                            }>
-                            <submenuItems.icon
-                              className={`h-6 w-6 mr-2 ${
-                                !open && "h-10 w-10 m-0 p-2"
-                              }`}
-                              aria-hidden="true"
-                            />
+                            )
+                          }>
+                          <submenuItems.icon
+                            className={`h-6 w-6 mr-2 ${
+                              !open && "h-10 w-10 m-0 p-2"
+                            }`}
+                            aria-hidden="true"
+                          />
 
-                            <div className={`${!open && "hidden"}`}>
-                              {submenuItems.name}
-                            </div>
-                          </NavLink>
-                        </>
+                          <div className={`${!open && "hidden"}`}>
+                            {submenuItems.name}
+                          </div>
+                        </NavLink>
                       ))}
                     </>
                   )}
                 </>
               </Transition>
-            </>
+            </div>
           ))}
         </div>
       </div>
