@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function SubMenu({ item, open }) {
   const [openSubmenu, setOpenSubmenu] = useState(false);
+  const navigate = useNavigate();
   return (
     <div key={item.name} className="inline-flex flex-col w-full">
       <div
@@ -19,6 +20,7 @@ export default function SubMenu({ item, open }) {
             : "mb-3 h-10 rounded-md"
         }`}
         onClick={() => {
+          if (item.to) navigate(item.to);
           if (open) setOpenSubmenu(!openSubmenu);
         }}>
         <div className="flex items-center">
@@ -27,7 +29,7 @@ export default function SubMenu({ item, open }) {
             aria-hidden="true"
           />
 
-          <div className={`${!open && "hidden"}`}>{item.name}</div>
+          <div className={!open && "hidden"}>{item.name}</div>
         </div>
 
         {item.submenu && open && (

@@ -13,7 +13,6 @@ import {
   ArrowUpTrayIcon,
   CodeBracketIcon,
   MagnifyingGlassIcon,
-  ChevronUpIcon,
   UsersIcon,
   UserGroupIcon,
   PresentationChartLineIcon,
