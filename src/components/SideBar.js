@@ -12,11 +12,14 @@ import {
   ArrowUpTrayIcon,
   CodeBracketIcon,
   MagnifyingGlassIcon,
+  ChevronUpIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 function SideBar() {
   const [open, setOpen] = useState(true);
+  const [openSubmenu, setOpenSubmenu] = useState(false);
 
   const navigation = [
     { name: "Dashboard", icon: Squares2X2Icon, to: "/", current: true },
@@ -27,6 +30,34 @@ function SideBar() {
       to: "/task-up",
       current: false,
     },
+    {
+      name: "SubMenu",
+      icon: Cog6ToothIcon,
+      to: "/task-up",
+      current: false,
+      submenu: true,
+      submenuItems: [
+        {
+          name: "Sub Menu 1",
+          icon: Cog6ToothIcon,
+          to: "/report",
+          current: false,
+        },
+        {
+          name: "Sub Menu 2",
+          icon: Cog6ToothIcon,
+          to: "/report",
+          current: false,
+        },
+        {
+          name: "Sub Menu 3",
+          icon: Cog6ToothIcon,
+          to: "/report",
+          current: false,
+        },
+      ],
+    },
+
     {
       name: "Report",
       icon: DocumentChartBarIcon,
@@ -98,28 +129,76 @@ function SideBar() {
         </div>
         <div className="inline-flex flex-col w-full">
           {navigation.map((item) => (
-            <Link
-              key={item.name}
-              to={item.to}
-              className={classNames(
-                item.current
-                  ? "bg-dark-blue text-white hover:bg-dark-grey"
-                  : "text-white hover:bg-orange",
-                ` text-sm font-medium
+            <>
+              <Link
+                key={item.name}
+                to={item.to}
+                className={classNames(
+                  item.current
+                    ? "bg-dark-blue text-white hover:bg-dark-grey"
+                    : "text-white hover:bg-orange",
+                  ` text-sm font-medium flex space-x-2 justify-content:space-between
                 ${
                   open
                     ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
                     : "mb-3 h-10 rounded-md "
                 }`
+                )}
+                aria-current={item.current ? "page" : undefined}
+              >
+                <div className="flex items-center">
+                  <item.icon
+                    className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
+                    aria-hidden="true"
+                  />
+
+                  <div className={`${!open && "hidden"}`}>{item.name}</div>
+                </div>
+                {item.submenu && open && (
+                  <ChevronUpIcon
+                    className={`h-4 w-4 mr-2 duration-100 float-right	 ${
+                      !openSubmenu && "rotate-180"
+                    }`}
+                    onClick={() => {
+                      setOpenSubmenu(!openSubmenu);
+                    }}
+                  />
+                )}
+              </Link>
+              {item.submenu && openSubmenu && open && (
+                <>
+                  {item.submenuItems.map((submenuItems, index) => (
+                    <Link
+                      key={submenuItems.name}
+                      to={submenuItems.to}
+                      className={classNames(
+                        item.current
+                          ? "bg-dark-blue text-white hover:bg-dark-grey"
+                          : "text-white hover:bg-orange",
+                        ` text-sm font-medium px-6 duration-100
+                     ${
+                       open
+                         ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
+                         : "mb-3 h-10 rounded-md "
+                     }`
+                      )}
+                      aria-current={submenuItems.current ? "page" : undefined}
+                    >
+                      <submenuItems.icon
+                        className={`h-6 w-6 mr-2 ${
+                          !open && "h-10 w-10 m-0 p-2"
+                        }`}
+                        aria-hidden="true"
+                      />
+
+                      <div className={`${!open && "hidden"}`}>
+                        {submenuItems.name}
+                      </div>
+                    </Link>
+                  ))}
+                </>
               )}
-              aria-current={item.current ? "page" : undefined}
-            >
-              <item.icon
-                className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
-                aria-hidden="true"
-              />
-              <div className={`${!open && "hidden"}`}>{item.name}</div>
-            </Link>
+            </>
           ))}
         </div>
         {/*  Cadastro de Tarefas
