@@ -1,4 +1,4 @@
-function PageForms() {
+function FormsPage() {
   return (
     <div>
       <h1 className="text-3xl mb-2">Modelos de forms</h1>
@@ -169,7 +169,7 @@ function PageForms() {
           </fieldset>
 
           <div className="area-button">
-            <button type="submit" className="btn">
+            <button type="submit" className="btn-blue">
               Save
             </button>
           </div>
@@ -179,4 +179,4 @@ function PageForms() {
   );
 }
 
-export default PageForms;
+export default FormsPage;

@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-import { AuthContext } from "../contexts/authContext";
-import api from "../api/api";
-import EditUser from "../components/EditUser";
+import { AuthContext } from "../../contexts/authContext";
+import api from "../../api/api";
+import EditUser from "../../components/EditUser";
 
 function ProfilePage() {
   const navigate = useNavigate();

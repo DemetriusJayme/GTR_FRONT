@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext";
+import { AuthContext } from "../contexts/authContext.js";
 
 import {
   BriefcaseIcon,
@@ -79,7 +79,7 @@ function HomePage() {
           </span>
 
           <span className="sm:ml-3">
-            <button type="button" className="btn">
+            <button type="button" className="btn-blue">
               <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
               Publish
             </button>

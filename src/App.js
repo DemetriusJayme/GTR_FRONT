@@ -1,7 +1,7 @@
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
-import MainContent from "./components/MainContent";
-import FooterBar from "./components/FooterBar";
+import NavBar from "./components/structure/NavBar";
+import SideBar from "./components/structure/SideBar";
+import MainContent from "./components/structure/MainContent";
+import FooterBar from "./components/structure/FooterBar";
 
 import { AuthContextComponent } from "./contexts/authContext";
 

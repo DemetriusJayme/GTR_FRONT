@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api/api.js";
-import { AuthContext } from "../contexts/authContext";
+import api from "../../api/api.js";
+import { AuthContext } from "../../contexts/authContext";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -29,10 +29,6 @@ function LoginPage() {
 
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
-
-      /*  if (response.data.user.role === "ADMIN") {
-            navigate("/admin")
-        } */
 
       navigate("/profile");
     } catch (error) {

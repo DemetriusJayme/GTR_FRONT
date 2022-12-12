@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import api from "../api/api";
+import api from "../../api/api.js";
 
-function TasksPage() {
+function ListTaskPage() {
   const [form, setForm] = useState({
     details: "",
     dateFin: "",
@@ -129,4 +129,4 @@ function TasksPage() {
   );
 }
 
-export default TasksPage;
+export default ListTaskPage;
