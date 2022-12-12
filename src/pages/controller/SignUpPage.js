@@ -66,7 +66,7 @@ function SignUpPage() {
 
   return (
     <>
-      <h1 className="text-3xl mb-2">Sign-Up</h1>
+      <h1>Sign-Up</h1>
       <section>
         <form onSubmit={handleSubmit}>
           <form>

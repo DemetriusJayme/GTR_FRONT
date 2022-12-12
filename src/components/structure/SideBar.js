@@ -104,14 +104,14 @@ function SideBar() {
     return classes.filter(Boolean).join(" ");
   }
   return (
-    <div className="invisible w-0 md:visible md:w-auto bg-gray-100">
+    <div className="invisible w-0 md:visible md:w-auto bg-gray-100 mt-4">
       <div
-        className={`bg-blue rounded-br-lg  p-5 pt-10  relative duration-300 ${
+        className={`bg-blue rounded-r-lg  p-5 pt-10  relative duration-300 ${
           open ? "w-72" : "w-20"
         }`}
       >
         <Bars3Icon
-          className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-0.5 hover:bg-orange ${
+          className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-1.5 hover:bg-orange ${
             !open && "rotate-180"
           }`}
           aria-hidden="true"

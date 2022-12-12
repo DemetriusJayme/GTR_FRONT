@@ -9,11 +9,15 @@
 }
 @layer base {
   h1 {
-    @apply text-2xl;
+    @apply text-4xl font-bold leading-7 text-blue2 sm:truncate sm:text-4xl sm:tracking-tight mb-2;
   }
   h2 {
-    @apply text-xl;
+    @apply text-3xl font-bold leading-7 text-blue sm:truncate sm:text-3xl sm:tracking-tight;
   }
+  h3 {
+    @apply text-2xl font-bold leading-7 text-blue sm:truncate sm:text-2xl sm:tracking-tight;
+  }
+
   .btn {
     @apply inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50;
   }
@@ -74,5 +78,42 @@
   }
   section {
     @apply space-y-6 bg-white px-4 py-5 sm:p-6 mb-2 shadow sm:overflow-hidden rounded-md;
+  }
+  /*   Table */
+  .table-responsive {
+    @apply overflow-x-auto relative shadow-md sm:rounded-lg;
+  }
+  table {
+    @apply w-full text-sm text-left text-gray-500;
+  }
+  thead {
+    @apply text-xs text-white uppercase bg-blue2;
+  }
+  thead th {
+    @apply py-3 px-6;
+  }
+  tbody tr {
+    @apply bg-white border-b   hover:bg-gray-50;
+  }
+  tbody th {
+    @apply flex items-center py-4 px-6  whitespace-nowrap  text-gray-500 hover:text-blue;
+  }
+  .links {
+    hover: text-orange;
+  }
+  .pagination {
+    @apply inline-flex items-center -space-x-px;
+  }
+  .pagination .previous {
+    @apply block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700;
+  }
+  .pagination .next {
+    @apply block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700;
+  }
+  .pagination .item {
+    @apply px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700;
+  }
+  .pagination .item-current {
+    @apply px-3 py-2 leading-tight text-white bg-blue border border-gray-300 hover:bg-gray-100 hover:text-gray-700;
   }
 }

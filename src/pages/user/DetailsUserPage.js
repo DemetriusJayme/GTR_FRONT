@@ -50,6 +50,7 @@ function DetailsUserPage() {
 
   return (
     <div>
+      <h1>Details User</h1>
       <div className="mt-5">
         <div className="align-items-center mb-5">
           <div>
