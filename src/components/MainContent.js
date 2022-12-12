@@ -8,6 +8,7 @@ import ProfilePage from "../pages/ProfilePage";
 import ErrorPage from "../pages/ErrorPage";
 import TasksPage from "../pages/TasksPage";
 import NotificationPage from "../pages/NotificationPage";
+import DeadLinePage from "../pages/DeadLinePage";
 import PageForms from "../pages/template/PageForms";
 import ProtectRoute from "./ProtectRoute";
 
@@ -27,6 +28,10 @@ function MainContent() {
         <Route
           path="/notificacoes"
           element={<ProtectRoute Component={NotificationPage} />}
+        />
+        <Route
+          path="/event-deadline"
+          element={<ProtectRoute Component={DeadLinePage} />}
         />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
