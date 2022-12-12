@@ -13,6 +13,9 @@ https://github.com/MichelaCamboim
 Anderson Moro
 https://github.com/nosderson
 
+Demetrius Jayme
+https://github.com/DemetriusJayme
+
 Gabriel Stroligo
 https://github.com/stroligo
 

@@ -99,6 +99,36 @@ function HomePage() {
           )}
         </form>
       </section>
+      <section>
+        <form>
+          <button className="btn mr-2">
+            <Link to="/sign-up">Cadastrar no sistema</Link>
+          </button>
+          <button className="btn  mr-2">
+            <Link to="/login">Entrar no sistema</Link>
+          </button>
+          {loggedInUser && (
+            <button className="btn  mr-2">
+              <Link to="/profile">Vá para o Perfil</Link>
+            </button>
+          )}
+        </form>
+      </section>
+      <section>
+        <form>
+          <button className="btn mr-2">
+            <Link to="/sign-up">Cadastrar no sistema</Link>
+          </button>
+          <button className="btn  mr-2">
+            <Link to="/login">Entrar no sistema</Link>
+          </button>
+          {loggedInUser && (
+            <button className="btn  mr-2">
+              <Link to="/profile">Vá para o Perfil</Link>
+            </button>
+          )}
+        </form>
+      </section>
     </>
   );
 }
