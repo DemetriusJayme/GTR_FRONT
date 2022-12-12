@@ -10,7 +10,7 @@ export default function SubMenu({ item, open }) {
     <div key={item.name} className="inline-flex flex-col w-full">
       <div
         key={item.name}
-        className={`cursor-pointer  ${
+        className={`cursor-pointer ${
           openSubmenu
             ? "bg-dark-blue text-white hover:bg-dark-grey"
             : "text-white hover:bg-orange"
@@ -25,17 +25,17 @@ export default function SubMenu({ item, open }) {
         }}>
         <div className="flex items-center">
           <item.icon
-            className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
+            className={`h-6 w-6 mr-2 ${!open ? "h-10 w-10 m-0 p-2" : ""}`}
             aria-hidden="true"
           />
 
-          <div className={!open && "hidden"}>{item.name}</div>
+          <div className={!open ? "hidden" : ""}>{item.name}</div>
         </div>
 
         {item.submenu && open && (
           <ChevronUpIcon
             className={`h-4 w-4 mr-2 duration-300 ${
-              !openSubmenu && "rotate-180"
+              !openSubmenu ? "rotate-180" : ""
             }`}
             onClick={() => {
               setOpenSubmenu(!openSubmenu);
