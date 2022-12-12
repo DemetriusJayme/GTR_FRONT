@@ -1,5 +1,9 @@
 function ChatBotPage() {
-  return <>ChatBot Page</>;
+  return (
+    <>
+      <h1>ChatBot Page</h1>
+    </>
+  );
 }
 
 export default ChatBotPage;

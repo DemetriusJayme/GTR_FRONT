@@ -1,5 +1,9 @@
 function AddTaskPage() {
-  return <>Add Task Page</>;
+  return (
+    <>
+      <h1>Add Task Page</h1>
+    </>
+  );
 }
 
 export default AddTaskPage;

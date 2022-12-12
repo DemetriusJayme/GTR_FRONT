@@ -1,5 +1,9 @@
 function DetailsTask() {
-  return <>Details Task Page</>;
+  return (
+    <>
+      <h1>Details Task Page</h1>
+    </>
+  );
 }
 
 export default DetailsTask;

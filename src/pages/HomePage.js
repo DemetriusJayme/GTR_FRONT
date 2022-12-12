@@ -19,9 +19,7 @@ function HomePage() {
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-10">
         <div className="min-w-0 flex-1">
-          <h2 className="text-1xl font-bold leading-7 text-blue sm:truncate sm:text-1xl sm:tracking-tight">
-            Fron End Developer
-          </h2>
+          <h3>Fron End Developer</h3>
           <h1 className="text-4xl font-bold leading-7 text-blue2 sm:truncate sm:text-4xl sm:tracking-tight">
             Gabriel Stroligo
           </h1>

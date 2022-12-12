@@ -1,5 +1,9 @@
 function EditUserPage() {
-  return <>Edit User</>;
+  return (
+    <>
+      <h1>Edit User</h1>
+    </>
+  );
 }
 
 export default EditUserPage;

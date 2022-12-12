@@ -58,6 +58,7 @@ function ListTaskPage() {
 
   return (
     <div>
+      <h1>All Tasks</h1>
       <div className="border rounded mt-3">
         <div>
           <div className="mt-3">

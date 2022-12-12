@@ -1,5 +1,9 @@
 function AgendaPage() {
-  return <>Agenda Page</>;
+  return (
+    <>
+      <h1>Agenda Page</h1>
+    </>
+  );
 }
 
 export default AgendaPage;

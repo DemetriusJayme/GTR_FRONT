@@ -42,7 +42,7 @@ function LoginPage() {
 
   return (
     <>
-      <h1 className="text-3xl mb-2">Login</h1>
+      <h1>Login</h1>
       <section>
         <form onSubmit={handleSubmit}>
           <form>
