@@ -4,7 +4,7 @@ import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 function ListUserPage() {
   return (
     <>
-      <div className="lg:flex lg:items-center lg:justify-between mb-10">
+      <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
           <h1>All Users</h1>
         </div>
