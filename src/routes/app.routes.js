@@ -15,6 +15,12 @@ import ListUserPage from "../pages/user/ListUserPage";
 import AddUserPage from "../pages/user/AddUserPage";
 import EditUserPage from "../pages/user/EditUserPage";
 import DetailsUserPage from "../pages/user/DetailsUserPage";
+/* Agenda */
+import AgendaPage from "../pages/agenda/AgendaPage";
+/* Reports */
+import ReportPage from "../pages/report/ReportPage";
+/* ChatBot */
+import ChatBotPage from "../pages/chatbot/ChatBotPage";
 /* Templates */
 import FormsPage from "../pages/template/FormsPage";
 /* ErrorPage */
@@ -26,21 +32,26 @@ function AppRoutes() {
       <Route path="/" element={<HomePage />} />
       {/* Controlers */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/log-out" element={<LoginPage />} />
       <Route path="/notification" element={<NotificationPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="*" element={<ErrorPage />} />
       {/* Tasks */}
-      <Route path="/listtask" element={<ListTaskPage />} />
-      <Route path="/addtask" element={<AddTaskPage />} />
+      <Route path="/task" element={<ListTaskPage />} />
+      <Route path="/add-task" element={<AddTaskPage />} />
       <Route path="/task/:id" element={<DetailsTask />} />
       {/* User */}
-      <Route path="/listuser" element={<ListUserPage />} />
-      <Route path="/adduser" element={<AddUserPage />} />
-      <Route path="/edituser" element={<EditUserPage />} />
+      <Route path="/users" element={<ListUserPage />} />
+      <Route path="/add-user" element={<AddUserPage />} />
+      <Route path="/edit-user" element={<EditUserPage />} />
       <Route path="/user/:id" element={<DetailsUserPage />} />
       {/* Agenda */}
+      <Route path="/agenda" element={<AgendaPage />} />
       {/* Reports */}
+      <Route path="/report" element={<ReportPage />} />
+      {/* ChatBot */}
+      <Route path="/chatbot" element={<ChatBotPage />} />
       {/* Templates */}
       <Route path="/template/forms" element={<FormsPage />} />
     </Routes>

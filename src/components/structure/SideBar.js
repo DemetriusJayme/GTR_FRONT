@@ -10,14 +10,12 @@ import {
   ClipboardDocumentListIcon,
   CalendarDaysIcon,
   DocumentChartBarIcon,
-  ArrowUpTrayIcon,
   CodeBracketIcon,
   MagnifyingGlassIcon,
   UsersIcon,
   UserGroupIcon,
   PresentationChartLineIcon,
   DocumentPlusIcon,
-  ClockIcon,
 } from "@heroicons/react/24/outline";
 import SubMenu from "./SubMenu";
 
@@ -28,18 +26,31 @@ function SideBar() {
     {
       name: "Modelos - Form",
       icon: CodeBracketIcon,
-      to: "/model-form",
+      to: "/template/forms",
     },
     { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
     {
       name: "All Tasks",
       icon: ClipboardDocumentListIcon,
-      to: "/task-up",
+      to: "/task",
+      submenu: true,
+      submenuItems: [
+        {
+          name: "Add Task",
+          icon: ClipboardDocumentListIcon,
+          to: "/add-task",
+        },
+        {
+          name: "Details Task",
+          icon: ClipboardDocumentListIcon,
+          to: "/task/:id",
+        },
+      ],
     },
     {
       name: "All Users",
       icon: UsersIcon,
-      to: "/all-users",
+      to: "/users",
       submenu: true,
       submenuItems: [
         {
@@ -48,32 +59,27 @@ function SideBar() {
           to: "/add-user",
         },
         {
-          name: "Creat Group",
+          name: "Edit User",
           icon: UserGroupIcon,
-          to: "/group-user",
+          to: "/edit-user",
         },
         {
           name: "Statistic Users",
           icon: PresentationChartLineIcon,
-          to: "/statistic-users",
+          to: "/user/:id",
         },
       ],
     },
     {
       name: "My Agenda",
       icon: CalendarDaysIcon,
-      to: "/calendar",
+      to: "/agenda",
       submenu: true,
       submenuItems: [
         {
-          name: "Add Event",
+          name: "Add Task",
           icon: DocumentPlusIcon,
-          to: "/add-event",
-        },
-        {
-          name: "Deadline",
-          icon: ClockIcon,
-          to: "/event-deadline",
+          to: "/add-task",
         },
       ],
     },
@@ -81,12 +87,6 @@ function SideBar() {
       name: "Report",
       icon: DocumentChartBarIcon,
       to: "/report",
-    },
-
-    {
-      name: "Upload",
-      icon: ArrowUpTrayIcon,
-      to: "/fileUpload",
     },
     {
       name: "Chatbot",
@@ -96,7 +96,7 @@ function SideBar() {
     {
       name: "Log-out",
       icon: ArrowLeftOnRectangleIcon,
-      to: "/log",
+      to: "/log-out",
     },
   ];
 
@@ -108,7 +108,8 @@ function SideBar() {
       <div
         className={`bg-blue rounded-br-lg  p-5 pt-10  relative duration-300 ${
           open ? "w-72" : "w-20"
-        }`}>
+        }`}
+      >
         <Bars3Icon
           className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-0.5 hover:bg-orange ${
             !open && "rotate-180"
@@ -152,7 +153,8 @@ function SideBar() {
                     : "mb-3 h-10 rounded-md "
                 }`
                     )
-                  }>
+                  }
+                >
                   <div className="flex items-center">
                     <item.icon
                       className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
