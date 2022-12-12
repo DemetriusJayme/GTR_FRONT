@@ -58,6 +58,7 @@ function LoginPage() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
+                className="text-blue2"
                 placeholder="Insira o endereço de e-mail cadastrado"
                 required
               />
@@ -70,6 +71,7 @@ function LoginPage() {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
+                className="text-blue2"
                 placeholder="Insira a senha cadastrada"
                 required
               />
