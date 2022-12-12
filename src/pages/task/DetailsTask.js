@@ -1,5 +1,5 @@
 function DetailsTask() {
-  return <>Add Task Page</>;
+  return <>Details Task Page</>;
 }
 
 export default DetailsTask;
