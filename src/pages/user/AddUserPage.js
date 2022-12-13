@@ -13,7 +13,7 @@ function AddUserPage() {
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(form);
+    console.log(e.target.value);
   }
 
   async function handleSubmit(e) {
@@ -85,17 +85,11 @@ function AddUserPage() {
             <label htmlFor="role" className="">
               Role
             </label>
-            <select
-              name="role"
-              onChange={handleChange}
-              defaultValue={form.role}
-            >
-              <option value="supervisor">supervisor</option>
-              <option value="user">user</option>
-              <option value="director">director</option>
+            <select name="role" onChange={handleChange} value={form.role}>
+              <option value="supervisor">Supervisor</option>
+              <option value="user">User</option>
             </select>
           </div>
-
           <div className="area-button">
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
               Save
