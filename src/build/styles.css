@@ -1300,11 +1300,11 @@ select {
 .h-8 {
   height: 2rem;
 }
-.h-4 {
-  height: 1rem;
-}
 .h-10 {
   height: 2.5rem;
+}
+.h-4 {
+  height: 1rem;
 }
 .h-12 {
   height: 3rem;
@@ -1336,9 +1336,6 @@ select {
 .w-48 {
   width: 12rem;
 }
-.w-4 {
-  width: 1rem;
-}
 .w-0 {
   width: 0px;
 }
@@ -1350,6 +1347,9 @@ select {
 }
 .w-10 {
   width: 2.5rem;
+}
+.w-4 {
+  width: 1rem;
 }
 .w-12 {
   width: 3rem;
