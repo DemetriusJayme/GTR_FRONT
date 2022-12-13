@@ -23,6 +23,7 @@ function LoginPage() {
     e.preventDefault();
     try {
       const response = await api.post("/user/login", form);
+      console.log(response);
 
       //validar se o usuário confirmou o email dele
 
@@ -35,10 +36,7 @@ function LoginPage() {
       navigate("/profile");
     } catch (error) {
       console.log(error);
-      if (error.response.status === 401) {
-        alert("Por favor, ative seu email antes do login");
-        return;
-      }
+      
     }
   }
 
@@ -77,7 +75,9 @@ function LoginPage() {
             />
             <button
               className="btn border-none hover:bg-orange hover:text-white mt-4 mb-2 float-right"
-              type="submit">
+              type="submit"
+              //onClick={handleSubmit}
+            >
               Entrar no sistema
             </button>
             <div className=" t text-white mt-4 text-sm font-medium">
@@ -90,7 +90,8 @@ function LoginPage() {
         </section>
         <div
           className="bg-cover bg-center  invisible md:visible md:block rounded-lg"
-          style={{ backgroundImage: `url(${imgHome})` }}></div>
+          style={{ backgroundImage: `url(${imgHome})` }}
+        ></div>
       </div>
     </>
   );
