@@ -33,7 +33,7 @@ export default function Tags({ onChange, selected = [] }) {
     <div>
       <label htmlFor="tags">Tags</label>
       {tags.map((tag) => (
-        <span key={tag} type="button" className="btn">
+        <span key={tag} className="btn">
           {tag}
           <button>
             <XCircleIcon

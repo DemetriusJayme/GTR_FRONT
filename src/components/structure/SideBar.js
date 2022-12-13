@@ -38,7 +38,7 @@ function SideBar() {
         {
           name: "Add Task",
           icon: ClipboardDocumentListIcon,
-          to: "/add-task",
+          to: "/task/new",
         },
         {
           name: "Details Task",
@@ -108,8 +108,7 @@ function SideBar() {
       <div
         className={`bg-blue rounded-r-lg  p-5 pt-10  relative duration-300 ${
           open ? "w-72" : "w-20"
-        }`}
-      >
+        }`}>
         <Bars3Icon
           className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-1.5 hover:bg-orange ${
             !open && "rotate-180"
@@ -153,8 +152,7 @@ function SideBar() {
                     : "mb-3 h-10 rounded-md "
                 }`
                     )
-                  }
-                >
+                  }>
                   <div className="flex items-center">
                     <item.icon
                       className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}

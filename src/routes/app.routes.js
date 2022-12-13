@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import ProtectRoute from "../components/ProtectRoute";
+
 import HomePage from "../pages/HomePage";
 /* Access - Validate */
 import LoginPage from "../pages/controller/LoginPage";
@@ -39,7 +41,10 @@ function AppRoutes() {
       <Route path="*" element={<ErrorPage />} />
       {/* Tasks */}
       <Route path="/task" element={<ListTaskPage />} />
-      <Route path="/add-task" element={<AddTaskPage />} />
+      <Route
+        path="/task/new"
+        element={<ProtectRoute Component={AddTaskPage}></ProtectRoute>}
+      />
       <Route path="/task/:id" element={<DetailsTask />} />
       {/* User */}
       <Route path="/users" element={<ListUserPage />} />
