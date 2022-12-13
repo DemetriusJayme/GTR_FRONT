@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 
 import { useEffect, useState } from "react";
 import api from "../../api/api.js";
 
 function ListUserPage() {
+  
   const [users, setUsers] = useState([]);
+  
+  const { userId } = useParams(); 
 
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
@@ -20,11 +23,12 @@ function ListUserPage() {
     console.log("Dentro do useEffect da home!!");
   }, [reload]);
 
+  
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>All Users</h1>
+          <h1>PageAdmin</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           <span className="hidden sm:block">
@@ -33,7 +37,7 @@ function ListUserPage() {
                 className="-ml-1 mr-2 h-5 w-5 text-gray-500"
                 aria-hidden="true"
               />
-              Edit
+              Group
             </button>
           </span>
 
@@ -43,7 +47,7 @@ function ListUserPage() {
                 className="-ml-1 mr-2 h-5 w-5 text-gray-500"
                 aria-hidden="true"
               />
-              View
+              Users
             </button>
           </span>
 
@@ -90,8 +94,8 @@ function ListUserPage() {
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Position</th>
-                <th scope="col">Status</th>
+                <th scope="col">Role</th>
+                <th scope="col">Alocated</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -122,16 +126,18 @@ function ListUserPage() {
                           <div className="font-normal">{user.email}</div>
                         </div>
                       </th>
-                      <td className="py-4 px-6">{user.jobPosition}</td>
+                      <td className="py-4 px-6">
+                        {user.role[0].toUpperCase() + user.role.slice(1)}
+                      </td>
                       <td className="py-4 px-6">
                         <div className="flex items-center">
                           <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                          {user.status}
+                          {user.allocated}
                         </div>
                       </td>
                       <td className="py-4 px-6">
                         <Link
-                          to={`/user/${user._id}`}
+                          to={`/user/${userId}`}
                           type="button"
                           data-modal-toggle="editUserModal"
                           className="links"

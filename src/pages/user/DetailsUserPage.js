@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
@@ -6,6 +6,7 @@ import EditUser from "../../components/EditUser";
 
 function DetailsUserPage() {
   const navigate = useNavigate();
+  const { userId } = useParams(); 
 
   const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
@@ -17,9 +18,10 @@ function DetailsUserPage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get("/user/profile");
+        const response = await api.get(`/user/${userId}`);
         setUser(response.data);
-        setForm({ name: response.data.name });
+        console.log(response);
+        setForm(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -37,6 +39,12 @@ function DetailsUserPage() {
 
     navigate("/");
   }
+
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
 
   async function handleDeleteUser() {
     try {
@@ -57,10 +65,11 @@ function DetailsUserPage() {
             <div>
               <h1>{user.name}</h1>
               <p>{user.email}</p>
+              <p>{user.matricula}</p>
             </div>
           </div>
           <div>
-            <img src={user.profilePic} alt="profile Pic" className="rounded" />
+            <img src={user.photo} alt="profile Pic" className="rounded" />
           </div>
         </div>
 
