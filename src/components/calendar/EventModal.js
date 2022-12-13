@@ -49,7 +49,7 @@ export default function EventModal() {
   }
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-      <form className="shadow w-full rounded-lg bg-white overflow-hidden w-full block p-8">
+      <form className="shadow rounded-lg bg-white overflow-hidden block p-8">
         <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
 
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -142,7 +142,14 @@ export default function EventModal() {
           </div>
         </div>
         <div className="mt-8 text-right">
+        <button
+            class="btn"
+            onClick={() => setShowEventModal(false)}
+          >
+            Cancel
+          </button>
           <button
+            class="btn-blue"
             type="submit"
             onClick={handleSubmit}
           >
