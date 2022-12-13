@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
 import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 
+import { useEffect, useState } from "react";
+import api from "../../api/api.js";
+
 function ListUserPage() {
+  const [users, setUsers] = useState([]);
+
+  const [reload, setReload] = useState(false);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    async function fetchUsers() {
+      const response = await api.get("/user/all");
+      setUsers(response.data);
+    }
+
+    fetchUsers();
+    console.log("Dentro do useEffect da home!!");
+  }, [reload]);
+
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
@@ -78,170 +96,52 @@ function ListUserPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <div className="pl-3 ">
-                    <div className="text-base font-semibold">
-                      Gabriel Stroligo
-                    </div>
-                    <div className="font-normal">gabriel@gtr.com</div>
-                  </div>
-                </th>
-                <td className="py-4 px-6">React Developer</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                    Online
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  <Link
-                    to="#"
-                    type="button"
-                    data-modal-toggle="editUserModal"
-                    className="links"
-                  >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <div className="pl-3 ">
-                    <div className="text-base font-semibold">
-                      Gabriel Stroligo
-                    </div>
-                    <div className="font-normal">gabriel@gtr.com</div>
-                  </div>
-                </th>
-                <td className="py-4 px-6">React Developer</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                    Online
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  <Link
-                    to="#"
-                    type="button"
-                    data-modal-toggle="editUserModal"
-                    className="links"
-                  >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <div className="pl-3 ">
-                    <div className="text-base font-semibold">
-                      Gabriel Stroligo
-                    </div>
-                    <div className="font-normal">gabriel@gtr.com</div>
-                  </div>
-                </th>
-                <td className="py-4 px-6">React Developer</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                    Online
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  <Link
-                    to="#"
-                    type="button"
-                    data-modal-toggle="editUserModal"
-                    className="links"
-                  >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <div className="pl-3 ">
-                    <div className="text-base font-semibold">
-                      Gabriel Stroligo
-                    </div>
-                    <div className="font-normal">gabriel@gtr.com</div>
-                  </div>
-                </th>
-                <td className="py-4 px-6">React Developer</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                    Online
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  <Link
-                    to="#"
-                    type="button"
-                    data-modal-toggle="editUserModal"
-                    className="links"
-                  >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
-
-              <tr>
-                <th scope="row">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                  <div className="pl-3 ">
-                    <div className="text-base font-semibold">
-                      Gabriel Stroligo
-                    </div>
-                    <div className="font-normal">gabriel@gtr.com</div>
-                  </div>
-                </th>
-                <td className="py-4 px-6">React Developer</td>
-                <td className="py-4 px-6">
-                  <div className="flex items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                    Online
-                  </div>
-                </td>
-                <td className="py-4 px-6">
-                  <Link
-                    to="#"
-                    type="button"
-                    data-modal-toggle="editUserModal"
-                    className="links"
-                  >
-                    Edit user
-                  </Link>
-                </td>
-              </tr>
+              {users
+                .filter((user) => {
+                  return (
+                    user.name.toLowerCase().includes(search.toLowerCase()) ||
+                    user.jobPosition
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    user.role.toLowerCase().includes(search.toLowerCase())
+                  );
+                })
+                .map((user) => {
+                  return (
+                    <tr key={user._id}>
+                      <th scope="row">
+                        <img
+                          className="w-10 h-10 rounded-full"
+                          src={user.photo}
+                          alt=""
+                        />
+                        <div className="pl-3 ">
+                          <div className="text-base font-semibold">
+                            {user.name}
+                          </div>
+                          <div className="font-normal">{user.email}</div>
+                        </div>
+                      </th>
+                      <td className="py-4 px-6">{user.jobPosition}</td>
+                      <td className="py-4 px-6">
+                        <div className="flex items-center">
+                          <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
+                          {user.status}
+                        </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <Link
+                          to={`/user/${user._id}`}
+                          type="button"
+                          data-modal-toggle="editUserModal"
+                          className="links"
+                        >
+                          Edit user
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
