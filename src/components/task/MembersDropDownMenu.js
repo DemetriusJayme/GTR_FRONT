@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
-export default function SubMenu({ onChange }) {
+export default function MembersDropDownMenu({ onChange }) {
   const { loggedInUser } = useContext(AuthContext);
   let team = loggedInUser?.user.team || [];
   let [selected, setSelected] = useState({});
@@ -20,7 +20,7 @@ export default function SubMenu({ onChange }) {
     onChange({
       target: {
         name: "members",
-        value: [...getSelected(team)].map((user) => user._id),
+        value: [...getSelected(resSelected)].map((user) => user._id),
       },
     });
   }

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../contexts/authContext";
 
 import {
   Bars3Icon,
@@ -20,8 +21,8 @@ import {
 import SubMenu from "./SubMenu";
 
 function SideBar() {
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [open, setOpen] = useState(true);
-
   const navigation = [
     {
       name: "Modelos - Form",
@@ -93,16 +94,15 @@ function SideBar() {
       icon: ChatBubbleBottomCenterIcon,
       to: "/chatbot",
     },
-    {
-      name: "Log-out",
-      icon: ArrowLeftOnRectangleIcon,
-      to: "/log-out",
-    },
   ];
 
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
+  function handleLogout() {
+    localStorage.clear();
+    setLoggedInUser(null);
   }
+
+  if (!loggedInUser) return <></>;
+
   return (
     <div className="invisible w-0 md:visible md:w-auto bg-gray-100 mt-4">
       <div
@@ -138,20 +138,19 @@ function SideBar() {
                 <SubMenu item={item} open={open} />
               ) : (
                 <NavLink
-                  key={item.name}
                   to={item.to}
                   className={({ isActive }) =>
-                    classNames(
+                    `text-sm font-medium flex justify-between 
+                    ${
                       isActive
                         ? "bg-dark-blue text-white hover:bg-dark-grey"
-                        : "text-white hover:bg-orange",
-                      ` text-sm font-medium flex justify-between
-                ${
-                  open
-                    ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
-                    : "mb-3 h-10 rounded-md "
-                }`
-                    )
+                        : "text-white hover:bg-orange"
+                    }
+                      ${
+                        open
+                          ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
+                          : "mb-3 h-10 rounded-md"
+                      }`
                   }>
                   <div className="flex items-center">
                     <item.icon
@@ -165,6 +164,24 @@ function SideBar() {
               )}
             </div>
           ))}
+          <div className="inline-flex flex-col w-full">
+            <span
+              className={`text-sm font-medium flex justify-between text-white hover:bg-orange cursor-pointer ${
+                open
+                  ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
+                  : "mb-3 h-10 rounded-md"
+              }`}
+              onClick={handleLogout}>
+              <div className="flex items-center">
+                <ArrowLeftOnRectangleIcon
+                  className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
+                  aria-hidden="true"
+                />
+
+                <div className={`${!open && "hidden"}`}>Log-out</div>
+              </div>
+            </span>
+          </div>
         </div>
       </div>
     </div>
