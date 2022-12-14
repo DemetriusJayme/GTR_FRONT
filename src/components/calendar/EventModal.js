@@ -1,19 +1,22 @@
-import React, { useContext, useState } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
-
-const labelsClasses = [
-  "alta",
-  "media",
-  "baixa",
-];
-
-const labelsClassesStatus = [
-  "Aberto",
-  "Fechada"
-];
-
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/authContext";
+import api from "../../api/api";
+import Tags from "../../components/task/Tags";
 
 export default function EventModal() {
+  const { loggedInUser } = useContext(AuthContext);
+  const [form, setForm] = useState({
+    description: "",
+    name: "",
+    deadline: new Date(),
+    estimated: "00:30",
+    priority: "regular",
+    status: "started",
+    // annex: [],
+    tags: [],
+  });
+
   const {
     setShowEventModal,
     daySelected,
@@ -21,42 +24,32 @@ export default function EventModal() {
     selectedEvent,
   } = useContext(GlobalContext);
 
-  const [title, setTitle] = useState(
-    selectedEvent ? selectedEvent.title : ""
-  );
-  const [description, setDescription] = useState(
-    selectedEvent ? selectedEvent.description : ""
-  );
-
-  const [selectedLabel, setSelectedLabel] = useState(
-    selectedEvent
-      ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
-      : labelsClasses
-  );
+  function handleChange({ target: { name, value } }) {
+    setForm({ ...form, [name]: value });
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const calendarEvent = {
+    e.stopPropagation();
 
-      title,
-      description,
-      label: selectedLabel,
-      day: daySelected.valueOf(),
-      id: selectedEvent ? selectedEvent.id : Date.now(),
-    };
-    if (selectedEvent) {
-      dispatchCalEvent({ type: "update", payload: calendarEvent });
-    } else {
-      dispatchCalEvent({ type: "push", payload: calendarEvent });
+    async function sendTask() {
+      try {
+        let response = await api.post("/task/new", form);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    sendTask();
 
     setShowEventModal(false);
   }
+
   return (
     <div style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }} className="fixed z-40 top-0 right-0 left-0 bottom-0 h-full w-full">
 
       <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
-        <form className="shadow rounded-lg bg-white overflow-hidden block p-8">
+        <div className="shadow rounded-lg bg-white overflow-hidden block p-8">
           <header className="bg-gray-100 px-4 py-2 flex justify-between items-center">
 
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -87,113 +80,69 @@ export default function EventModal() {
               </button>
             </div>
           </header>
-          <div>
-            <div>
-              <div className="mb-4">
-                <label htmlFor="title" className="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Event title</label>
-                <input
-                  id="title"
-                  type="text"
-                  name="title"
-                  placeholder="Add title"
-                  value={title}
-                  required
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="schedule" className="text-gray-800 block mb-1 font-bold text-sm tracking-wide">schedule</label>
-                <input
-                  id="schedule"
-                  type="text"
-                  name="schedule"
-                  value={daySelected.format("dddd, MMMM DD")}
-                  required
-                  readOnly
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-                  x-model="event_date"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="description" className="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Description</label>
-                <input
+          <>
+            <h1>Create a new task</h1>
+            <section className="overflow-visible">
+              <form onSubmit={handleSubmit}>
+                <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
+                  <div className="w-full">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Name of the task"
+                      required
+                      value={form.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                </div>
+                <label htmlFor="description">Description</label>
+                <textarea
                   id="description"
-                  type="text"
                   name="description"
-                  placeholder="Add a description"
-                  defaultValue={description}
-                  required
-                  className="pt-3 border-0 text-sm md:text-base text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
-                  onChange={(e) => setDescription(e.target.value)}
+                  rows={3}
+                  placeholder="A description of the task"
+                  value={form.description}
+                  onChange={handleChange}
                 />
-              </div>
-              <div className="inline-block w-64 mb-4">
-                <label className="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Priority</label>
-                <div className="relative">
-                  <div className="flex gap-x-2 flex-col">
-                    {labelsClasses.map((lblClass, i) => (
-                      <div>
-                        <span
-                          key={lblClass}
-                          onClick={() => setSelectedLabel(lblClass)}
-                          className={`${lblClass} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                        >
-                          {selectedLabel === lblClass && (
-                            <span className="material-icons-outlined text-white text-sm">
-                              +
-                            </span>
-                          )}
-                          <span>{lblClass}</span>
-                        </span>
-
-                      </div>
-                    ))}
+                <Tags onChange={handleChange} selected={form.tags} />
+                <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
+                  <div className="w-full">
+                    <label htmlFor="deadline">Deadline</label>
+                    <input
+                      type="date"
+                      name="deadline"
+                      id="deadline"
+                      className="w-full"
+                      value={daySelected.format('YYYY-MM-DD')}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="w-full">
+                    <label htmlFor="estimated">Task's estimated time required</label>
+                    <input
+                      type="time"
+                      name="estimated"
+                      id="estimated"
+                      className="w-full"
+                      value={form.estimated}
+                      min="00:05"
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
-              </div>
-              <div className="inline-block w-64 mb-4">
-                <label className="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Status</label>
-                <div className="relative">
-                  <div className="flex gap-x-2 flex-col">
-                    {labelsClassesStatus.map((labelsClassesStatus, i) => (
-                      <div>
-                        <span
-                          key={labelsClassesStatus}
-                          onClick={() => setSelectedLabel(labelsClassesStatus)}
-                          className={`${labelsClassesStatus} w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
-                        >
-                          {selectedLabel === labelsClassesStatus && (
-                            <span className="material-icons-outlined text-white text-sm">
-                              +
-                            </span>
-                          )}
-                          <span>{labelsClassesStatus}</span>
-                        </span>
-
-                      </div>
-                    ))}
-                  </div>
+                <div className="area-button">
+                  <button type="submit" className="btn-blue">
+                    Create
+                  </button>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="mt-8 text-right">
-            <button
-              className="btn"
-              onClick={() => setShowEventModal(false)}
-            >
-              Cancel
-            </button>
-            <button
-              className="btn-blue"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Save
-            </button>
-          </div>
-        </form >
+              </form>
+            </section>
+          </>
+        </div >
       </div >
     </div >
   );
