@@ -6,21 +6,22 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function NavBar() {
-  const { loggedInUser } = useContext(AuthContext);
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
 
   const navigation = [
     { name: "Login", to: "/login" },
     { name: "Sign-Up", to: "/sign-up" },
-    { name: "Model-form", to: "/model-form" },
+    // { name: "Model-form", to: "/model-form" },
   ];
-  const navigationLogged = [
-    { name: "Profile", to: "/profile" },
-    { name: "Tasks", to: "/tasks" },
-    { name: "Tasks", to: "/notification" },
-  ];
+  // const navigationLogged = [
+  //   { name: "Profile", to: "/profile" },
+  //   { name: "Tasks", to: "/tasks" },
+  //   { name: "Tasks", to: "/notification" },
+  // ];
 
   function handleLogout() {
-    console.log("unimplemented!");
+    localStorage.clear();
+    setLoggedInUser(null);
   }
 
   function classNames(...classes) {
@@ -77,8 +78,8 @@ function NavBar() {
                   </Link>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {[navigationLogged, navigation][+!!loggedInUser].map(
-                        (item) => (
+                      {!loggedInUser &&
+                        navigation.map((item) => (
                           <NavLink
                             key={item.name + item.to}
                             to={item.to}
@@ -92,21 +93,11 @@ function NavBar() {
                             }>
                             {item.name}
                           </NavLink>
-                        )
-                      )}
+                        ))}
                     </div>
                   </div>
                 </div>
-                {!loggedInUser && (
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <Link to="/login" className="btn mr-2">
-                      Log in
-                    </Link>
-                    <Link to="/signup" className="btn">
-                      Sign up
-                    </Link>
-                  </div>
-                )}
+
                 {loggedInUser && (
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <button

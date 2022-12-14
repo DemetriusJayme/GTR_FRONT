@@ -4,19 +4,21 @@ import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 import DropdownMenu from "../../components/task/MembersDropDownMenu";
 
+const defautFormValues = {
+  description: "",
+  name: "",
+  deadline: new Date().toISOString().split("T")[0],
+  estimated: "00:30",
+  priority: "regular",
+  status: "started",
+  // annex: [],
+  members: [],
+  tags: [],
+};
+
 function AddTaskPage() {
   const { loggedInUser } = useContext(AuthContext);
-  const [form, setForm] = useState({
-    description: "",
-    name: "",
-    deadline: new Date().toISOString().split("T")[0],
-    estimated: "00:30",
-    priority: "regular",
-    status: "started",
-    // annex: [],
-    members: [],
-    tags: [],
-  });
+  const [form, setForm] = useState(defautFormValues);
 
   function handleChange({ target: { name, value } }) {
     setForm({ ...form, [name]: value });
@@ -29,7 +31,8 @@ function AddTaskPage() {
     async function sendTask() {
       try {
         let response = await api.post("/task/new", form);
-        console.log(response);
+        setForm({ ...defautFormValues });
+        alert(response.msg);
       } catch (error) {
         console.log(error);
       }
@@ -80,7 +83,11 @@ function AddTaskPage() {
           />
           <Tags onChange={handleChange} selected={form.tags} />
           {/* NOT IMPLEMENTED! <Dropzone /> */}
-          <DropdownMenu onChange={handleChange} />
+
+          {loggedInUser.user.role !== "user" && (
+            <DropdownMenu onChange={handleChange} />
+          )}
+
           <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
             <div className="w-full">
               <label htmlFor="deadline">Deadline</label>
