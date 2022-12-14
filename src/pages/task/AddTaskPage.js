@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 import DropdownMenu from "../../components/task/MembersDropDownMenu";
 
-const defautFormValues = {
+const emptyDefault = {
   description: "",
   name: "",
   deadline: new Date().toISOString().split("T")[0],
@@ -16,9 +17,32 @@ const defautFormValues = {
   tags: [],
 };
 
+const defaultKeys = Object.keys(emptyDefault);
+
+function pick(obj, keys) {
+  let shallowCopy = {};
+  for (let key of keys) {
+    shallowCopy[key] = obj[key];
+  }
+  return shallowCopy;
+}
+
 function AddTaskPage() {
+  const location = useLocation();
   const { loggedInUser } = useContext(AuthContext);
-  const [form, setForm] = useState(defautFormValues);
+
+  let defaultValues = emptyDefault;
+  if (location.state) {
+    defaultValues = { ...defaultValues, ...pick(location.state, defaultKeys) };
+
+    if (loggedInUser.user.role === "user") {
+      defaultValues.members = [];
+    } else {
+      defaultValues.members = defaultValues.members.map((user) => user._id);
+    }
+  }
+
+  const [form, setForm] = useState(defaultValues);
 
   function handleChange({ target: { name, value } }) {
     setForm({ ...form, [name]: value });
@@ -31,8 +55,8 @@ function AddTaskPage() {
     async function sendTask() {
       try {
         let response = await api.post("/task/new", form);
-        setForm({ ...defautFormValues });
-        alert(response.msg);
+        setForm({ ...emptyDefault });
+        alert(response.data.msg);
       } catch (error) {
         console.log(error);
       }
@@ -85,7 +109,7 @@ function AddTaskPage() {
           {/* NOT IMPLEMENTED! <Dropzone /> */}
 
           {loggedInUser.user.role !== "user" && (
-            <DropdownMenu onChange={handleChange} />
+            <DropdownMenu onChange={handleChange} selected={form.members} />
           )}
 
           <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
