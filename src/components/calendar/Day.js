@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, Link } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
 
 export default function Day({ day, rowIdx }) {
@@ -9,7 +9,6 @@ export default function Day({ day, rowIdx }) {
     monthIndex,
     setShowEventModal,
     filteredEvents,
-    setSelectedEvent,
   } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -60,7 +59,7 @@ export default function Day({ day, rowIdx }) {
         {dayEvents.map((evt, idx) => (
           <div
             key={idx}
-            onClick={() => setSelectedEvent(evt)}
+            onClick={() => <Link to="/task/nefw"></Link>}
             className={`${evt.label} p-1 text-gray-800 text-xs rounded mb-1 truncate text-center md:text-left mx-1`}
           >
             {evt.title}
