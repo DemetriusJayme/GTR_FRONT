@@ -1,34 +1,34 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 
 import { useEffect, useState } from "react";
 import api from "../../api/api.js";
 
 function ListUserPage() {
-  
   const [users, setUsers] = useState([]);
-  
-  const { userId } = useParams(); 
-
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
+  const myMap = new Map();
 
   useEffect(() => {
     async function fetchUsers() {
       const response = await api.get("/user/all");
+      //console.log(response.data);
       setUsers(response.data);
     }
-
     fetchUsers();
-    console.log("Dentro do useEffect da home!!");
+    //console.log("Dentro do useEffect da home!!");
   }, [reload]);
 
-  
+  function handleSearch(e) {
+    setSearch(e.target.value);
+  }
+
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>PageAdmin</h1>
+          <h1>Page Supervisor</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           <span className="hidden sm:block">
@@ -84,8 +84,9 @@ function ListUserPage() {
               type="search"
               id="default-search"
               className="block w-full pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg "
-              placeholder="Search Users"
-              required
+              placeholder="Search users by name"
+              value={search}
+              onChange={handleSearch}
             />
           </div>
         </form>
@@ -94,21 +95,14 @@ function ListUserPage() {
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Alocated</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               {users
                 .filter((user) => {
-                  return (
-                    user.name.toLowerCase().includes(search.toLowerCase()) ||
-                    user.jobPosition
-                      .toLowerCase()
-                      .includes(search.toLowerCase()) ||
-                    user.role.toLowerCase().includes(search.toLowerCase())
-                  );
+                  return user.name.toLowerCase().includes(search.toLowerCase());
                 })
                 .map((user) => {
                   return (
@@ -127,22 +121,18 @@ function ListUserPage() {
                         </div>
                       </th>
                       <td className="py-4 px-6">
-                        {user.role[0].toUpperCase() + user.role.slice(1)}
+                        {/*  {user.jobPosition[0].toUpperCase() + user.jobPosition.slice(1)} */}
+                        {user.status}
                       </td>
-                      <td className="py-4 px-6">
-                        <div className="flex items-center">
-                          <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                          {user.allocated}
-                        </div>
-                      </td>
+
                       <td className="py-4 px-6">
                         <Link
-                          to={`/user/${userId}`}
+                          to={`/user/${user._id}`}
                           type="button"
                           data-modal-toggle="editUserModal"
                           className="links"
                         >
-                          Edit user
+                          Details
                         </Link>
                       </td>
                     </tr>

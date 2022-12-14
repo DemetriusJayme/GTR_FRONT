@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
+import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 import api from "../../api/api";
-import EditUser from "../../components/EditUser";
 
 function DetailsUserPage() {
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ function DetailsUserPage() {
 
   const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
+
   const [form, setForm] = useState({
     registration: "",
     name: "",
@@ -34,22 +35,15 @@ function DetailsUserPage() {
     tasks: [],
   });
   const [reload, setReload] = useState(false);
-  // const status = ["Active", "Vacation", "Inactive"];
-  // const role = ["user", "supervisor"];
-  //  const allocated = ["true", "false"];
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get("/user/profile");
-        // const response = await api.get(`/user/${userId}`);
-        //console.log(`${userId}`)
-
+        const response = await api.get(`/user/${userId}`);
         setUser(response.data);
-        console.log(response);
         setForm(response.data);
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
 
@@ -59,7 +53,6 @@ function DetailsUserPage() {
   function signOut() {
     //removendo o loggedInUser do localStorage
     localStorage.removeItem("loggedInUser");
-
     //atualizar o meu context
     setLoggedInUser(null);
 
@@ -68,34 +61,6 @@ function DetailsUserPage() {
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
-  /* 
-  function updateTags(tags) {
-    handleChange({ target: { name: "skills", value: tags } });
-  } */
-
-  async function handleStack(e) {
-    //console.log(e.target.checked); -> está clicado ou não
-    //console.log(e.target.name); -> qual o nome da tech
-    // toda vez que o checkbox é alterado, enviamos essa alteração pra API
-    try {
-      const clone = { ...user };
-      delete clone._id;
-
-      if (e.target.checked === true) {
-        clone.stack.push(e.target.name);
-      }
-
-      if (e.target.checked === false) {
-        const index = clone.stack.indexOf(e.target.name); //acho o index do elemento que eu cliquei
-        clone.stack.splice(index, 1); //retiro o elemento da array
-      }
-
-      await api.put("/user/edit", clone);
-      setReload(!reload);
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   async function handleDeleteUser() {
@@ -110,7 +75,40 @@ function DetailsUserPage() {
 
   return (
     <div>
-      <h1>Details User NA VERSÃO ADMIN</h1>
+      <div className="lg:flex lg:items-center lg:justify-between mb-6">
+        <div className="min-w-0 flex-1">
+          <h1>Details User DO SUPERVISOR</h1>
+        </div>
+        <div className="mt-5 flex lg:mt-0 lg:ml-4">
+          <span className="hidden sm:block">
+            <button type="button" className="btn">
+              <PencilIcon
+                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
+                aria-hidden="true"
+              />
+              Edit
+            </button>
+          </span>
+
+          <span className="ml-3 hidden sm:block">
+            <button type="button" className="btn">
+              <LinkIcon
+                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
+                aria-hidden="true"
+              />
+              Delete
+            </button>
+          </span>
+
+          <span className="sm:ml-3">
+            <button type="button" className="btn-blue">
+              <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+              Publish
+            </button>
+          </span>
+        </div>
+      </div>
+
       <section>
         <form action="#" method="POST">
           <label>Photo</label>
@@ -389,9 +387,17 @@ function DetailsUserPage() {
               />
             </div>
           </fieldset>
+
           <div className="area-button">
             <button type="submit" className="btn-blue">
-              Save
+              <Link
+                to={"/users"}
+                type="button"
+                data-modal-toggle="editUserModal"
+                className="links"
+              >
+                Previous
+              </Link>
             </button>
           </div>
         </form>
