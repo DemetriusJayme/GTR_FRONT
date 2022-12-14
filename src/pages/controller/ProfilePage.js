@@ -17,7 +17,7 @@ function ProfilePage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get("/user/profile");
+        const response = await api.get("/user/all");
         setUser(response.data);
         setForm({ name: response.data.name });
       } catch (error) {
@@ -60,7 +60,7 @@ function ProfilePage() {
             </div>
           </div>
           <div>
-            <img src={user.profilePic} alt="profile Pic" className="rounded" />
+            <img src={user.photo} alt="profile Pic" className="rounded" />
           </div>
         </div>
 
