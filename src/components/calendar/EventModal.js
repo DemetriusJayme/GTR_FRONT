@@ -4,18 +4,21 @@ import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 
+const defautFormValues = {
+  description: "",
+  name: "",
+  deadline: new Date().toISOString().split("T")[0],
+  estimated: "00:30",
+  priority: "regular",
+  status: "started",
+  // annex: [],
+  members: [],
+  tags: [],
+};
+
 export default function EventModal() {
   const { loggedInUser } = useContext(AuthContext);
-  const [form, setForm] = useState({
-    description: "",
-    name: "",
-    deadline: new Date(),
-    estimated: "00:30",
-    priority: "regular",
-    status: "started",
-    // annex: [],
-    tags: [],
-  });
+  const [form, setForm] = useState(defautFormValues);
 
   const {
     setShowEventModal,
@@ -31,19 +34,33 @@ export default function EventModal() {
   function handleSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
+    completeCalendar();
 
     async function sendTask() {
       try {
         let response = await api.post("/task/new", form);
-        console.log(response);
+        setForm({ ...defautFormValues });
+        alert(response.msg);
       } catch (error) {
         console.log(error);
       }
     }
     sendTask();
-
     setShowEventModal(false);
   }
+
+  function completeCalendar() {
+    const calendarEvent = {
+      title: "title",
+      idhtml: "1234",
+      label: "alta",
+      day: 1670986800000,//daySelected.valueOf(),
+      id: Date.now(),
+    };
+    dispatchCalEvent({ type: "push", payload: calendarEvent });
+
+  }
+
 
   return (
     <div style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }} className="fixed z-40 top-0 right-0 left-0 bottom-0 h-full w-full">
@@ -55,7 +72,7 @@ export default function EventModal() {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
             </svg>
-            Add Event Details
+            Create a new task
             <div className="flex">
               {selectedEvent && (
                 <svg
@@ -81,7 +98,6 @@ export default function EventModal() {
             </div>
           </header>
           <>
-            <h1>Create a new task</h1>
             <section className="overflow-visible">
               <form onSubmit={handleSubmit}>
                 <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
@@ -97,7 +113,19 @@ export default function EventModal() {
                       onChange={handleChange}
                     />
                   </div>
-
+                  <div className="w-full">
+                    <label htmlFor="priority">Priority</label>
+                    <select
+                      id="priority"
+                      name="priority"
+                      className="leading-6"
+                      value={form.priority}
+                      onChange={handleChange}>
+                      <option value="high">high</option>
+                      <option value="regular">regular</option>
+                      <option value="low">low</option>
+                    </select>
+                  </div>
                 </div>
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -109,6 +137,8 @@ export default function EventModal() {
                   onChange={handleChange}
                 />
                 <Tags onChange={handleChange} selected={form.tags} />
+                {/* NOT IMPLEMENTED! <Dropzone /> */}
+
                 <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
                   <div className="w-full">
                     <label htmlFor="deadline">Deadline</label>
@@ -117,7 +147,7 @@ export default function EventModal() {
                       name="deadline"
                       id="deadline"
                       className="w-full"
-                      value={daySelected.format('YYYY-MM-DD')}
+                      value={form.deadline}
                       onChange={handleChange}
                     />
                   </div>
@@ -147,3 +177,4 @@ export default function EventModal() {
     </div >
   );
 }
+
