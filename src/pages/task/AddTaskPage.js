@@ -9,7 +9,7 @@ function AddTaskPage() {
   const [form, setForm] = useState({
     description: "",
     name: "",
-    deadline: new Date(),
+    deadline: new Date().toISOString().split("T")[0],
     estimated: "00:30",
     priority: "regular",
     status: "started",
