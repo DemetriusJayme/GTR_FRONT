@@ -1,46 +1,28 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import api from "../../api/api.js";
+import { EyeIcon, DocumentDuplicateIcon } from "@heroicons/react/20/solid";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 function ListTaskPage() {
-  const [form, setForm] = useState({
-    details: "",
-    dateFin: "",
-  });
   const [tasks, setTasks] = useState([]);
-  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     async function fetchTasks() {
       try {
-        const response = await api.get("/task/my-tasks");
+        const response = await api.get("/task/all");
         setTasks(response.data);
       } catch (error) {
         console.log(error);
       }
     }
     fetchTasks();
-  }, [reload]);
+  }, []);
 
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      await api.post("/task/create-task", form);
-      setReload(!reload);
-      setForm({
-        details: "",
-        dateFin: "",
-      });
-    } catch (error) {
-      console.log(error);
-      alert("Algo deu errado na criação da task");
-    }
-  }
-
-  async function handleSelect(e, idTask) {
+  /*  async function handleSelect(e, idTask) {
     await api.put(`/task/edit/${idTask}`, { status: e.target.value });
   }
 
@@ -52,81 +34,90 @@ function ListTaskPage() {
   async function handleTaskComplete(e, idTask) {
     await api.put(`/task/complete/${idTask}`);
     setReload(!reload);
-  }
-
-  console.log(tasks);
+  } */
 
   return (
-    <div>
-      <h1>All Tasks</h1>
-      <div className="border rounded mt-3">
-        <div>
-          <div className="mt-3">
-            <label htmlFor="detais">Tarefa</label>
-            <input
-              id="detais"
-              type="text"
-              placeholder="Escreva sua tarefa"
-              name="details"
-              value={form.details}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mt-3">
-            <label htmlFor="dateFin">Data de Finalização</label>
-            <input
-              id="dateFIn"
-              type="date"
-              name="dateFin"
-              value={form.dateFin}
-              onChange={handleChange}
-            />
-          </div>
-          <button variant="primary" className="m-3" onClick={handleSubmit}>
-            Salvar Tarefa
-          </button>
+    <>
+      <div className="lg:flex lg:items-center lg:justify-between mb-6">
+        <div className="min-w-0 flex-1">
+          <h1>All Users</h1>
         </div>
       </div>
-
-      <div className="border rounded mt-3">
-        <h1 className="mt-3">Tarefas</h1>
-        {tasks.map((task) => {
-          return (
-            <div key={task._id} className="m-4">
-              <div>
-                <p>{task.details}</p>
-
-                {!task.complete && (
-                  <input
-                    type="select"
-                    defaultValue={form.status}
-                    onChange={(e) => handleSelect(e, task._id)}
-                  >
-                    <option value="aberto">Em Aberto</option>
-                    <option value="andamento">Em Andamento</option>
-                    <option value="finalizando">Finalizando</option>
-                  </input>
-                )}
-              </div>
-              <div>
-                {task.complete ? (
-                  <p>Tarefa finalizada no dia: {task.dateFin.slice(0, 10)}</p>
-                ) : (
-                  <p>Data final esperada: {task.dateFin.slice(0, 10)}</p>
-                )}
-
-                <button onClick={(e) => handleDeleteTask(e, task._id)}>
-                  Excluir Task
-                </button>
-                <button onClick={(e) => handleTaskComplete(e, task._id)}>
-                  Concluir Task
-                </button>
-              </div>
+      <section className="overflow-auto">
+        <form>
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
             </div>
-          );
-        })}
-      </div>
-    </div>
+            <input
+              type="search"
+              id="default-search"
+              className="block pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg "
+              placeholder="Search Users"
+              required
+            />
+          </div>
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Members</th>
+              <th>Deadline</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task._id}>
+                <td className="px-6">{task.name}</td>
+                <td className="px-6">
+                  <div className="overflow-hidden text-ellipsis whitespace-nowrap w-52">
+                    {task.description}
+                  </div>
+                </td>
+                <td className="px-6">{task.status}</td>
+                <td className="px-6">{task.priority}</td>
+                <td className="px-6 group">
+                  {task.members.length}{" "}
+                  {task.members.length > 1 ? "members" : "member"}
+                </td>
+                <td
+                  className={`px-6 ${
+                    dayjs().isAfter(task.deadline) ? "text-red-600" : ""
+                  }`}>
+                  {dayjs().to(task.deadline)}
+                </td>
+                <td className="px-6 flex">
+                  <Link to={`./${task._id}`} state={task}>
+                    <EyeIcon className="h-5 w-5 text-gray-500" />
+                  </Link>
+                  <Link to={`./new`} state={task}>
+                    <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    </>
   );
 }
 
