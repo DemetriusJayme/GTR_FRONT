@@ -6,25 +6,29 @@ import api from "../../api/api.js";
 
 function ListUserPage() {
   const [users, setUsers] = useState([]);
-
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
+  const myMap = new Map();
 
   useEffect(() => {
     async function fetchUsers() {
       const response = await api.get("/user/all");
+      //console.log(response.data);
       setUsers(response.data);
     }
-
     fetchUsers();
-    console.log("Dentro do useEffect da home!!");
+    //console.log("Dentro do useEffect da home!!");
   }, [reload]);
+
+  function handleSearch(e) {
+    setSearch(e.target.value);
+  }
 
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>All Users</h1>
+          <h1>Page Supervisor</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           <span className="hidden sm:block">
@@ -33,7 +37,7 @@ function ListUserPage() {
                 className="-ml-1 mr-2 h-5 w-5 text-gray-500"
                 aria-hidden="true"
               />
-              Edit
+              Group
             </button>
           </span>
 
@@ -43,7 +47,7 @@ function ListUserPage() {
                 className="-ml-1 mr-2 h-5 w-5 text-gray-500"
                 aria-hidden="true"
               />
-              View
+              Users
             </button>
           </span>
 
@@ -80,8 +84,9 @@ function ListUserPage() {
               type="search"
               id="default-search"
               className="block w-full pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg "
-              placeholder="Search Users"
-              required
+              placeholder="Search users by name"
+              value={search}
+              onChange={handleSearch}
             />
           </div>
         </form>
@@ -90,7 +95,6 @@ function ListUserPage() {
             <thead>
               <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Position</th>
                 <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
@@ -98,13 +102,7 @@ function ListUserPage() {
             <tbody>
               {users
                 .filter((user) => {
-                  return (
-                    user.name.toLowerCase().includes(search.toLowerCase()) ||
-                    user.jobPosition
-                      .toLowerCase()
-                      .includes(search.toLowerCase()) ||
-                    user.role.toLowerCase().includes(search.toLowerCase())
-                  );
+                  return user.name.toLowerCase().includes(search.toLowerCase());
                 })
                 .map((user) => {
                   return (
@@ -113,7 +111,7 @@ function ListUserPage() {
                         <img
                           className="w-10 h-10 rounded-full"
                           src={user.photo}
-                          alt=""
+                          alt="UserPhoto"
                         />
                         <div className="pl-3 ">
                           <div className="text-base font-semibold">
@@ -122,13 +120,11 @@ function ListUserPage() {
                           <div className="font-normal">{user.email}</div>
                         </div>
                       </th>
-                      <td className="py-4 px-6">{user.jobPosition}</td>
                       <td className="py-4 px-6">
-                        <div className="flex items-center">
-                          <div className="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div>{" "}
-                          {user.status}
-                        </div>
+                        {/*  {user.jobPosition[0].toUpperCase() + user.jobPosition.slice(1)} */}
+                        {user.status}
                       </td>
+
                       <td className="py-4 px-6">
                         <Link
                           to={`/user/${user._id}`}
@@ -136,7 +132,7 @@ function ListUserPage() {
                           data-modal-toggle="editUserModal"
                           className="links"
                         >
-                          Edit user
+                          Details
                         </Link>
                       </td>
                     </tr>
