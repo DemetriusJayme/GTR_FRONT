@@ -1,11 +1,12 @@
 import GlobalContext from "../../contexts/GlobalContext";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../contexts/authContext";
+//import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 
+
 export default function EventModal() {
-  const { loggedInUser } = useContext(AuthContext);
+  //const { loggedInUser } = useContext(AuthContext);
   const [form, setForm] = useState({
     description: "",
     name: "",
@@ -31,6 +32,7 @@ export default function EventModal() {
   function handleSubmit(e) {
     e.preventDefault();
     e.stopPropagation();
+    completeCalendar();
 
     async function sendTask() {
       try {
@@ -45,6 +47,19 @@ export default function EventModal() {
     setShowEventModal(false);
   }
 
+  function completeCalendar() {
+      const calendarEvent = {
+      title:"title",
+      idhtml:"1234",
+      label: "alta",
+      day: 1670986800000,//daySelected.valueOf(),
+      id: Date.now(),
+    };
+    dispatchCalEvent({ type: "push", payload: calendarEvent });
+    
+  }
+
+
   return (
     <div style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }} className="fixed z-40 top-0 right-0 left-0 bottom-0 h-full w-full">
 
@@ -55,7 +70,7 @@ export default function EventModal() {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
             </svg>
-            Add Event Details
+            Create a new task
             <div className="flex">
               {selectedEvent && (
                 <svg
@@ -81,7 +96,6 @@ export default function EventModal() {
             </div>
           </header>
           <>
-            <h1>Create a new task</h1>
             <section className="overflow-visible">
               <form onSubmit={handleSubmit}>
                 <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
@@ -147,3 +161,4 @@ export default function EventModal() {
     </div >
   );
 }
+
