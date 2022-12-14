@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
 export default function Tags({ onChange, selected = [] }) {
-  const [tags, setTags] = useState(selected);
   const [value, setValue] = useState("");
 
   function handleChange({ target }) {
@@ -13,26 +12,24 @@ export default function Tags({ onChange, selected = [] }) {
     if (e.key === "Enter") {
       e.preventDefault();
       e.stopPropagation();
-      let res = Array.from(new Set([...tags, value]));
+      let res = Array.from(new Set([...selected, value]));
 
-      setTags(res);
       onChange({ target: { name: "tags", value: res } });
       setValue("");
     }
   }
 
   function deleteTag(tag) {
-    let res = new Set(tags);
+    let res = new Set(selected);
     res.delete(tag);
     res = Array.from(res);
-    setTags(res);
     onChange({ target: { name: "tags", value: res } });
   }
 
   return (
     <div>
       <label htmlFor="tags">Tags</label>
-      {tags.map((tag) => (
+      {selected.map((tag) => (
         <span key={tag} className="btn">
           {tag}
           <button>
