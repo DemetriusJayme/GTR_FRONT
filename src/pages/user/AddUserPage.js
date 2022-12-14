@@ -52,10 +52,21 @@ function AddUserPage() {
               onChange={handleChange}
             />
           </div>
-
           <div className="col-span-6 sm:col-span-4">
             <label htmlFor="email" className="">
-              Email
+              Registration
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={form.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-4">
+            <label htmlFor="email" className="">
+              E-mail
             </label>
             <input
               type="email"

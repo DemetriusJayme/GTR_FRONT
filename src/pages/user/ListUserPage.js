@@ -117,7 +117,7 @@ function ListUserPage() {
                         <img
                           className="w-10 h-10 rounded-full"
                           src={user.photo}
-                          alt=""
+                          alt="UserPhoto"
                         />
                         <div className="pl-3 ">
                           <div className="text-base font-semibold">
