@@ -19,6 +19,7 @@ function DetailsUserPage() {
     async function fetchUser() {
       try {
         const response = await api.get(`/user/${userId}`);
+        console.log(`${userId}`)
         setUser(response.data);
         console.log(response);
         setForm(response.data);
