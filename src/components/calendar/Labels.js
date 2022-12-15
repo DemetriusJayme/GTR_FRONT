@@ -4,7 +4,7 @@ import GlobalContext from "../../contexts/GlobalContext";
 export default function Labels() {
   const { labels, updateLabel } = useContext(GlobalContext);
   return (
-    <React.Fragment>
+    <React.Fragment key={crypto.randomUUID({ disableEntropyCache: true })}>
       <p className="text-gray-500 font-bold mt-10 text-sm md:text-base ">Label</p>
       {labels.map(({ label: lbl, checked }, idx) => (
         <label key={crypto.randomUUID({disableEntropyCache : true})} className="items-center mt-3 block">

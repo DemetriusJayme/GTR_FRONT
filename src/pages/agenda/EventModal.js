@@ -35,6 +35,8 @@ function EventModal() {
   useEffect(() => {
     async function fetchTasks() {
       try {
+        localStorage.removeItem('savedEvents')
+        alert("Carregando Agenda")
         const response = await api.get("/task/all");
         setTasks(response.data);
         tasks.map((task) => (
