@@ -1,14 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 
 function DetailsTask() {
   const location = useLocation();
   const { id } = useParams();
   const [task, setTask] = useState(location.state);
+  const [firstUpdate, setFirstUpdate] = useState(true);
+  const { loggedInUser } = useContext(AuthContext);
+  const [showActivity, setShowActivity] = useState(false);
+  const [form, setForm] = useState({
+    hours: "00:30",
+    comment: "",
+  });
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    if (task) return;
+    if (task && firstUpdate) {
+      setFirstUpdate(false);
+      return;
+    }
 
     async function getTask() {
       try {
@@ -19,7 +31,29 @@ function DetailsTask() {
       }
     }
     getTask();
-  }, [id, task]);
+  }, [id, task, reload]);
+
+  function handleShowActivity() {
+    setShowActivity(!showActivity);
+  }
+
+  function handleChange({ target: { name, value } }) {
+    setForm({ ...form, [name]: value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      await api.post("/activity/new", { ...form, id });
+      setReload(!reload);
+    } catch (error) {
+      console.log(error);
+    }
+    setForm({
+      hours: "00:30",
+      comment: "",
+    });
+  }
 
   if (!task) return <h1>Carregando a tarefa...</h1>;
   return (
@@ -87,7 +121,58 @@ function DetailsTask() {
           </div>
         </div>
       </section>
+      <section>
+        <h3 className="">Steps</h3>
+        {!!task.activities.length && (
+          <ul>
+            {task.activities.map((activity) => (
+              <li>
+                {activity.author}
+                {activity.hours}
+                {activity.comment}
+                <button>X</button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {!showActivity && (
+          <button className="btn-blue" onClick={handleShowActivity}>
+            + Add
+          </button>
+        )}
+        {showActivity && (
+          <form onSubmit={handleSubmit} className="shadow mt-2 px-2 pb-2">
+            <div className="flex md:justify-end">
+              <div>
+                <label htmlFor="hours">Hours taken:</label>
+                <input
+                  type="time"
+                  name="hours"
+                  id="hours"
+                  value={form.hours}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="-mt-2">
+              <label htmlFor="comment">Comment</label>
+              <textarea
+                name="comment"
+                id="comment"
+                value={form.comment}
+                onChange={handleChange}
+                cols="30"
+                rows="5"></textarea>
+            </div>
 
+            <div className="mt-1">
+              <button type="submit" className="btn-blue">
+                Submit
+              </button>
+            </div>
+          </form>
+        )}
+      </section>
       <section className="flex justify-end items-right bg-gray-100 p-2  mt-4">
         <div className="flex justify-center gap-2 items-center">
           <button className="btn mt-0">ACCEPT</button>
