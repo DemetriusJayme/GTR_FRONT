@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
 
-import { useEffect, useState } from "react";
+import { AuthContext } from "../../contexts/authContext";
+import { useEffect, useState, useContext } from "react";
 import api from "../../api/api.js";
 
 function ListUserPage() {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
+  const { loggedInUser } = useContext(AuthContext);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -104,107 +106,54 @@ function ListUserPage() {
                   return user.name.toLowerCase().includes(search.toLowerCase());
                 })
                 .map((user) => {
-                  return (
-                    <tr key={user._id}>
-                      <th scope="row">
-                        <img
-                          className="w-10 h-10 rounded-full"
-                          src={user.photo}
-                          alt="UserPhoto"
-                        />
-                        <div className="pl-3 ">
-                          <div className="text-base font-semibold">
-                            {user.name}
+                  if (user._id === loggedInUser.user._id) {
+                    return null;
+                  }
+                  if (user.role === "admin") {
+                    return null;
+                  }
+                  if (user.role === "supervisor") {
+                    return null;
+                  }
+                  if (user.role === "director") {
+                    return null;
+                  } else
+                    return (
+                      <tr key={user._id}>
+                        <th scope="row">
+                          <img
+                            className="w-10 h-10 rounded-full"
+                            src={user.photo}
+                            alt="UserPhoto"
+                          />
+                          <div className="pl-3 ">
+                            <div className="text-base font-semibold">
+                              {user.name}
+                            </div>
+                            <div className="font-normal">{user.email}</div>
                           </div>
-                          <div className="font-normal">{user.email}</div>
-                        </div>
-                      </th>
-                      <td className="py-4 px-6">
-                        {/*  {user.jobPosition[0].toUpperCase() + user.jobPosition.slice(1)} */}
-                        {user.status}
-                      </td>
+                        </th>
+                        <td className="py-4 px-6">
+                          {/*  {user.jobPosition[0].toUpperCase() + user.jobPosition.slice(1)} */}
+                          {user.status}
+                        </td>
 
-                      <td className="py-4 px-6">
-                        <Link
-                          to={`/user/${user._id}`}
-                          type="button"
-                          data-modal-toggle="editUserModal"
-                          className="links"
-                        >
-                          Details
-                        </Link>
-                      </td>
-                    </tr>
-                  );
+                        <td className="py-4 px-6">
+                          <Link
+                            to={`/user/${user._id}`}
+                            type="button"
+                            data-modal-toggle="editUserModal"
+                            className="links"
+                          >
+                            Details
+                          </Link>
+                        </td>
+                      </tr>
+                    );
                 })}
             </tbody>
           </table>
         </div>
-        <nav className=" flex w-full items-center justify-center">
-          <ul className="pagination">
-            <li>
-              <Link to="#" className="previous">
-                <span className="sr-only">Previous</span>
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="item">
-                1
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="item">
-                2
-              </Link>
-            </li>
-            <li>
-              <Link to="#" aria-current="page" className="item-current">
-                3
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="item">
-                4
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="item">
-                5
-              </Link>
-            </li>
-            <li>
-              <Link to="#" className="next">
-                <span className="sr-only">Next</span>
-                <svg
-                  aria-hidden="true"
-                  className="w-5 h-5"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </Link>
-            </li>
-          </ul>
-        </nav>
       </section>
     </>
   );
