@@ -1,16 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-import { AuthContext } from "../../contexts/authContext";
+//import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 
 function DetailsUserPage() {
   const navigate = useNavigate();
   const { userId } = useParams();
+  const [reload, setReload] = useState(false);
 
-  const { setLoggedInUser } = useContext(AuthContext);
+  //const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
 
-  const [form, setForm] = useState({
+  /* const [form, setForm] = useState({
     registration: "",
     name: "",
     password: "",
@@ -32,20 +33,18 @@ function DetailsUserPage() {
     team: [],
     report: [],
     tasks: [],
-  });
-  const [reload, setReload] = useState(false);
+  }); */
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const response = await api.get(`/user/${userId}`);
         setUser(response.data);
-        setForm(response.data);
       } catch (error) {
         //console.log(error);
       }
     }
-
+console.log(user)
     fetchUser();
   }, [reload, userId]);
 
@@ -53,7 +52,7 @@ function DetailsUserPage() {
     <div>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>Details User DO SUPERVISOR</h1>
+          <h1>DetailsUserPage</h1>
         </div>
       </div>
 
@@ -77,15 +76,25 @@ function DetailsUserPage() {
                 </span>
               </div>
               <fieldset>
-                <div class="card-title">{user.email}</div>{" "}
-                <div class="card-title">{user.email}</div>
-                <div class="card-title">{user.phone}</div>
-                <div class="card-title">{user.workHours}</div>
-                <div class="card-title">{user.department}</div>
-                <div class="card-title">{user.jobPosition}</div>
-                <div class="card-title">{user.status}</div>
-                <div class="card-title">{user.workHours}</div>
-                <div class="card-title">{user.skills}</div>
+                <p>E-mail</p>
+                <p>{user.email}</p>
+                <p>Registration</p>
+                <p>{user.registration}</p>
+                <p>phone</p>
+                <p>{user.phone}</p>
+                <p>workHours</p>
+                <p>{user.workHours}</p>
+                <p>department</p>
+
+                <p>{user.department}</p>
+                <p>jobPosition</p>
+                <p>{user.jobPosition}</p>
+                <p>skills</p>
+                <p>{user.skills}</p>
+                <p>status</p>
+                <p>{user.status}</p>
+                <p>role</p>
+                <p>{user.role}</p>
               </fieldset>
             </div>
             <div className="area-button">
