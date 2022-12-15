@@ -19,7 +19,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50;
+    @apply inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 m-0;
   }
   .btn-blue {
     @apply inline-flex items-center rounded-md border border-gray-300  bg-blue hover:bg-orange px-4 py-2 text-sm font-medium text-white shadow-sm;
