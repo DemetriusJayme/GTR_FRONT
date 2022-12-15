@@ -1,20 +1,35 @@
 import { useState, useEffect, useContext } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
+import { toast } from "react-hot-toast";
+
+function pick(obj, keys) {
+  let shallowCopy = {};
+  for (let key of keys) {
+    shallowCopy[key] = obj[key];
+  }
+  return shallowCopy;
+}
 
 function DetailsTask() {
+  const { loggedInUser } = useContext(AuthContext);
   const location = useLocation();
   const { id } = useParams();
+  const navigate = useNavigate();
   const [task, setTask] = useState(location.state);
-  const [firstUpdate, setFirstUpdate] = useState(true);
-  const { loggedInUser } = useContext(AuthContext);
+  const [firstUpdate, setFirstUpdate] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editForm, setEditForm] = useState({});
+  const [reload, setReload] = useState(false);
+
+  /*   
+  STEPS
   const [showActivity, setShowActivity] = useState(false);
   const [form, setForm] = useState({
     hours: "00:30",
     comment: "",
-  });
-  const [reload, setReload] = useState(false);
+  }); */
 
   useEffect(() => {
     if (task && firstUpdate) {
@@ -31,8 +46,11 @@ function DetailsTask() {
       }
     }
     getTask();
-  }, [id, task, reload]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reload]);
 
+  /* 
+  STEPS
   function handleShowActivity() {
     setShowActivity(!showActivity);
   }
@@ -53,6 +71,47 @@ function DetailsTask() {
       hours: "00:30",
       comment: "",
     });
+  } */
+
+  function handleEditChange({ target: { name, value } }) {
+    setEditForm({ ...editForm, [name]: value });
+  }
+
+  function toggleEditMode() {
+    if (!editMode)
+      setEditForm(pick(task, ["name", "priority", "deadline", "description"]));
+    setEditMode(!editMode);
+  }
+
+  function handleUpdateStatus({ target: { value } }) {
+    handleUpdate({ status: value });
+  }
+
+  async function handleSave() {
+    await handleUpdate(editForm);
+    setEditMode(!editMode);
+    navigate("/task");
+  }
+
+  async function handleUpdate(values) {
+    try {
+      console.log(values);
+      let response = await api.put(`/task/${id}`, values);
+      toast.success(response.data.msg);
+      setReload(!reload);
+    } catch (error) {
+      toast.error(error);
+    }
+  }
+
+  async function handleDelete() {
+    try {
+      let response = await api.put(`/task/${id}`);
+      toast.success(response.data.msg);
+      navigate("/task");
+    } catch (error) {
+      toast.error(error);
+    }
   }
 
   if (!task) return <h1>Carregando a tarefa...</h1>;
@@ -61,10 +120,22 @@ function DetailsTask() {
       <section>
         <div className="md:grid md:grid-cols-4 gap-4 p-0  mb-4">
           <div className=" col-span-3">
-            <h1 className="mb-0 flex">
-              {task.name}
-              <span className="text-orange text-sm ml-2">{task.status}</span>
-            </h1>
+            {editMode ? (
+              <>
+                <input
+                  type="text"
+                  name="name"
+                  value={editForm.name}
+                  onChange={handleEditChange}
+                />
+                <span className="text-orange text-sm">{task.status}</span>
+              </>
+            ) : (
+              <h1 className="mb-0 flex">
+                {task.name}
+                <span className="text-orange text-sm ml-2">{task.status}</span>
+              </h1>
+            )}
 
             <h4 className="author text-sm">
               <span className="font-bold">Author:</span> {task.author.name}
@@ -74,19 +145,51 @@ function DetailsTask() {
           <div>
             <div className="">
               <span className="font-bold">Priority: </span>
-              <span className="tag"> {task.priority}</span>
+              {editMode ? (
+                <select
+                  name="priority"
+                  value={editForm.priority}
+                  onChange={handleEditChange}>
+                  <option value="high">high</option>
+                  <option value="regular">regular</option>
+                  <option value="low">low</option>
+                </select>
+              ) : (
+                <span className="tag"> {task.priority}</span>
+              )}
             </div>
             {/* codicional cor */}
             <div className="">
               <span className="font-bold">Deadline:</span>{" "}
-              <span className="font-bold text-orange ">{task.deadline}</span>
+              {editMode ? (
+                <input
+                  type="date"
+                  name="deadline"
+                  value={editForm.deadline}
+                  onChange={handleEditChange}
+                />
+              ) : (
+                <span className="font-bold text-orange ">
+                  {new Date(task.deadline + "T00:00:00").toLocaleDateString()}
+                </span>
+              )}
             </div>
           </div>
         </div>
 
         <div className="md:grid md:grid-cols-4 gap-4 mb-4 rounded-md">
           <div className=" col-span-3">
-            <p>{task.description}</p>
+            {editMode ? (
+              <textarea
+                name="description"
+                rows={3}
+                placeholder="A description of the task"
+                value={editForm.description}
+                onChange={handleEditChange}
+              />
+            ) : (
+              <p>{task.description}</p>
+            )}
           </div>
           <div className=" col-span-1">
             <span className="font-bold">Estimated:</span>{" "}
@@ -96,7 +199,7 @@ function DetailsTask() {
         <hr className="mb-0 mt-2" />
         <div className="md:grid md:grid-cols-2 mb-4 gap-4 pt-0 bg-white p-0 rounded-md">
           <div>
-            {task.members.length && (
+            {task.members.length > 0 && (
               <ul className="members">
                 <p className="mb-1 font-bold text-md text-blue">Members:</p>
                 {task.members.map((member) => (
@@ -108,7 +211,7 @@ function DetailsTask() {
             )}
           </div>
           <div>
-            {task.tags.length && (
+            {task.tags.length > 0 && (
               <ul className="tags">
                 <p className="mb-1 font-bold text-md text-blue">Tags:</p>
                 {task.tags.map((tag) => (
@@ -121,9 +224,9 @@ function DetailsTask() {
           </div>
         </div>
       </section>
-      <section>
+      {/* <section>
         <h3 className="">Steps</h3>
-        {!!task.activities.length && (
+        {task.activities.length > 0 && (
           <ul>
             {task.activities.map((activity) => (
               <li>
@@ -172,13 +275,69 @@ function DetailsTask() {
             </div>
           </form>
         )}
-      </section>
+      </section> */}
       <section className="flex justify-end items-right bg-gray-100 p-2  mt-4">
         <div className="flex justify-center gap-2 items-center">
-          <button className="btn mt-0">ACCEPT</button>
-          <button className="btn mt-0">REJECT</button>
-          <button className="btn mt-0">EDIT</button>
-          <button className="btn mt-0">ARCHIVE</button>
+          {loggedInUser.user.role === "user" && task.status === "pending" && (
+            <>
+              <button
+                className="btn mt-0"
+                onClick={handleUpdateStatus}
+                value="active">
+                ACCEPT
+              </button>
+              <button
+                className="btn mt-0"
+                onClick={handleUpdateStatus}
+                value="rejected">
+                REJECT
+              </button>
+            </>
+          )}
+          {editMode ? (
+            <>
+              <button className="btn mt-0" onClick={toggleEditMode}>
+                Cancel
+              </button>
+              <button className="btn mt-0" onClick={handleSave}>
+                Save
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="btn mt-0" onClick={toggleEditMode}>
+                EDIT
+              </button>
+              {task.status === "done" || task.status === "archive" ? (
+                <button
+                  className="btn mt-0"
+                  onClick={handleUpdateStatus}
+                  value="active">
+                  ACTIVE
+                </button>
+              ) : (
+                <button
+                  className="btn mt-0"
+                  onClick={handleUpdateStatus}
+                  value="done">
+                  DONE
+                </button>
+              )}
+              {task.status !== "archive" && (
+                <button
+                  className="btn mt-0"
+                  onClick={handleUpdateStatus}
+                  value="archive">
+                  ARCHIVE
+                </button>
+              )}
+              {loggedInUser.user.role !== "user" && (
+                <button className="btn mt-0" onClick={handleDelete}>
+                  DELETE
+                </button>
+              )}
+            </>
+          )}
         </div>
       </section>
     </>
