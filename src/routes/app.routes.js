@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import ProtectRoute from "../components/ProtectRoute";
 
 import HomePage from "../pages/HomePage";
+import HomeLogedPage from "../pages/HomeLogedPage";
 /* Access - Validate */
 import LoginPage from "../pages/controller/LoginPage";
 import NotificationPage from "../pages/controller/NotificationPage";
@@ -33,6 +34,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomeLogedPage />} />
       {/* Controlers */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/log-out" element={<LoginPage />} />
@@ -54,7 +56,7 @@ function AppRoutes() {
       <Route path="/user/:userId" element={<DetailsUserPage />} />
       {/* Agenda */}
       <Route path="/agenda" element={<AgendaPage />} />
-      <Route  path="/add-task" element={<ListTaskPageUser />} />
+      <Route path="/add-task" element={<ListTaskPageUser />} />
       {/* Reports */}
       <Route path="/report" element={<ReportPage />} />
       {/* ChatBot */}
