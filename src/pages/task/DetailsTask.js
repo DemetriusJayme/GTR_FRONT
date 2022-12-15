@@ -25,26 +25,58 @@ function DetailsTask() {
   return (
     <>
       <section>
-        <button className="btn">actions</button>
-      </section>
-      <section>
-        <div className="md:grid md:grid-cols-2 gap-8  bg-white p-0 md:p-8 rounded-md">
-          <p>{task.description}</p>
-          <p>{task.deadline}</p>
+        <div className="md:grid md:grid-cols-4 gap-8 p-0  mb-8">
+          <div className=" col-span-3">
+            <h1>
+              {task.name} / {task.status}
+            </h1>
+
+            <h4 className="author mb-4">Author: {task.author.name}</h4>
+          </div>
+
+          <div>
+            <p className="">
+              Priority: <span className="uppercase"> {task.priority}</span>
+            </p>
+            {/* codicional cor */}
+            <p className="">Deadline: {task.deadline}</p>
+          </div>
         </div>
-        <p>{task.estimated}</p>
-        <p>{task.priority}</p>
-        <p>{task.status}</p>
-        <ul className="members">
-          {task.members.map((member) => (
-            <li key={member._id}>{member.name}</li>
-          ))}
-        </ul>
-        <ul className="tags">
-          {task.tags.map((tag) => (
-            <li key={crypto.randomUUID()}>{tag}</li>
-          ))}
-        </ul>
+
+        <div className="md:grid md:grid-cols-4 gap-4 mb-4 rounded-md">
+          <div className=" col-span-3">
+            <p>{task.description}</p>
+          </div>
+          <div className=" col-span-1">
+            <p>{task.estimated}h</p>
+          </div>
+        </div>
+
+        <div className="md:grid md:grid-cols-2 gap-4  bg-white p-0 rounded-md">
+          <div>
+            {/* CONDICIONAL APRESENTAR */}
+            <ul className="members">
+              <h3>Members:</h3>
+              {task.members.map((member) => (
+                <li key={member._id}>{member.name}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <ul className="tags">
+              <h3>Tags:</h3>
+              {task.tags.map((tag) => (
+                <li key={crypto.randomUUID()}>{tag}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section className="flex justify-center gap-4 items-center">
+        <button className="btn m-0">ACCEPT</button>
+        <button className="btn m-0">REJECT</button>
+        <button className="btn m-0">EDIT</button>
+        <button className="btn m-0">ARCHIVE</button>
       </section>
     </>
   );
