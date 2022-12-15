@@ -8,7 +8,6 @@ function ListUserPage() {
   const [users, setUsers] = useState([]);
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
-  const myMap = new Map();
 
   useEffect(() => {
     async function fetchUsers() {
