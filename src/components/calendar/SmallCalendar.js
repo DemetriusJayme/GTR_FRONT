@@ -67,12 +67,12 @@ export default function SmallCalendar() {
       </header>
       <div className="grid grid-cols-7 grid-rows-6">
         {currentMonth[0].map((day, i) => (
-          <span key={i} className="text-sm py-1 text-center">
+          <span key={crypto.randomUUID({disableEntropyCache : true})} className="text-sm py-1 text-center">
           {day.format("dd").charAt(0)}
           </span>
         ))}
         {currentMonth.map((row, i) => (
-          <React.Fragment key={i}>
+          <React.Fragment key={crypto.randomUUID({disableEntropyCache : true})}>
             {row.map((day, idx) => (
               <button
                 key={idx}
