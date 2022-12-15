@@ -20,7 +20,6 @@ import EditUserPage from "../pages/user/EditUserPage";
 import DetailsUserPage from "../pages/user/DetailsUserPage";
 /* Agenda */
 import AgendaPage from "../pages/agenda/AgendaPage";
-import ListTaskPageUser from "../pages/agenda/ListTaskPageUser";
 /* Reports */
 import ReportPage from "../pages/report/ReportPage";
 /* ChatBot */
@@ -56,7 +55,6 @@ function AppRoutes() {
       <Route path="/user/:userId" element={<DetailsUserPage />} />
       {/* Agenda */}
       <Route path="/agenda" element={<AgendaPage />} />
-      <Route path="/add-task" element={<ListTaskPageUser />} />
       {/* Reports */}
       <Route path="/report" element={<ReportPage />} />
       {/* ChatBot */}

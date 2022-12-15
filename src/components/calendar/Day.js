@@ -64,7 +64,7 @@ export default function Day({ day, rowIdx }) {
         className="flex-1 cursor-pointer md:overflow-y-auto scrollbar scrollbar-thumb-gray-400  scrollbar-track-gray-100 scrollbar-thin scrollbar-thumb-rounded-md"
       >
         {dayEvents.map((evt, idx) => (
-          <Link to={`../task/${evt.idhtml}`} state={"task"}>
+          <Link to={`../task/${evt.idhtml}`}>
             <div
               key={crypto.randomUUID({ disableEntropyCache: true })}
               id={evt.idhtml}

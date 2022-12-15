@@ -5,6 +5,7 @@ import Sidebar from "../../components/calendar/Sidebar";
 import Month from "../../components/calendar/Month";
 import GlobalContext from "../../contexts/GlobalContext";
 import EventModal from "./EventModal";
+
 function AppAgenda() {
   const [currenMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
@@ -15,7 +16,7 @@ function AppAgenda() {
 
   return (
     <React.Fragment>
-      {showEventModal && <EventModal />}
+      {<EventModal />}
 
       <div className="h-screen flex flex-col">
         <CalendarHeader />
