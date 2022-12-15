@@ -25,8 +25,26 @@ function DetailsTask() {
   return (
     <>
       <section>
-        <h1>{task.name}</h1>
-        <p>{task.description}</p>
+        <button className="btn">actions</button>
+      </section>
+      <section>
+        <div className="md:grid md:grid-cols-2 gap-8  bg-white p-0 md:p-8 rounded-md">
+          <p>{task.description}</p>
+          <p>{task.deadline}</p>
+        </div>
+        <p>{task.estimated}</p>
+        <p>{task.priority}</p>
+        <p>{task.status}</p>
+        <ul className="members">
+          {task.members.map((member) => (
+            <li key={member._id}>{member.name}</li>
+          ))}
+        </ul>
+        <ul className="tags">
+          {task.tags.map((tag) => (
+            <li key={crypto.randomUUID()}>{tag}</li>
+          ))}
+        </ul>
       </section>
     </>
   );
