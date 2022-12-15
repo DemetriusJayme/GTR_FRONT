@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
+
 import api from "../../api/api.js";
 
 function AddUserPage() {
+  const { loggedInUser } = useContext(AuthContext);
+
   const [reload, setReload] = useState(false);
   const navigate = useNavigate();
 
@@ -23,6 +27,7 @@ function AddUserPage() {
     e.preventDefault();
     try {
       await api.post("/user/create", form);
+      navigate("/");
       setForm({
         name: "",
         email: "",

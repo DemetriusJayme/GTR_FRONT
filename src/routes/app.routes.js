@@ -49,7 +49,7 @@ function AppRoutes() {
       {/* User */}
       <Route path="/users" element={<ListUserPage />} />
       <Route path="/add-user" element={<AddUserPage />} />
-      <Route path="/edit-user" element={<EditUserPage />} />
+      <Route path="/edit-user/:userId" element={<EditUserPage />} />
       <Route path="/user/:userId" element={<DetailsUserPage />} />
       {/* Agenda */}
       <Route path="/agenda" element={<AgendaPage />} />
