@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 import DropdownMenu from "../../components/task/MembersDropDownMenu";
+import toast from "react-hot-toast";
 
 const emptyDefault = {
   description: "",
@@ -11,7 +12,7 @@ const emptyDefault = {
   deadline: new Date().toISOString().split("T")[0],
   estimated: "00:30",
   priority: "regular",
-  status: "started",
+  status: "pending",
   // annex: [],
   members: [],
   tags: [],
@@ -30,6 +31,7 @@ function pick(obj, keys) {
 function AddTaskPage() {
   const location = useLocation();
   const { loggedInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   let defaultValues = emptyDefault;
   if (location.state) {
@@ -56,9 +58,10 @@ function AddTaskPage() {
       try {
         let response = await api.post("/task/new", form);
         setForm({ ...emptyDefault });
-        alert(response.data.msg);
+        toast.success(response.data.msg, { duration: 6000 });
+        navigate("/task");
       } catch (error) {
-        console.log(error);
+        toast.error(error);
       }
     }
     sendTask();
@@ -105,8 +108,8 @@ function AddTaskPage() {
             value={form.description}
             onChange={handleChange}
           />
+
           <Tags onChange={handleChange} selected={form.tags} />
-          {/* NOT IMPLEMENTED! <Dropzone /> */}
 
           {loggedInUser.user.role !== "user" && (
             <DropdownMenu onChange={handleChange} selected={form.members} />
