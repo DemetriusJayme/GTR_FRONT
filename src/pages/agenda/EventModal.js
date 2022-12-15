@@ -35,12 +35,10 @@ function EventModal() {
   useEffect(() => {
     async function fetchTasks() {
       try {
-      alert("erro")
         const response = await api.get("/task/all");
         setTasks(response.data);
       } catch (error) {
-        console.log(error);
-      }
+          }
     }
     fetchTasks();
   }, []);

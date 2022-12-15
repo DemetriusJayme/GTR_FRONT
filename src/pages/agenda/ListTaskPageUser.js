@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import GlobalContext from "../../contexts/GlobalContext";
 import { Link } from "react-router-dom";
 import api from "../../api/api.js";
 import { EyeIcon } from "@heroicons/react/20/solid";
@@ -8,7 +9,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
 function ListTaskPageUser() {
+  let x;
   const [tasks, setTasks] = useState([]);
+  const {
+    setShowEventModal,
+    daySelected,
+    dispatchCalEvent,
+    selectedEvent,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     async function fetchTasks() {
@@ -37,6 +45,19 @@ function ListTaskPageUser() {
     await api.put(`/task/complete/${idTask}`);
     setReload(!reload);
   } */
+
+  function completeCalendar() {
+
+    const calendarEvent = { 
+      title: "title",
+      idhtml: "1234",
+      label: "alta",
+      day: 1670986800000,//daySelected.valueOf(),
+      id: Date.now(),
+    };
+    dispatchCalEvent({ type: "push", payload: calendarEvent });
+
+  }
 
   return (
     <>
@@ -113,10 +134,14 @@ function ListTaskPageUser() {
                  
                   Encerrar
                 </td>
+                <td>{task._id}</td>
+                <td id="p">{new Date(task.deadline).getTime()}</td>
+                <td>{task.deadline}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        <button id="3" onClick={completeCalendar}>Criar Exemplo</button>
       </section>
     </>
   );
