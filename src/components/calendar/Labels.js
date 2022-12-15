@@ -7,7 +7,7 @@ export default function Labels() {
     <React.Fragment>
       <p className="text-gray-500 font-bold mt-10 text-sm md:text-base ">Label</p>
       {labels.map(({ label: lbl, checked }, idx) => (
-        <label key={idx} className="items-center mt-3 block">
+        <label key={crypto.randomUUID({disableEntropyCache : true})} className="items-center mt-3 block">
           <input
             type="checkbox"
             checked={checked}

@@ -1,10 +1,11 @@
+import { useContext, useState, useEffect } from "react";
 import GlobalContext from "../../contexts/GlobalContext";
-import { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 import Tags from "../../components/task/Tags";
 
-const defautFormValues = {
+const emptyDefault = {
   description: "",
   name: "",
   deadline: new Date().toISOString().split("T")[0],
@@ -16,9 +17,35 @@ const defautFormValues = {
   tags: [],
 };
 
-export default function EventModal() {
+const defaultKeys = Object.keys(emptyDefault);
+
+function pick(obj, keys) {
+  let shallowCopy = {};
+  for (let key of keys) {
+    shallowCopy[key] = obj[key];
+  }
+  return shallowCopy;
+}
+
+function EventModal() {
+  const location = useLocation();
   const { loggedInUser } = useContext(AuthContext);
-  const [form, setForm] = useState(defautFormValues);
+  const [tasks, setTasks] = useState([]);
+  
+  useEffect(() => {
+    async function fetchTasks() {
+      try {
+      alert("erro")
+        const response = await api.get("/task/all");
+        setTasks(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchTasks();
+  }, []);
+
+  
 
   const {
     setShowEventModal,
@@ -27,20 +54,36 @@ export default function EventModal() {
     selectedEvent,
   } = useContext(GlobalContext);
 
+  let defaultValues = emptyDefault;
+
+  if (location.state) {
+    defaultValues = { ...defaultValues, ...pick(location.state, defaultKeys) };
+
+    if (loggedInUser.user.role === "user") {
+      defaultValues.members = [];
+    } else {
+      defaultValues.members = defaultValues.members.map((user) => user._id);
+    }
+  }
+
+  const [form, setForm] = useState(defaultValues);
   function handleChange({ target: { name, value } }) {
     setForm({ ...form, [name]: value });
   }
 
   function handleSubmit(e) {
+   
     e.preventDefault();
     e.stopPropagation();
     completeCalendar();
 
+
+
     async function sendTask() {
       try {
         let response = await api.post("/task/new", form);
-        setForm({ ...defautFormValues });
-        alert(response.msg);
+        setForm({ ...emptyDefault });
+        alert(response.data.msg);
       } catch (error) {
         console.log(error);
       }
@@ -50,6 +93,7 @@ export default function EventModal() {
   }
 
   function completeCalendar() {
+  
     const calendarEvent = {
       title: "title",
       idhtml: "1234",
@@ -147,7 +191,7 @@ export default function EventModal() {
                       name="deadline"
                       id="deadline"
                       className="w-full"
-                      value={form.deadline}
+                      value={daySelected.format('YYYY-MM-DD')}
                       onChange={handleChange}
                     />
                   </div>
@@ -174,7 +218,30 @@ export default function EventModal() {
           </>
         </div >
       </div >
+      {tasks.map((task) => (
+  <tr key={task._id}>
+    <td className="px-6">{task.name}</td>
+    <td className="px-6">
+      <div className="overflow-hidden text-ellipsis whitespace-nowrap w-52">
+        {task.description}
+      </div>
+    </td>
+    <td className="px-6">{task.status}</td>
+    <td className="px-6">{task.priority}</td>
+    <td className="px-6 group">
+      {task.members.length}{" "}
+      {task.members.length > 1 ? "members" : "member"}
+    </td>
+   
+    
+  </tr>
+))}
     </div >
+
+
+
+
   );
 }
 
+export default EventModal;

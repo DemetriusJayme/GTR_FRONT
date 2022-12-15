@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import React, { useContext, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import GlobalContext from "../../contexts/GlobalContext";
 
 export default function Day({ day, rowIdx }) {
@@ -57,13 +58,15 @@ export default function Day({ day, rowIdx }) {
         className="flex-1 cursor-pointer md:overflow-y-auto scrollbar scrollbar-thumb-gray-400  scrollbar-track-gray-100 scrollbar-thin scrollbar-thumb-rounded-md"
       >
         {dayEvents.map((evt, idx) => (
+          <Link to={`../task/${evt.idhtml}`} state={"task"}>
           <div
-            id={evt.idhtml}
-            key={idx}
-            className={`${evt.label} p-1 text-gray-800 text-xs rounded mb-1 truncate text-center md:text-left mx-1`}
+             key={crypto.randomUUID({disableEntropyCache : true})}
+             id={evt.idhtml}
+            className={`${evt.label} event text-white rounded p-1 text-sm mb-1 mx-1`}
           >
             {evt.title}
           </div>
+          </Link>
         ))}
       </div>
     </div>
