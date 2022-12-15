@@ -33,7 +33,7 @@ function LoginPage() {
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
 
-      navigate("/home");
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }

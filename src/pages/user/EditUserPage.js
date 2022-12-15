@@ -4,11 +4,13 @@ import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 
 function EditUserPage() {
-  const { loggedInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { userId } = useParams();
+  console.log(userId)
 
-  const { setLoggedInUser } = useContext(AuthContext);
+  const { loggedInUser } = useContext(AuthContext);
+  //const { setLoggedInUser } = useContext(AuthContext);
+
   const [user, setUser] = useState({});
   const [form, setForm] = useState({
     registration: "",
@@ -41,8 +43,8 @@ function EditUserPage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get(`/user/one/${userId}`);
-
+        const response = await api.get(`/user/${userId}`);
+        console.log(response.data);
         setUser(response.data);
         setForm(response.data);
       } catch (error) {
@@ -51,7 +53,7 @@ function EditUserPage() {
     }
 
     fetchUser();
-  }, [reload, userId]);
+  }, [reload]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -75,7 +77,7 @@ function EditUserPage() {
     }
   }
 
-  console.log(form);
+  //console.log(form);
 
   async function handleDeleteUser() {
     try {
@@ -88,12 +90,13 @@ function EditUserPage() {
 
   return (
     <div>
-      <h1>EDIT USER PAGE VERSÃO SUPERVISOR</h1>
+      <h1>EDIT USER </h1>
       <section>
         <form action="#" method="POST">
           <label>{user.name}</label>
           <p>{user.registration}</p>
-          <p>{user.jobPosition}</p>
+          <p>{user.email}</p>
+
           <div className="mt-1 flex items-center">
             <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
               <svg
@@ -104,6 +107,23 @@ function EditUserPage() {
                 <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
             </span>
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="last-name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autoComplete="name"
+              placeholder="Enter the full name"
+              value={form.name}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="col-span-6 sm:col-span-3">
