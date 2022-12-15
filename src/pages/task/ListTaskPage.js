@@ -108,7 +108,7 @@ function ListTaskPage() {
                   <Link to={`./${task._id}`} state={task}>
                     <EyeIcon className="h-5 w-5 text-gray-500" />
                   </Link>
-                  <Link to={`./new`} state={task}>
+                  <Link to="./new" state={task}>
                     <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
                   </Link>
                 </td>
