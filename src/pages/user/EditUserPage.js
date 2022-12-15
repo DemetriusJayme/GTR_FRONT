@@ -6,7 +6,7 @@ import api from "../../api/api";
 function EditUserPage() {
   const navigate = useNavigate();
   const { userId } = useParams();
-  console.log(userId)
+  console.log(userId);
 
   const { loggedInUser } = useContext(AuthContext);
   //const { setLoggedInUser } = useContext(AuthContext);
@@ -125,6 +125,39 @@ function EditUserPage() {
               onChange={handleChange}
             />
           </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="number"
+              name="workHours"
+              placeholder="Type the workHours"
+              id="workHours"
+              value={form.workHours}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="last-name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone
+            </label>
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              autoComplete="phone"
+              placeholder="Enter the full phone"
+              value={form.phone}
+              onChange={handleChange}
+            />
+          </div>
 
           <div className="col-span-6 sm:col-span-3">
             <label htmlFor="department" className="">
@@ -146,6 +179,26 @@ function EditUserPage() {
               </option>
               <option value="Compras e Licitações">Compras e Licitações</option>
               <option value="Ouvidoria">Ouvidoria</option>
+            </select>
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label htmlFor="department" className="">
+              Job Position
+            </label>
+            <select
+              id="jobPosition"
+              name="jobPosition"
+              autoComplete="jobPosition"
+              onChange={handleChange}
+              value={form.jobPosition}
+            >
+              <option value="Analista">Analista </option>
+              <option value="Técnico de Atividades Administrativas">
+                Técnico de Atividades Administrativas
+              </option>
+              <option value="Auxiliar Técnico">Auxiliar Técnico</option>
+              <option value="Tecnólogo">Tecnólogo</option>
+              <option value="Assitente">Assitente</option>
             </select>
           </div>
 
