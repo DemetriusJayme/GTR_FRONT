@@ -1,27 +1,23 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
-import EditUser from "../../components/EditUser";
+//import EditUser from "../../components/EditUser";
 
 function ProfilePage() {
   const navigate = useNavigate();
 
   const { setLoggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
-  const [form, setForm] = useState({
-    name: "",
-  });
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get("/user/all");
+        const response = await api.get("/user/profile");
         setUser(response.data);
-        setForm({ name: response.data.name });
       } catch (error) {
-        console.log(error);
+        //console.log(error);
       }
     }
 
@@ -38,16 +34,6 @@ function ProfilePage() {
     navigate("/");
   }
 
-  async function handleDeleteUser() {
-    try {
-      await api.delete("/user/delete");
-      signOut();
-    } catch (error) {
-      console.log(error);
-      alert("Algo deu errado no delete do user");
-    }
-  }
-
   return (
     <div>
       <h1>Profile Page</h1>
@@ -55,39 +41,70 @@ function ProfilePage() {
         <div className="align-items-center mb-5">
           <div>
             <div>
-              <h1>{user.name}</h1>
-              <p>{user.email}</p>
+              <img src={user.photo} alt="profile Pic" className="rounded" />
             </div>
           </div>
           <div>
-            <img src={user.photo} alt="profile Pic" className="rounded" />
+            <h1>Nome</h1>
+            <h1>{user.name}</h1>
+            <p>E-mail</p>
+            <p>{user.email}</p>
+            <p>Registration</p>
+            <p>{user.registration}</p>
+            <p>phone</p>
+            <p>{user.phone}</p>
+            <p>workHours</p>
+            <p>{user.workHours}</p>
+            <p>department</p>
+
+            <p>{user.department}</p>
+            <p>jobPosition</p>
+            <p>{user.jobPosition}</p>
+            <p>skills</p>
+            <p>{user.skills}</p>
+            <p>status</p>
+            <p>{user.status}</p>
+            <p>role</p>
+
+            <p>{user.role}</p>
           </div>
         </div>
 
         <div>
-          <div>
-            <EditUser
-              form={form}
-              setForm={setForm}
-              setReload={setReload}
-              reload={reload}
-            />
-          </div>
-          <div>
-            <button variant="danger" onClick={handleDeleteUser}>
-              Excluir perfil
-            </button>
-          </div>
-          <div>
-            <button variant="dark" onClick={signOut}>
-              Sign Out
-            </button>
-          </div>
-          <div>
-            <Link to="/tasks">
-              <button variant="dark">Minhas Tarefas</button>
-            </Link>
-          </div>
+          <section>
+            <form action="#" method="POST">
+              <div className="area-button">
+                <button
+                  type="submit"
+                  className="btn-blue"
+                  onClick={() => navigate("/edit-user/:userId")}
+                >
+                  Edit
+                </button>
+                <button
+                  type="submit"
+                  className="btn-blue"
+                  onClick={() => navigate("/users")}
+                >
+                  My Team
+                </button>
+                <button
+                  type="submit"
+                  className="btn-blue"
+                  onClick={() => navigate("/task/:id")}
+                >
+                  My Tasks
+                </button>
+                <button
+                  type="submit"
+                  className="btn-blue"
+                  onClick={() => navigate("/report")}
+                >
+                  My Reports
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
       </div>
     </div>
