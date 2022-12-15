@@ -33,10 +33,9 @@ function LoginPage() {
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
 
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error);
-      
     }
   }
 
