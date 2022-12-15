@@ -154,6 +154,13 @@ function EditUserPage() {
             >
               Previos
             </button>
+            <button
+              type="submit"
+              className="btn-blue"
+              onClick={() => navigate("/profile")}
+            >
+              My-Profile
+            </button>
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
               Save
             </button>
