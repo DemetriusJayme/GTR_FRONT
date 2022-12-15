@@ -7,7 +7,8 @@ import api from "../../api/api";
 function ProfilePage() {
   const navigate = useNavigate();
 
-  const { setLoggedInUser } = useContext(AuthContext);
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  console.log(loggedInUser.user._id);
   const [user, setUser] = useState({});
   const [reload, setReload] = useState(false);
 
@@ -77,7 +78,9 @@ function ProfilePage() {
                 <button
                   type="submit"
                   className="btn-blue"
-                  onClick={() => navigate("/edit-user/:userId")}
+                  onClick={() =>
+                    navigate(`/edit-user/${loggedInUser.user._id}`)
+                  }
                 >
                   Edit
                 </button>
