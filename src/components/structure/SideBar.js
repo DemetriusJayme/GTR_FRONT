@@ -31,9 +31,8 @@ function SideBar() {
     },
     { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
     {
-      name: "All Tasks",
+      name: "Tasks",
       icon: ClipboardDocumentListIcon,
-      to: "/task",
       submenu: true,
       submenuItems: [
         {
@@ -42,9 +41,9 @@ function SideBar() {
           to: "/task/new",
         },
         {
-          name: "Details Task",
+          name: "All Tasks",
           icon: ClipboardDocumentListIcon,
-          to: "/task/:id",
+          to: "/task",
         },
       ],
     },
@@ -95,6 +94,22 @@ function SideBar() {
       to: "/chatbot",
     },
   ];
+  const [subMenu, setSubMenus] = useState(
+    navigation
+      .filter((item) => item.submenu)
+      .reduce((acc, item) => {
+        acc[item.name] = false;
+        return acc;
+      }, {})
+  );
+
+  function openSubMenu(name) {
+    let result = {};
+    for (let key in subMenu) {
+      result[key] = key === name ? !subMenu[key] : false;
+    }
+    setSubMenus(result);
+  }
 
   function handleLogout() {
     localStorage.clear();
@@ -135,10 +150,16 @@ function SideBar() {
           {navigation.map((item) => (
             <div key={item.name} className="inline-flex flex-col w-full">
               {item.submenu ? (
-                <SubMenu item={item} open={open} />
+                <SubMenu
+                  item={item}
+                  open={open}
+                  openSubmenu={subMenu[item.name]}
+                  setOpenSubMenu={openSubMenu}
+                />
               ) : (
                 <NavLink
                   to={item.to}
+                  end
                   className={({ isActive }) =>
                     `text-sm font-medium flex justify-between 
                     ${

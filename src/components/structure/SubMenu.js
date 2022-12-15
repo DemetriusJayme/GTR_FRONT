@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-export default function SubMenu({ item, open }) {
-  const [openSubmenu, setOpenSubmenu] = useState(false);
+export default function SubMenu({ item, open, openSubmenu, setOpenSubMenu }) {
   const navigate = useNavigate();
   return (
     <div key={item.name} className="inline-flex flex-col w-full">
       <div
         key={item.name}
-        className={`cursor-pointer ${
-          openSubmenu
-            ? "bg-dark-blue text-white hover:bg-dark-grey"
-            : "text-white hover:bg-orange"
+        className={`cursor-pointer text-white hover:bg-orange ${
+          openSubmenu ? "bg-dark-blue text-white hover:bg-dark-grey" : ""
         } text-sm font-medium flex justify-between ${
           open
             ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
@@ -21,7 +18,7 @@ export default function SubMenu({ item, open }) {
         }`}
         onClick={() => {
           if (item.to) navigate(item.to);
-          if (open) setOpenSubmenu(!openSubmenu);
+          if (open) setOpenSubMenu(item.name);
         }}>
         <div className="flex items-center">
           <item.icon
@@ -38,7 +35,7 @@ export default function SubMenu({ item, open }) {
               !openSubmenu ? "rotate-180" : ""
             }`}
             onClick={() => {
-              setOpenSubmenu(!openSubmenu);
+              setOpenSubMenu(item.name);
             }}
           />
         )}
@@ -54,10 +51,11 @@ export default function SubMenu({ item, open }) {
         <>
           {item.submenu && openSubmenu && open && (
             <>
-              {item.submenuItems.map((submenuItems, index) => (
+              {item.submenuItems.map((submenuItems) => (
                 <NavLink
                   key={submenuItems.name}
                   to={submenuItems.to}
+                  end
                   className={({ isActive }) =>
                     `${
                       isActive

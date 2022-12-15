@@ -62,25 +62,28 @@ function DetailsTask() {
         <hr className="mb-0 mt-2" />
         <div className="md:grid md:grid-cols-2 mb-4 gap-4 pt-0 bg-white p-0 rounded-md">
           <div>
-            {/* CONDICIONAL APRESENTAR */}
-            <ul className="members">
-              <p className="mb-1 font-bold text-md text-blue">Members:</p>
-              {task.members.map((member) => (
-                <li className="ml-2" key={member._id}>
-                  {member.name}
-                </li>
-              ))}
-            </ul>
+            {task.members.length && (
+              <ul className="members">
+                <p className="mb-1 font-bold text-md text-blue">Members:</p>
+                {task.members.map((member) => (
+                  <li className="ml-2" key={member._id}>
+                    {member.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <div>
-            <ul className="tags">
-              <p className="mb-1 font-bold text-md text-blue">Tags:</p>
-              {task.tags.map((tag) => (
-                <li className="tag" key={crypto.randomUUID()}>
-                  {tag}
-                </li>
-              ))}
-            </ul>
+            {task.tags.length && (
+              <ul className="tags">
+                <p className="mb-1 font-bold text-md text-blue">Tags:</p>
+                {task.tags.map((tag) => (
+                  <li className="tag" key={crypto.randomUUID()}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </section>

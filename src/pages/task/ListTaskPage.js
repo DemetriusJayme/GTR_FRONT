@@ -77,7 +77,7 @@ function ListTaskPage() {
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>All Users</h1>
+          <h1>All Tasks</h1>
         </div>
       </div>
       <section className="overflow-auto">
@@ -106,7 +106,8 @@ function ListTaskPage() {
               <th>Priority</th>
               <th>Members</th>
               <th>Deadline</th>
-              <th>Action</th>
+              <th>Copy</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
@@ -126,7 +127,7 @@ function ListTaskPage() {
                   </td>
                   <td className="px-6">{task.status}</td>
                   <td className="px-6">{task.priority}</td>
-                  <td className="px-6 group">
+                  <td className="px-6">
                     <ul className="flex flex-wrap w-72">
                       {task.members.map((member) => (
                         <li className="whitespace-nowrap tag">{member.name}</li>
@@ -139,12 +140,14 @@ function ListTaskPage() {
                     }`}>
                     {dayjs().to(task.deadline)}
                   </td>
-                  <td className="px-6 flex">
-                    <Link to={`./${task._id}`} state={task}>
-                      <EyeIcon className="h-5 w-5 text-gray-500" />
-                    </Link>
+                  <td className="px-6">
                     <Link to="./new" state={task}>
                       <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
+                    </Link>
+                  </td>
+                  <td className="px-6">
+                    <Link to={`./${task._id}`} state={task}>
+                      <EyeIcon className="h-5 w-5 text-gray-500" />
                     </Link>
                   </td>
                 </tr>
