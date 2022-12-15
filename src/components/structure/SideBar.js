@@ -5,14 +5,11 @@ import { AuthContext } from "../../contexts/authContext";
 import {
   Bars3Icon,
   UserPlusIcon,
-  ChatBubbleBottomCenterIcon,
   ArrowLeftOnRectangleIcon,
   Squares2X2Icon,
   ClipboardDocumentListIcon,
   CalendarDaysIcon,
   DocumentChartBarIcon,
-  CodeBracketIcon,
-  MagnifyingGlassIcon,
   UsersIcon,
   UserGroupIcon,
   PresentationChartLineIcon,
@@ -24,28 +21,11 @@ function SideBar() {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [open, setOpen] = useState(true);
   const navigation = [
-    {
-      name: "Modelos - Form",
-      icon: CodeBracketIcon,
-      to: "/template/forms",
-    },
     { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
     {
       name: "Tasks",
       icon: ClipboardDocumentListIcon,
-      submenu: true,
-      submenuItems: [
-        {
-          name: "Add Task",
-          icon: ClipboardDocumentListIcon,
-          to: "/task/new",
-        },
-        {
-          name: "All Tasks",
-          icon: ClipboardDocumentListIcon,
-          to: "/task",
-        },
-      ],
+      to: "/task",
     },
     {
       name: "All Users",
@@ -88,11 +68,6 @@ function SideBar() {
       icon: DocumentChartBarIcon,
       to: "/report",
     },
-    {
-      name: "Chatbot",
-      icon: ChatBubbleBottomCenterIcon,
-      to: "/chatbot",
-    },
   ];
   const [subMenu, setSubMenus] = useState(
     navigation
@@ -131,21 +106,6 @@ function SideBar() {
           aria-hidden="true"
           onClick={() => setOpen(!open)}
         />
-
-        <div className="flex items-center rounded-md bg-white mb-4  border-none">
-          <MagnifyingGlassIcon
-            className={`h-6 w-6 ml-2 mr-2 duration-75 ${
-              !open && "h-10 w-10 m-0"
-            }`}
-          />
-          <input
-            type={"search"}
-            placeholder="Search"
-            className={`bg-transparent w-full focus:outline-none  border-none text-sm font-medium ${
-              !open && "hidden"
-            }`}
-          />
-        </div>
         <div>
           {navigation.map((item) => (
             <div key={item.name} className="inline-flex flex-col w-full">
@@ -172,7 +132,8 @@ function SideBar() {
                           ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
                           : "mb-3 h-10 rounded-md"
                       }`
-                  }>
+                  }
+                  onClick={() => openSubMenu("")}>
                   <div className="flex items-center">
                     <item.icon
                       className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
