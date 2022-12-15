@@ -12,10 +12,10 @@ import {
   DocumentChartBarIcon,
   UsersIcon,
   UserGroupIcon,
-  PresentationChartLineIcon,
   DocumentPlusIcon,
 } from "@heroicons/react/24/outline";
 import SubMenu from "./SubMenu";
+import { UserCircleIcon } from "@heroicons/react/20/solid";
 
 function SideBar() {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
@@ -28,9 +28,8 @@ function SideBar() {
       to: "/task",
     },
     {
-      name: "All Users",
+      name: "Users",
       icon: UsersIcon,
-      to: "/users",
       submenu: true,
       submenuItems: [
         {
@@ -39,14 +38,14 @@ function SideBar() {
           to: "/add-user",
         },
         {
-          name: "Edit User",
-          icon: UserGroupIcon,
-          to: "/edit-user",
+          name: "Profile",
+          icon: UserCircleIcon,
+          to: "/profile",
         },
         {
-          name: "Statistic Users",
-          icon: PresentationChartLineIcon,
-          to: "/user/:id",
+          name: "My Team",
+          icon: UserGroupIcon,
+          to: "/users",
         },
       ],
     },
