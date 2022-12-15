@@ -130,7 +130,9 @@ function ListTaskPage() {
                   <td className="px-6">
                     <ul className="flex flex-wrap w-72">
                       {task.members.map((member) => (
-                        <li className="whitespace-nowrap tag">{member.name}</li>
+                        <li className="whitespace-nowrap tag" key={member._id}>
+                          {member.name}
+                        </li>
                       ))}
                     </ul>
                   </td>
