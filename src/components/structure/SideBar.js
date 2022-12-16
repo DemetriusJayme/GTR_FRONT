@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/authContext";
 
@@ -20,42 +20,19 @@ import { UserCircleIcon } from "@heroicons/react/20/solid";
 function SideBar() {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
   const navigation = [
     { name: "Dashboard", icon: Squares2X2Icon, to: "/home" },
+
     {
       name: "Tasks",
       icon: ClipboardDocumentListIcon,
       to: "/task",
     },
     {
-      name: "Users",
-      icon: UsersIcon,
-      submenu: true,
-      submenuItems: [
-        {
-          name: "Add User",
-          icon: UserPlusIcon,
-          to: "/add-user",
-        },
-        {
-          name: "Profile",
-          icon: UserCircleIcon,
-          to: "/profile",
-        },
-      ],
-    },
-    {
       name: "My Agenda",
       icon: CalendarDaysIcon,
       to: "/agenda",
-      submenu: true,
-      submenuItems: [
-        {
-          name: "Add Task",
-          icon: DocumentPlusIcon,
-          to: "/add-task",
-        },
-      ],
     },
     {
       name: "Report",
@@ -64,14 +41,36 @@ function SideBar() {
     },
   ];
 
-  if (loggedInUser?.user.role !== "user")
-    navigation
-      .find((obj) => obj.name === "Users")
-      .submenuItems.push({
-        name: "My Team",
-        icon: UserGroupIcon,
-        to: "/users",
-      });
+  if (loggedInUser?.user.role !== "user") {
+    navigation.splice(1, 0, {
+      name: "Users",
+      icon: UsersIcon,
+      submenu: true,
+      submenuItems: [
+        {
+          name: "Profile",
+          icon: UserCircleIcon,
+          to: "/profile",
+        },
+        {
+          name: "My Team",
+          icon: UserGroupIcon,
+          to: "/users",
+        },
+        {
+          name: "Add User",
+          icon: UserPlusIcon,
+          to: "/add-user",
+        },
+      ],
+    });
+  } else {
+    navigation.splice(1, 0, {
+      name: "Profile",
+      icon: UserCircleIcon,
+      to: "/profile",
+    });
+  }
 
   const [subMenu, setSubMenus] = useState(
     navigation
@@ -93,6 +92,7 @@ function SideBar() {
   function handleLogout() {
     localStorage.clear();
     setLoggedInUser(null);
+    navigate("/");
   }
 
   if (!loggedInUser) return <></>;
