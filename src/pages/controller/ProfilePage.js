@@ -16,6 +16,7 @@ function ProfilePage() {
   console.log(loggedInUser.user._id);
   const [user, setUser] = useState({});
   const [reload, setReload] = useState(false);
+  console.log(setReload);
 
   useEffect(() => {
     async function fetchUser() {
@@ -92,40 +93,6 @@ function ProfilePage() {
         </div>
 
         <div>
-<<<<<<< HEAD
-          <form action="#" method="POST">
-            <div className="text-right  flex gap-2 justify-end">
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
-              >
-                Edit
-              </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/users")}
-              >
-                My Team
-              </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/task/:id")}
-              >
-                My Tasks
-              </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/report")}
-              >
-                My Reports
-              </button>
-            </div>
-          </form>
-=======
           <section>
             <form action="#" method="POST">
               <div className="area-button">
@@ -159,18 +126,13 @@ function ProfilePage() {
                 >
                   My Reports
                 </button>
-                
-                <button
-                  type="submit"
-                  className="btn-blue"
-                  onClick={signOut}
-                >
+
+                <button type="submit" className="btn-blue" onClick={signOut}>
                   Log-Out
                 </button>
               </div>
             </form>
           </section>
->>>>>>> 652caa030e5b7263037d4fa9d00c5519a0e00fa5
         </div>
       </section>
     </div>
