@@ -3,7 +3,6 @@ import GlobalContext from "../../contexts/GlobalContext";
 import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
-import Tags from "../../components/task/Tags";
 
 const emptyDefault = {
   description: "",
@@ -38,24 +37,13 @@ function EventModal() {
         localStorage.removeItem('savedEvents')
         const response = await api.get("/task/all");
         setTasks(response.data);
-         } catch (error) {
-      }
-    }
-    fetchTasks();
-  }, []);
-
-  useEffect(() => {
-    async function fetchTasks2() {
-      try {
-        
         tasks.map((task) => (
-
-          completeCalendar(task.name, task._id, task.priority, new Date(task.deadline).getTime())
+          completeCalendar(task.name, task._id, task.priority, (task.deadline).getTime())
         ))
       } catch (error) {
       }
     }
-    fetchTasks2();
+    fetchTasks();
   }, []);
 
 
@@ -112,7 +100,7 @@ function EventModal() {
       day: cday,//daySelected.valueOf(),
       id: Date.now(),
     };
-    alert(cid)
+
     if (document.getElementById(cid) === null) {
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }
@@ -121,6 +109,7 @@ function EventModal() {
 
   return (
     <div>
+      
     </div >
 
 

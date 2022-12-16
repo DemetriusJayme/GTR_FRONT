@@ -23,7 +23,8 @@ const defaultKeys = Object.keys(emptyDefault);
 function pick(obj, keys) {
   let shallowCopy = {};
   for (let key of keys) {
-    shallowCopy[key] = obj[key];
+    if (key in obj)
+      shallowCopy[key] = obj[key];
   }
   return shallowCopy;
 }
