@@ -80,14 +80,12 @@ function ListTaskPage() {
 
   return (
     <>
-      <div className="lg:flex lg:items-center lg:justify-between mb-6">
-        <div className="min-w-0 flex-1">
-          <h1>All Tasks</h1>
-        </div>
+      <div className="">
+        <h1>All Tasks</h1>
       </div>
-      <section className="overflow-auto">
-        <div className="flex">
-          <div className="grow">
+      <section>
+        <div className="md:flex md:justify-between md:items-center">
+          <div className="md:flex items-center ">
             <div className="relative w-auto">
               <div className="absolute inset-y-0 left-0   flex items-center pl-3 pointer-events-none">
                 <MagnifyingGlassIcon className="w-4 h-4" />
@@ -101,12 +99,12 @@ function ListTaskPage() {
                 required
               />
             </div>
-            <div className="flex items-center ">
-              <span className=" font-bold">Filtered by:</span>
+            <div className="md:flex mb-2 md:mb-0 items-center m-0 md:ml-2 pt-2 md:pt-0">
+              <span className=" font-bold w-40 ">Filtered by:</span>
               <select
                 value={filterByStatus}
                 onChange={handleFilterByStatus}
-                className="w-max ml-2"
+                className=" m-0"
               >
                 <option value="active">Active</option>
                 <option value="rejected">Rejected</option>
@@ -123,21 +121,19 @@ function ListTaskPage() {
           </Link>
         </div>
 
-        <div>
+        <div className="table-responsive">
           <table>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Priority</th>
-                <th>Members</th>
-                <th>Deadline</th>
-                <th>Copy</th>
-                <th>Details</th>
+                <th>Name - Description - Members</th>
+                <th className="text-center">Status</th>
+                <th className="text-center">Priority</th>
+                <th className="text-center">Deadline</th>
+                <th></th>
+                <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-center">
               {tasks
                 .filter((task) =>
                   filterByKeys(task, ["status"], filterByStatus)
@@ -151,39 +147,40 @@ function ListTaskPage() {
                 )
                 .map((task) => (
                   <tr key={task._id}>
-                    <td className="px-6">{task.name}</td>
-                    <td className="px-6">
-                      <div className="overflow-hidden text-ellipsis whitespace-nowrap w-52">
-                        {task.description}
+                    <td className="px-2 text-left">
+                      <div className="overflow-hidden text-ellipsis whitespace-nowrap max-w-xs pl-2 ">
+                        <div className="font-bold mt-1 text-blue">
+                          {task.name}
+                        </div>
+                        <div className="mb-1"> {task.description}</div>
+                        <ul className="flex flex-wrap gap-1 mb-2">
+                          {task.members.map((member) => (
+                            <li
+                              className="whitespace-nowrap tag"
+                              key={member._id}
+                            >
+                              {member.name}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </td>
-                    <td className="px-6">{task.status}</td>
-                    <td className="px-6">{task.priority}</td>
-                    <td className="px-6">
-                      <ul className="flex flex-wrap w-72">
-                        {task.members.map((member) => (
-                          <li
-                            className="whitespace-nowrap tag"
-                            key={member._id}
-                          >
-                            {member.name}
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
+                    <td className="px-2">{task.status}</td>
+                    <td className="px-2">{task.priority}</td>
+
                     <td
-                      className={`px-6 ${
+                      className={`px-2 ${
                         dayjs().isAfter(task.deadline) ? "text-red-600" : ""
                       }`}
                     >
                       {dayjs().to(task.deadline)}
                     </td>
-                    <td className="px-6">
+                    <td className="px-2">
                       <Link to="./new" state={task}>
                         <DocumentDuplicateIcon className="h-5 w-5 text-gray-500" />
                       </Link>
                     </td>
-                    <td className="px-6">
+                    <td className="px-2">
                       <Link to={`./${task._id}`} state={task}>
                         <EyeIcon className="h-5 w-5 text-gray-500" />
                       </Link>

@@ -31,6 +31,7 @@ function ListUserPage() {
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
           <h1>My Team</h1>
+          <h1>My Team</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           {/* <span className="hidden sm:block">

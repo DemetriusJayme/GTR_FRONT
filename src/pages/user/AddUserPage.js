@@ -48,7 +48,7 @@ function AddUserPage() {
           <h1>Create New User</h1>
         </div>
       </div>
-      <section>
+      <section className=" md:w-3/6">
         <form action="#" method="POST">
           <div className="col-span-6 sm:col-span-3">
             <label
@@ -107,17 +107,9 @@ function AddUserPage() {
               <option value="user">User</option>
             </select>
           </div>
-          <div className="area-button">
-            <button
-              type="submit"
-              className="btn-blue"
-              onClick={() => navigate("/profile")}
-            >
-              Cancel
-            </button>
-
+          <div className="flex mt-4 justify-end">
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
-              Save
+              Create
             </button>
           </div>
         </form>

@@ -1,14 +1,20 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
-//import { AuthContext } from "../../contexts/authContext";
+import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  IdentificationIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/20/solid";
 
 function DetailsUserPage() {
   const navigate = useNavigate();
   const { userId } = useParams();
   const [reload, setReload] = useState(false);
 
-  //const { setLoggedInUser } = useContext(AuthContext);
+  const { loggedInUser } = useContext(AuthContext);
   const [user, setUser] = useState({});
 
   /* const [form, setForm] = useState({
@@ -44,7 +50,7 @@ function DetailsUserPage() {
         //console.log(error);
       }
     }
-console.log(user)
+    console.log(user);
     fetchUser();
   }, [reload, userId]);
 
@@ -52,9 +58,93 @@ console.log(user)
     <div>
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
-          <h1>DetailsUserPage</h1>
+          <h1>Details</h1>
         </div>
       </div>
+
+      <section className="mt-5">
+        <div className="align-items-center mb-5 md:grid md:grid-cols-12 gap-8">
+          <div className=" md:col-span-3">
+            <div className=" rounded-md w-full">
+              <img src={user.photo} alt="profile Pic" className="rounded-md" />
+            </div>
+          </div>
+          <div className="md:col-span-4 text-blue p-4 bg-gray-50 rounded-md">
+            <div>
+              <span className=" font-bold">Department:</span> {user.department}
+            </div>
+            <div>
+              <span className=" font-bold">JobPosition:</span>{" "}
+              {user.jobPosition}
+            </div>
+
+            <div>
+              <span className=" font-bold">Status:</span> {user.status}
+            </div>
+            <div>
+              <span className=" font-bold">Role:</span> {user.role}
+            </div>
+            <div>
+              <span className=" font-bold">Skills:</span>
+              <ul>
+                <li>{user.skills}</li>
+              </ul>
+            </div>
+          </div>
+          <div className=" md:col-span-5 text-blue p-4 bg-gray-50 rounded-md">
+            <h1>{user.name}</h1>
+
+            <div className="flex items-center">
+              <EnvelopeIcon className="h-4 w-4 mr-2" /> {user.email}
+            </div>
+            <div className="flex items-center">
+              <PhoneIcon className="h-4 w-4 mr-2" /> {user.phone}
+            </div>
+            <div className="flex items-center">
+              <IdentificationIcon className="h-4 w-4 mr-2" />{" "}
+              {user.registration}
+            </div>
+            <div className="flex items-center">
+              <BriefcaseIcon className="h-4 w-4 mr-2" /> {user.workHours}h
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form action="#" method="POST">
+            <div className="flex gap-2 justify-end">
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/users")}
+              >
+                My Team
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/task")}
+              >
+                My Tasks
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/report")}
+              >
+                My Reports
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
 
       <section>
         <form action="#" method="POST">
