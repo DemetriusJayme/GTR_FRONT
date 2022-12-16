@@ -27,16 +27,7 @@ function AddUserPage() {
     e.preventDefault();
     try {
       let response = await api.post("/user/create", form);
-      navigate("/user/" + response.data._id);
-      setForm({
-        name: "",
-        email: "",
-        password: "",
-        confirmEmail: true,
-        role: "",
-      });
-      console.log(form);
-      setReload(!reload);
+      navigate("/profile", { state: { user: response.data } });
     } catch (error) {
       console.log(error);
     }

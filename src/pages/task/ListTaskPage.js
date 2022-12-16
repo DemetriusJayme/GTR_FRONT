@@ -110,7 +110,6 @@ function ListTaskPage() {
                 <option value="pending">Pending</option>
                 <option value="done">Done</option>
                 <option value="archive">Archived</option>
-                <option value="started">Started</option>
               </select>
             </div>
           </div>
