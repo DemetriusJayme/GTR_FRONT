@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { CheckIcon, LinkIcon, PencilIcon } from "@heroicons/react/20/solid";
+import { Link, useNavigate } from "react-router-dom";
+import { CheckIcon } from "@heroicons/react/20/solid";
 
 import { AuthContext } from "../../contexts/authContext";
 import { useEffect, useState, useContext } from "react";
@@ -10,6 +10,7 @@ function ListUserPage() {
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
   const { loggedInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUsers() {
@@ -30,12 +31,48 @@ function ListUserPage() {
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
           <h1>My Team</h1>
+          <h1>My Team</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
+          {/* <span className="hidden sm:block">
+            <button type="button" className="btn">
+              <PencilIcon
+                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
+                aria-hidden="true"
+              />
+              Group
+            </button>
+          </span>
+
+          <span className="ml-3 hidden sm:block">
+            <button type="button" className="btn">
+              <LinkIcon
+                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
+                aria-hidden="true"
+              />
+              Users
+            </button>
+          </span>
+ */}
           <span className="sm:ml-3">
-            <Link to="/add-user" type="button" className="btn-blue">
-              + Add User
-            </Link>
+            <button
+              type="submit"
+              className="btn-blue"
+              onClick={() => navigate("/profile")}
+            >
+              <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+              My Profile
+            </button>
+          </span>
+          <span className="sm:ml-3">
+            <button
+              type="submit"
+              className="btn-blue"
+              onClick={() => navigate("/add-user")}
+            >
+              <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+              Add User
+            </button>
           </span>
         </div>
       </div>

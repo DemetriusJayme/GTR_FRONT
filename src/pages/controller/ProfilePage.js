@@ -13,23 +13,7 @@ function ProfilePage() {
   const navigate = useNavigate();
 
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
-  console.log(loggedInUser.user._id);
-  const [user, setUser] = useState({});
-  const [reload, setReload] = useState(false);
-  console.log(setReload);
-
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await api.get("/user/profile");
-        setUser(response.data);
-      } catch (error) {
-        //console.log(error);
-      }
-    }
-
-    fetchUser();
-  }, [reload]);
+  const user = loggedInUser.user;
 
   function signOut() {
     //removendo o loggedInUser do localStorage
