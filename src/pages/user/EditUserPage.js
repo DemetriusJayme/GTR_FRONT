@@ -53,11 +53,12 @@ function EditUserPage() {
     }
 
     fetchUser();
-  }, [reload]);
+  }, [reload, userId]);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
   /* 
   function updateTags(tags) {
     handleChange({ target: { name: "skills", value: tags } });
@@ -70,18 +71,18 @@ function EditUserPage() {
       const clone = { ...form };
       delete clone._id;
 
-      await api.put(`/user/edit/${userId}`, clone);
+      await api.put("/user/edit", clone);
       setReload(!reload);
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
   }
 
-  //console.log(form);
-
   async function handleDeleteUser() {
     try {
-      await api.delete("/user/delete");
+    await api.delete(`/user/delete/${userId}`);
+      navigate("/profile");
     } catch (error) {
       console.log(error);
       alert("Algo deu errado no delete do user");
@@ -133,9 +134,24 @@ function EditUserPage() {
               Password
             </label>
             <input
+              type="password"
+              name="password"
+              id="password"
+              value={form.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Work Hours
+            </label>
+            <input
               type="number"
               name="workHours"
-              placeholder="Type the workHours"
+              placeholder="Type the Work hours"
               id="workHours"
               value={form.workHours}
               onChange={handleChange}
@@ -214,8 +230,7 @@ function EditUserPage() {
                 type="text"
                 name="skills"
                 id="skills"
-                autoComplete="skills"
-                value={form.skills}
+                selected={form.skills}
               />
             </div>
           </fieldset>
@@ -225,7 +240,7 @@ function EditUserPage() {
               className="btn-blue"
               onClick={() => navigate("/user/:userId")}
             >
-              Previos
+              My-Team{" "}
             </button>
             <button
               type="submit"
@@ -236,6 +251,9 @@ function EditUserPage() {
             </button>
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
               Save
+            </button>
+            <button type="submit" className="btn-blue" onClick={() => navigate("/profile")}>
+              Cancel
             </button>
             {loggedInUser.user.role !== "user" && (
               <button
