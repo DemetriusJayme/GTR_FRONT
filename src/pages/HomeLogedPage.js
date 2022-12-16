@@ -19,9 +19,9 @@ function HomeLogedPage() {
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-10">
         <div className="min-w-0 flex-1">
-          <h3>Fron End Developer</h3>
+          <h3>Welcome to GTR</h3>
           <h1 className="text-4xl font-bold leading-7 text-blue2 sm:truncate sm:text-4xl sm:tracking-tight">
-            PAGINA INICIAL LOGADO
+            Discover our tool
           </h1>
 
           <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -82,6 +82,20 @@ function HomeLogedPage() {
               Publish
             </button>
           </span>
+        </div>
+      </div>
+      <div className="md:grid md:grid-cols-8 gap-2">
+        <div className="system md:col-span-2 bg-gray-100  p-8 rounded-md">
+          system1
+        </div>
+        <div className="system md:col-span-2 bg-gray-100  p-8 rounded-md">
+          system1
+        </div>
+        <div className="system md:col-span-2 bg-gray-100  p-8 rounded-md">
+          system1
+        </div>
+        <div className="system md:col-span-2 bg-gray-100  p-8 rounded-md">
+          system1
         </div>
       </div>
     </>

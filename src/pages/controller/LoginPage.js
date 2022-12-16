@@ -1,9 +1,7 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import api from "../../api/api.js";
 import { AuthContext } from "../../contexts/authContext";
-
-import imgHome from "../../assets/images/bg_home.jpeg";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -33,7 +31,7 @@ function LoginPage() {
       //atualizar o contexto
       setLoggedInUser({ ...response.data });
 
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -41,56 +39,86 @@ function LoginPage() {
 
   return (
     <>
-      <div className="md:grid md:grid-cols-2 gap-8  bg-white p-0 md:p-8 rounded-md">
-        <section className="m-0 bg-blue2 text-white">
-          <h1 className=" text-white">Login</h1>
-
-          <form className=" text-white" onSubmit={handleSubmit}>
-            <label htmlFor="email" className=" text-white">
-              Endereço de e-mail
-            </label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              className="text-blue2"
-              placeholder="Insira o endereço de e-mail cadastrado"
-              required
-            />
-            <label htmlFor="password" className=" text-white">
-              Senha
-            </label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              className="text-blue2"
-              placeholder="Insira a senha cadastrada"
-              required
-            />
-            <button
-              className="btn border-none hover:bg-orange hover:text-white mt-4 mb-2 float-right"
-              type="submit"
-              //onClick={handleSubmit}
-            >
-              Entrar no sistema
-            </button>
-            <div className=" t text-white mt-4 text-sm font-medium">
-              Ainda não possui cadastro?{" "}
-              <Link to="/sign-up" className="hover:text-blue text-orange ">
-                Cadastre aqui
-              </Link>
-            </div>
-          </form>
+      <div className="md:grid md:grid-cols-12 gap-4 mt-20">
+        <div className="md:col-span-1"></div>
+        <section className="md:col-span-7">
+          <h1 className="mb-4 text-4xl">
+            Every day remote work
+            <br />
+            becomes more common,
+            <br />
+            thanks to advances in technology.
+          </h1>
+          <p className="mb-4">
+            While the option to work from home is a huge benefit, it's important
+            that you and your team have the right software tool to ensure your
+            company's goals are met. This is especially necessary when we are
+            talking about working on multiple projects, which involve different
+            stakeholders. Working from home can make it more difficult to keep
+            everyone aware, organized and engaged in what needs to be done.
+          </p>
+          <h3 className="mb-4">
+            With GTR you will be able to do all this and have all the management
+            of <br />
+            your projects under development just a few clicks away!
+          </h3>
+          <p className="mb-4">
+            This means that even if you're managing your teams remotely, you'll
+            be able to know which tasks are being assigned to whom, what time is
+            being spent starting and finishing them, among many other pieces of
+            information that will make your life easier and ensure the health of
+            your team. your company.
+          </p>
         </section>
-        <div
-          className="bg-cover bg-center  invisible md:visible md:block rounded-lg"
-          style={{ backgroundImage: `url(${imgHome})` }}
-        ></div>
+        <div className="md:col-span-3">
+          <div className=" bg-gray-100 p-8 rounded-md">
+            <h1 className="">Login</h1>
+
+            <form className="" onSubmit={handleSubmit}>
+              <label htmlFor="email" className=" text-blue">
+                Your email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="text-blue2"
+                placeholder="your@mail.com"
+                required
+              />
+              <label htmlFor="password" className=" text-blue">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                className="text-blue2"
+                placeholder="..."
+                required
+              />
+              <button
+                className="btn-blue border-none hover:bg-orange hover:text-white mt-4 mb-2"
+                type="submit"
+                //onClick={handleSubmit}
+              >
+                Enter
+              </button>
+            </form>
+          </div>
+
+          <NavLink
+            key="signUp"
+            to="/signup"
+            className="p-3 mt-6 cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white"
+          >
+            Create your account
+          </NavLink>
+        </div>
       </div>
     </>
   );

@@ -21,7 +21,7 @@ function SideBar() {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const [open, setOpen] = useState(true);
   const navigation = [
-    { name: "Dashboard", icon: Squares2X2Icon, to: "/" },
+    { name: "Dashboard", icon: Squares2X2Icon, to: "/home" },
     {
       name: "Tasks",
       icon: ClipboardDocumentListIcon,
@@ -93,11 +93,12 @@ function SideBar() {
   if (!loggedInUser) return <></>;
 
   return (
-    <div className="invisible w-0 md:visible md:w-auto bg-gray-100 mt-4">
+    <div className="invisible w-0 md:visible md:w-auto mt-4">
       <div
         className={`bg-blue rounded-r-lg  p-5 pt-10  relative duration-300 ${
           open ? "w-72" : "w-20"
-        }`}>
+        }`}
+      >
         <Bars3Icon
           className={`bg-dark-blue  text-white text-2xl rounded-md absolute -right-3   h-6 w-6 p-1 cursor-pointer top-1.5 hover:bg-orange ${
             !open && "rotate-180"
@@ -132,7 +133,8 @@ function SideBar() {
                           : "mb-3 h-10 rounded-md"
                       }`
                   }
-                  onClick={() => openSubMenu("")}>
+                  onClick={() => openSubMenu("")}
+                >
                   <div className="flex items-center">
                     <item.icon
                       className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}
@@ -152,7 +154,8 @@ function SideBar() {
                   ? "px-3 py-2 items-center rounded-md mb-3 inline-flex"
                   : "mb-3 h-10 rounded-md"
               }`}
-              onClick={handleLogout}>
+              onClick={handleLogout}
+            >
               <div className="flex items-center">
                 <ArrowLeftOnRectangleIcon
                   className={`h-6 w-6 mr-2 ${!open && "h-10 w-10 m-0 p-2"}`}

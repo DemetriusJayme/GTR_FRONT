@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 .app {
-  background: #f3f4f6;
-  color: #676a6c;
   height: 100vh;
+  position: relative;
+  background: url(../images/xbghome.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
+
 @layer base {
   h1 {
     @apply text-4xl font-bold leading-7 text-blue2 sm:truncate sm:text-4xl sm:tracking-tight mb-2;
@@ -122,27 +126,26 @@
 
   .bg-blue-500 {
     --tw-bg-opacity: 1;
-    background-color: rgb(59 130 246/var(--tw-bg-opacity));
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
   }
 
   .bg-blue-600 {
     --tw-bg-opacity: 1;
-    background-color: rgb(37 99 235/var(--tw-bg-opacity));
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
   }
-
 
   .high {
     --tw-bg-opacity: 1;
-    background-color: rgb(248 113 113 / var(--tw-text-opacity))!important;
+    background-color: rgb(248 113 113 / var(--tw-text-opacity)) !important;
   }
 
   .regular {
     --tw-bg-opacity: 1;
-    background-color: rgb(234 179 8)!important;
+    background-color: rgb(234 179 8) !important;
   }
-  
+
   .low {
     --tw-bg-opacity: 1;
-    background-color: rgb(74 222 128 / var(--tw-text-opacity))!important;
+    background-color: rgb(74 222 128 / var(--tw-text-opacity)) !important;
   }
 }
