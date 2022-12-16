@@ -93,46 +93,38 @@ function ProfilePage() {
         </div>
 
         <div>
-          <section>
-            <form action="#" method="POST">
-              <div className="area-button">
-                <button
-                  type="submit"
-                  className="btn-blue"
-                  onClick={() =>
-                    navigate(`/edit-user/${loggedInUser.user._id}`)
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  type="submit"
-                  className="btn-blue"
-                  onClick={() => navigate("/users")}
-                >
-                  My Team
-                </button>
-                <button
-                  type="submit"
-                  className="btn-blue"
-                  onClick={() => navigate("/task/:id")}
-                >
-                  My Tasks
-                </button>
-                <button
-                  type="submit"
-                  className="btn-blue"
-                  onClick={() => navigate("/report")}
-                >
-                  My Reports
-                </button>
-
-                <button type="submit" className="btn-blue" onClick={signOut}>
-                  Log-Out
-                </button>
-              </div>
-            </form>
-          </section>
+          <form action="#" method="POST">
+            <div className="flex gap-2 justify-end">
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/users")}
+              >
+                My Team
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/task")}
+              >
+                My Tasks
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/report")}
+              >
+                My Reports
+              </button>
+            </div>
+          </form>
         </div>
       </section>
     </div>

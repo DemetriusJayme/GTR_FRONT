@@ -30,14 +30,15 @@ export default function MembersDropDownMenu({ onChange, selected = [] }) {
   }
 
   return (
-    <div className="mt-4 flex flex-wrap sm:flex-nowrap items-start">
+    <div className="flex flex-wrap sm:flex-nowrap items-start">
       <div className="group btn items-end relative">
         <span htmlFor="members">Members</span>
         <ChevronDownIcon className="h-4 w-4 ml-1 transform group-hover:-rotate-180 transition duration-300 ease-in-out" />
         <div className="absolute left-0 top-full overflow-hidden group-hover:overflow-auto h-36 pt-1 rounded-md drop-shadow ">
           <table
             className="table-auto transform opacity-0 group-hover:opacity-100
-            transition duration-300 ease-in-out origin-top">
+            transition duration-300 ease-in-out origin-top"
+          >
             <thead>
               <tr>
                 <th className="px-2 py-1"></th>
@@ -51,7 +52,8 @@ export default function MembersDropDownMenu({ onChange, selected = [] }) {
                   key={crypto.randomUUID()}
                   className="hover:bg-slate-100 cursor-pointer"
                   onClick={() => handleChange(user._id)}
-                  onMouseDown={disallowDoubleClickSelection}>
+                  onMouseDown={disallowDoubleClickSelection}
+                >
                   <td className="px-2 py-1">
                     <input
                       type="checkbox"

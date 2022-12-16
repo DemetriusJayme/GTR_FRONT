@@ -72,8 +72,8 @@ function AddTaskPage() {
       <h1>Create a new task</h1>
       <section className="overflow-visible">
         <form onSubmit={handleSubmit}>
-          <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
-            <div className="w-full">
+          <div className="md:grid md:grid-cols-8 gap-2 items-center">
+            <div className="md:col-span-6">
               <label htmlFor="name">Name</label>
               <input
                 type="text"
@@ -85,14 +85,15 @@ function AddTaskPage() {
                 onChange={handleChange}
               />
             </div>
-            <div className="w-full">
+            <div className="md:col-span-2">
               <label htmlFor="priority">Priority</label>
               <select
                 id="priority"
                 name="priority"
                 className="leading-6"
                 value={form.priority}
-                onChange={handleChange}>
+                onChange={handleChange}
+              >
                 <option value="high">high</option>
                 <option value="regular">regular</option>
                 <option value="low">low</option>
@@ -103,17 +104,27 @@ function AddTaskPage() {
           <textarea
             id="description"
             name="description"
-            rows={3}
+            rows={4}
             placeholder="A description of the task"
             value={form.description}
             onChange={handleChange}
           />
-
-          <Tags onChange={handleChange} selected={form.tags} />
-
-          {loggedInUser.user.role !== "user" && (
-            <DropdownMenu onChange={handleChange} selected={form.members} />
-          )}
+          <div className="md:grid md:grid-cols-8 gap-2 items-center">
+            <div className="md:col-span-4">
+              {loggedInUser.user.role !== "user" && (
+                <>
+                  <label>Members</label>
+                  <DropdownMenu
+                    onChange={handleChange}
+                    selected={form.members}
+                  />
+                </>
+              )}
+            </div>
+            <div className="md:col-span-4">
+              <Tags onChange={handleChange} selected={form.tags} />{" "}
+            </div>
+          </div>
 
           <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
             <div className="w-full">
