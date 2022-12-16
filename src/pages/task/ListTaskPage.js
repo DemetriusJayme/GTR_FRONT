@@ -89,29 +89,33 @@ function ListTaskPage() {
         <div className="flex">
           <div className="grow">
             <div className="relative w-auto">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <div className="absolute inset-y-0 left-0   flex items-center pl-3 pointer-events-none">
                 <MagnifyingGlassIcon className="w-4 h-4" />
               </div>
               <input
                 type="search"
                 id="default-search"
-                className="block pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg "
+                className="block pl-10  w-80 text-sm text-gray-900 border border-gray-300 rounded-lg "
                 placeholder="Search"
                 onChange={handleFilter}
                 required
               />
             </div>
-            <select
-              value={filterByStatus}
-              onChange={handleFilterByStatus}
-              className="w-max pr-7 mt-0">
-              <option value="active">active</option>
-              <option value="rejected">rejected</option>
-              <option value="pending">pending</option>
-              <option value="done">done</option>
-              <option value="archived">archived</option>
-              <option value="started">started</option>
-            </select>
+            <div className="flex items-center ">
+              <span className=" font-bold">Filtered by:</span>
+              <select
+                value={filterByStatus}
+                onChange={handleFilterByStatus}
+                className="w-max ml-2"
+              >
+                <option value="active">Active</option>
+                <option value="rejected">Rejected</option>
+                <option value="pending">Pending</option>
+                <option value="done">Done</option>
+                <option value="archived">Archived</option>
+                <option value="started">Started</option>
+              </select>
+            </div>
           </div>
 
           <Link to="/task/new">
@@ -160,7 +164,8 @@ function ListTaskPage() {
                         {task.members.map((member) => (
                           <li
                             className="whitespace-nowrap tag"
-                            key={member._id}>
+                            key={member._id}
+                          >
                             {member.name}
                           </li>
                         ))}
@@ -169,7 +174,8 @@ function ListTaskPage() {
                     <td
                       className={`px-6 ${
                         dayjs().isAfter(task.deadline) ? "text-red-600" : ""
-                      }`}>
+                      }`}
+                    >
                       {dayjs().to(task.deadline)}
                     </td>
                     <td className="px-6">

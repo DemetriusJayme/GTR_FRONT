@@ -66,7 +66,7 @@ function NavBar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <Link key="Home" to="/">
+                  <Link key="Home" to="/home">
                     <div className="flex flex-shrink-0 items-center">
                       <svg
                         className="block h-8 fill-white w-auto lg:hidden hover:fill-orange"

@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
-//import EditUser from "../../components/EditUser";
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  IdentificationIcon,
+  BriefcaseIcon,
+} from "@heroicons/react/20/solid";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -37,41 +42,90 @@ function ProfilePage() {
 
   return (
     <div>
-      <h1>Profile Page</h1>
-      <div className="mt-5">
-        <div className="align-items-center mb-5">
-          <div>
-            <div>
-              <img src={user.photo} alt="profile Pic" className="rounded" />
+      <h1>Your profile</h1>
+      <section className="mt-5">
+        <div className="align-items-center mb-5 md:grid md:grid-cols-12 gap-8">
+          <div className=" md:col-span-3">
+            <div className=" rounded-md w-full">
+              <img src={user.photo} alt="profile Pic" className="rounded-md" />
             </div>
           </div>
-          <div>
-            <h1>Nome</h1>
+          <div className="md:col-span-4 text-blue p-4 bg-gray-50 rounded-md">
+            <div>
+              <span className=" font-bold">Department:</span> {user.department}
+            </div>
+            <div>
+              <span className=" font-bold">JobPosition:</span>{" "}
+              {user.jobPosition}
+            </div>
+
+            <div>
+              <span className=" font-bold">Status:</span> {user.status}
+            </div>
+            <div>
+              <span className=" font-bold">Role:</span> {user.role}
+            </div>
+            <div>
+              <span className=" font-bold">Skills:</span>
+              <ul>
+                <li>{user.skills}</li>
+              </ul>
+            </div>
+          </div>
+          <div className=" md:col-span-5 text-blue p-4 bg-gray-50 rounded-md">
             <h1>{user.name}</h1>
-            <p>E-mail</p>
-            <p>{user.email}</p>
-            <p>Registration</p>
-            <p>{user.registration}</p>
-            <p>phone</p>
-            <p>{user.phone}</p>
-            <p>workHours</p>
-            <p>{user.workHours}</p>
-            <p>department</p>
 
-            <p>{user.department}</p>
-            <p>jobPosition</p>
-            <p>{user.jobPosition}</p>
-            <p>skills</p>
-            <p>{user.skills}</p>
-            <p>status</p>
-            <p>{user.status}</p>
-            <p>role</p>
-
-            <p>{user.role}</p>
+            <div className="flex items-center">
+              <EnvelopeIcon className="h-4 w-4 mr-2" /> {user.email}
+            </div>
+            <div className="flex items-center">
+              <PhoneIcon className="h-4 w-4 mr-2" /> {user.phone}
+            </div>
+            <div className="flex items-center">
+              <IdentificationIcon className="h-4 w-4 mr-2" />{" "}
+              {user.registration}
+            </div>
+            <div className="flex items-center">
+              <BriefcaseIcon className="h-4 w-4 mr-2" /> {user.workHours}h
+            </div>
           </div>
         </div>
 
         <div>
+<<<<<<< HEAD
+          <form action="#" method="POST">
+            <div className="text-right  flex gap-2 justify-end">
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
+              >
+                Edit
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/users")}
+              >
+                My Team
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/task/:id")}
+              >
+                My Tasks
+              </button>
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={() => navigate("/report")}
+              >
+                My Reports
+              </button>
+            </div>
+          </form>
+=======
           <section>
             <form action="#" method="POST">
               <div className="area-button">
@@ -116,8 +170,9 @@ function ProfilePage() {
               </div>
             </form>
           </section>
+>>>>>>> 652caa030e5b7263037d4fa9d00c5519a0e00fa5
         </div>
-      </div>
+      </section>
     </div>
   );
 }
