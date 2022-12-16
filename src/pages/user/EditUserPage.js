@@ -78,10 +78,24 @@ function EditUserPage() {
       console.log(error);
     }
   }
+  async function handleSubmitSuperv(e) {
+    e.preventDefault();
+    try {
+      //clonando o form para que possamos fazer as alterações necessárias
+      const clone = { ...form };
+      delete clone._id;
+
+      await api.put(`/user/edit/${userId}`, clone);
+      setReload(!reload);
+      navigate("/users");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function handleDeleteUser() {
     try {
-    await api.delete(`/user/delete/${userId}`);
+      await api.delete(`/user/delete/${userId}`);
       navigate("/profile");
     } catch (error) {
       console.log(error);
@@ -91,7 +105,7 @@ function EditUserPage() {
 
   return (
     <div>
-      <h1>EDIT USER </h1>
+      <h1>EDIT</h1>
       <section>
         <form action="#" method="POST">
           <label>{user.name}</label>
@@ -252,7 +266,27 @@ function EditUserPage() {
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
               Save
             </button>
-            <button type="submit" className="btn-blue" onClick={() => navigate("/profile")}>
+            <button
+              type="submit"
+              className="btn-blue"
+              onClick={() => navigate("/profile")}
+            >
+              Cancel
+            </button>
+            {loggedInUser.user.role !== "user" && (
+              <button
+                type="submit"
+                className="btn-blue"
+                onClick={handleSubmitSuperv}
+              >
+                Save
+              </button>
+            )}
+            <button
+              type="submit"
+              className="btn-blue"
+              onClick={() => navigate("/profile")}
+            >
               Cancel
             </button>
             {loggedInUser.user.role !== "user" && (
