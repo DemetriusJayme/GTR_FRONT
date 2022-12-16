@@ -2,7 +2,7 @@
 Projeto GTR - Gestor do Trabalho Remoto
 Ferramenta criada como PROJETO FINAL do Bootcamp de Devenvolvimento Web da IronHack
 
-# Aplicação Front End construida em REACT e Back End em Node utilizando o framework express e banco de dados MongoDB com a biblioteca Mongoose;
+Aplicação Front End construida em REACT e Back End em Node utilizando o framework express e banco de dados MongoDB com a biblioteca Mongoose;
 
 ## Links
 Github Back End: https://github.com/MichelaCamboim/GTR_Server.git
