@@ -10,8 +10,26 @@ function NavBar() {
   const navigate = useNavigate();
 
   const navigation = [
-    /*     { name: "Login", to: "/login" },
-    { name: "Sign-Up", to: "/sign-up" }, */
+    { name: "Dashboard", to: "/home" },
+    {
+      name: "Tasks",
+      to: "/task",
+    },
+    {
+      name: "Users",
+      submenu: true,
+    },
+    {
+      name: "My Agenda",
+
+      to: "/agenda",
+      submenu: true,
+    },
+    {
+      name: "Report",
+
+      to: "/report",
+    },
     // { name: "Model-form", to: "/model-form" },
   ];
   // const navigationLogged = [
