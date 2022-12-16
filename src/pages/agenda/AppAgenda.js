@@ -18,7 +18,7 @@ function AppAgenda() {
     <React.Fragment>
       {<EventModal />}
 
-      <div className="h-screen flex flex-col">
+      <div className="h-screen flex flex-col bg-white">
         <CalendarHeader />
         <div className="md:hidden flex">
           <Sidebar />
