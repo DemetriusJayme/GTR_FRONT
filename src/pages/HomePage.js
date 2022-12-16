@@ -1,137 +1,124 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/authContext.js";
+import { useState, useContext } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
+import api from "../api/api.js";
+import { AuthContext } from "../contexts/authContext";
 
+function LoginPage() {
+  const navigate = useNavigate();
 
-import {
-  BriefcaseIcon,
-  CalendarIcon,
-  CheckIcon,
-  CurrencyDollarIcon,
-  LinkIcon,
-  MapPinIcon,
-  PencilIcon,
-} from "@heroicons/react/20/solid";
+  const { setLoggedInUser } = useContext(AuthContext);
 
-function HomePage() {
-  const { loggedInUser } = useContext(AuthContext);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const response = await api.post("/user/login", form);
+      console.log(response);
+
+      //validar se o usuário confirmou o email dele
+
+      //setItem -> coloca algo dentro do localStorage
+      localStorage.setItem("loggedInUser", JSON.stringify(response.data));
+
+      //atualizar o contexto
+      setLoggedInUser({ ...response.data });
+
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
-      <div className="lg:flex lg:items-center lg:justify-between mb-10">
-        <div className="min-w-0 flex-1">
-          <h3>Fron End Developer</h3>
-          <h1 className="text-4xl font-bold leading-7 text-blue2 sm:truncate sm:text-4xl sm:tracking-tight">
-            Gabriel Stroligo
+      <div className="md:grid md:grid-cols-12 gap-4 mt-20">
+        <div className="md:col-span-1"></div>
+        <section className="md:col-span-7">
+          <h1 className="mb-4 text-4xl">
+            Every day remote work
+            <br />
+            becomes more common,
+            <br />
+            thanks to advances in technology.
           </h1>
+          <p className="mb-4">
+            While the option to work from home is a huge benefit, it's important
+            that you and your team have the right software tool to ensure your
+            company's goals are met. This is especially necessary when we are
+            talking about working on multiple projects, which involve different
+            stakeholders. Working from home can make it more difficult to keep
+            everyone aware, organized and engaged in what needs to be done.
+          </p>
+          <h3 className="mb-4">
+            With GTR you will be able to do all this and have all the management
+            of <br />
+            your projects under development just a few clicks away!
+          </h3>
+          <p className="mb-4">
+            This means that even if you're managing your teams remotely, you'll
+            be able to know which tasks are being assigned to whom, what time is
+            being spent starting and finishing them, among many other pieces of
+            information that will make your life easier and ensure the health of
+            your team. your company.
+          </p>
+        </section>
+        <div className="md:col-span-3">
+          <div className=" bg-gray-100 p-8 rounded-md">
+            <h1 className="">Login</h1>
 
-          <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div className="mt-2 flex items-center text-sm text-gray-500">
-              <BriefcaseIcon
-                className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                aria-hidden="true"
+            <form className="" onSubmit={handleSubmit}>
+              <label htmlFor="email" className=" text-blue">
+                Your email
+              </label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                className="text-blue2"
+                placeholder="your@mail.com"
+                required
               />
-              Full-time
-            </div>
-            <div className="mt-2 flex items-center text-sm text-gray-500">
-              <MapPinIcon
-                className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                aria-hidden="true"
+              <label htmlFor="password" className=" text-blue">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                className="text-blue2"
+                placeholder="..."
+                required
               />
-              Remote
-            </div>
-            <div className="mt-2 flex items-center text-sm text-gray-500">
-              <CurrencyDollarIcon
-                className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                aria-hidden="true"
-              />
-              $120k &ndash; $140k
-            </div>
-            <div className="mt-2 flex items-center text-sm text-gray-500">
-              <CalendarIcon
-                className="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
-                aria-hidden="true"
-              />
-              Closing on January 9, 2020
-            </div>
+              <button
+                className="btn-blue border-none hover:bg-orange hover:text-white mt-4 mb-2"
+                type="submit"
+                //onClick={handleSubmit}
+              >
+                Enter
+              </button>
+            </form>
           </div>
-        </div>
-        <div className="mt-5 flex lg:mt-0 lg:ml-4">
-          <span className="hidden sm:block">
-            <button type="button" className="btn">
-              <PencilIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
-                aria-hidden="true"
-              />
-              Edit
-            </button>
-          </span>
-
-          <span className="ml-3 hidden sm:block">
-            <button type="button" className="btn">
-              <LinkIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
-                aria-hidden="true"
-              />
-              View
-            </button>
-          </span>
-
-          <span className="sm:ml-3">
-            <button type="button" className="btn-blue">
-              <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-              Publish
-            </button>
-          </span>
+          <NavLink key="signUp" to="/signup">
+            <div className="p-3 mt-6 w-full cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white">
+              Create your account
+            </div>
+          </NavLink>
         </div>
       </div>
-      <section>
-        <form>
-          <button className="btn mr-2">
-            <Link to="/sign-up">Cadastrar no sistema</Link>
-          </button>
-          <button className="btn  mr-2">
-            <Link to="/login">Entrar no sistema</Link>
-          </button>
-          {loggedInUser && (
-            <button className="btn  mr-2">
-              <Link to="/profile">Vá para o Perfil</Link>
-            </button>
-          )}
-        </form>
-      </section>
-      <section>
-        <form>
-          <button className="btn mr-2">
-            <Link to="/sign-up">Cadastrar no sistema</Link>
-          </button>
-          <button className="btn  mr-2">
-            <Link to="/login">Entrar no sistema</Link>
-          </button>
-          {loggedInUser && (
-            <button className="btn  mr-2">
-              <Link to="/profile">Vá para o Perfil</Link>
-            </button>
-          )}
-        </form>
-      </section>
-      <section>
-        <form>
-          <button className="btn mr-2">
-            <Link to="/sign-up">Cadastrar no sistema</Link>
-          </button>
-          <button className="btn  mr-2">
-            <Link to="/login">Entrar no sistema</Link>
-          </button>
-          {loggedInUser && (
-            <button className="btn  mr-2">
-              <Link to="/profile">Vá para o Perfil</Link>
-            </button>
-          )}
-        </form>
-      </section>
     </>
   );
 }
 
-export default HomePage;
+export default LoginPage;

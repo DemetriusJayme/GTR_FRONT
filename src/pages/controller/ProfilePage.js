@@ -105,6 +105,14 @@ function ProfilePage() {
                 >
                   My Reports
                 </button>
+                
+                <button
+                  type="submit"
+                  className="btn-blue"
+                  onClick={signOut}
+                >
+                  Log-Out
+                </button>
               </div>
             </form>
           </section>

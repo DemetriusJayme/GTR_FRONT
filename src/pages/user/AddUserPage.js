@@ -27,7 +27,7 @@ function AddUserPage() {
     e.preventDefault();
     try {
       await api.post("/user/create", form);
-      navigate("/");
+      navigate("/profile");
       setForm({
         name: "",
         email: "",
@@ -111,7 +111,7 @@ function AddUserPage() {
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/profile")}
             >
               Cancel
             </button>
