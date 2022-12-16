@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
@@ -11,19 +11,10 @@ import {
 
 function ProfilePage() {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
-  const user = loggedInUser.user;
-
-  function signOut() {
-    //removendo o loggedInUser do localStorage
-    localStorage.removeItem("loggedInUser");
-
-    //atualizar o meu context
-    setLoggedInUser(null);
-
-    navigate("/");
-  }
+  const { loggedInUser } = useContext(AuthContext);
+  const user = location.state ? location.state.user : loggedInUser.user;
 
   return (
     <div>
@@ -77,38 +68,40 @@ function ProfilePage() {
         </div>
 
         <div>
-          <form action="#" method="POST">
+          <div>
             <div className="flex gap-2 justify-end">
               <button
                 type="submit"
                 className="btn-blue"
-                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
-              >
+                onClick={() => navigate(`/edit-user/${user._id}`)}>
                 Edit
               </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/users")}
-              >
-                My Team
-              </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/task")}
-              >
-                My Tasks
-              </button>
-              <button
-                type="submit"
-                className="btn-blue"
-                onClick={() => navigate("/report")}
-              >
-                My Reports
-              </button>
+              {location.state === null && (
+                <>
+                  {user.role !== "user" && (
+                    <button
+                      type="submit"
+                      className="btn-blue"
+                      onClick={() => navigate("/users")}>
+                      My Team
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className="btn-blue"
+                    onClick={() => navigate("/task")}>
+                    My Tasks
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn-blue"
+                    onClick={() => navigate("/report")}>
+                    My Reports
+                  </button>
+                </>
+              )}
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </div>

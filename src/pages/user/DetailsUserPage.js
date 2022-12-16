@@ -111,43 +111,39 @@ function DetailsUserPage() {
         </div>
 
         <div>
-          <form action="#" method="POST">
+          <div>
             <div className="flex gap-2 justify-end">
               <button
                 type="submit"
                 className="btn-blue"
-                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}
-              >
+                onClick={() => navigate(`/edit-user/${loggedInUser.user._id}`)}>
                 Edit
               </button>
               <button
                 type="submit"
                 className="btn-blue"
-                onClick={() => navigate("/users")}
-              >
+                onClick={() => navigate("/users")}>
                 My Team
               </button>
               <button
                 type="submit"
                 className="btn-blue"
-                onClick={() => navigate("/task")}
-              >
+                onClick={() => navigate("/task")}>
                 My Tasks
               </button>
               <button
                 type="submit"
                 className="btn-blue"
-                onClick={() => navigate("/report")}
-              >
+                onClick={() => navigate("/report")}>
                 My Reports
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </section>
 
       <section>
-        <form action="#" method="POST">
+        <div>
           <div class="card">
             <fieldset>
               <div class="card-header">{user.name}</div>
@@ -159,8 +155,7 @@ function DetailsUserPage() {
                   <svg
                     className="h-full w-full text-gray-300 mr-2"
                     fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                    viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </span>
@@ -193,35 +188,32 @@ function DetailsUserPage() {
                   to={`/edit-user/${user._id}`}
                   type="button"
                   data-modal-toggle="editUserModal"
-                  className="links"
-                >
+                  className="links">
                   Edit
                 </Link>
               </button>
             </div>
           </div>
-        </form>
+        </div>
       </section>
 
       <section>
-        <form action="#" method="POST">
+        <div>
           <div className="area-button">
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/users")}
-            >
+              onClick={() => navigate("/users")}>
               Previos
             </button>
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/")}
-            >
+              onClick={() => navigate("/")}>
               Sign Out
             </button>
           </div>
-        </form>
+        </div>
       </section>
     </div>
   );
