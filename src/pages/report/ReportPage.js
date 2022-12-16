@@ -177,7 +177,7 @@ function ReportPage() {
                     if (user.role === "supervisor") {
                       return null;
                     }
-                    return <option value={user._id}>{user.email}</option>;
+                    return <option value={user._id}>{user.name}</option>;
                   })}
                 </select>
               </div>

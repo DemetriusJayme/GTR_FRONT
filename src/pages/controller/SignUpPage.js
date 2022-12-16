@@ -79,7 +79,8 @@ function AddUserPage() {
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700">
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Name
                 </label>
                 <input
@@ -108,7 +109,8 @@ function AddUserPage() {
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700">
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
@@ -121,21 +123,12 @@ function AddUserPage() {
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="role" className="">
-                  Role
-                </label>
-                <select name="role" onChange={handleChange} value={form.role}>
-                  <option>Select an option</option>
-                  <option value="supervisor">Supervisor</option>
-                  <option value="user">User</option>
-                </select>
-              </div>
               <div className="mt-2 flex justify-end ">
                 <button
                   type="submit"
                   className="p-3 mt-6 cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white"
-                  onClick={handleSubmit}>
+                  onClick={handleSubmit}
+                >
                   Create your account
                 </button>
               </div>
