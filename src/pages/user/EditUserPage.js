@@ -95,6 +95,8 @@ function EditUserPage() {
 
   async function handleDeleteUser() {
     try {
+      console.log("estou no handledelete");
+
       await api.delete(`/user/delete/${userId}`);
       navigate("/profile");
     } catch (error) {
@@ -107,7 +109,7 @@ function EditUserPage() {
     <div>
       <h1>EDIT</h1>
       <section>
-        <form action="#" method="POST">
+        <div>
           <label>{user.name}</label>
           <p>{user.registration}</p>
           <p>{user.email}</p>
@@ -249,30 +251,12 @@ function EditUserPage() {
             </div>
           </fieldset>
           <div className="area-button">
-            <button
-              type="submit"
-              className="btn-blue"
-              onClick={() => navigate("/user/:userId")}
-            >
-              My-Team{" "}
-            </button>
-            <button
-              type="submit"
-              className="btn-blue"
-              onClick={() => navigate("/profile")}
-            >
-              My-Profile
-            </button>
-            <button type="submit" className="btn-blue" onClick={handleSubmit}>
-              Save
-            </button>
-            <button
-              type="submit"
-              className="btn-blue"
-              onClick={() => navigate("/profile")}
-            >
-              Cancel
-            </button>
+            {loggedInUser.user.role === "user" && (
+              <button type="submit" className="btn-blue" onClick={handleSubmit}>
+                Save
+              </button>
+            )}
+
             {loggedInUser.user.role !== "user" && (
               <button
                 type="submit"
@@ -285,7 +269,7 @@ function EditUserPage() {
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/users")}
             >
               Cancel
             </button>
@@ -299,7 +283,7 @@ function EditUserPage() {
               </button>
             )}
           </div>
-        </form>
+        </div>
       </section>
     </div>
   );
