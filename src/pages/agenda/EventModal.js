@@ -36,9 +36,18 @@ function EventModal() {
     async function fetchTasks() {
       try {
         localStorage.removeItem('savedEvents')
-        alert("Carregando Agenda")
         const response = await api.get("/task/all");
         setTasks(response.data);
+         } catch (error) {
+      }
+    }
+    fetchTasks();
+  }, []);
+
+  useEffect(() => {
+    async function fetchTasks2() {
+      try {
+        
         tasks.map((task) => (
 
           completeCalendar(task.name, task._id, task.priority, new Date(task.deadline).getTime())
@@ -46,7 +55,7 @@ function EventModal() {
       } catch (error) {
       }
     }
-    fetchTasks();
+    fetchTasks2();
   }, []);
 
 
@@ -103,7 +112,7 @@ function EventModal() {
       day: cday,//daySelected.valueOf(),
       id: Date.now(),
     };
-
+    alert(cid)
     if (document.getElementById(cid) === null) {
       dispatchCalEvent({ type: "push", payload: calendarEvent });
     }

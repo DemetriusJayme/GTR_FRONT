@@ -51,8 +51,7 @@ export default function Day({ day, rowIdx }) {
           className={`text-xs md:text-sm p-1 my-1 text-center ${getCurrentDayClass()}`}
           id={day.format("YYYY-MM-DD")}
           onClick={(e) => {
-            console.log(e.target.id);
-            navigate('/../task/new')
+            navigate('/../task/new', { state: { deadline: e.target.id } })
           }}
 
         >
