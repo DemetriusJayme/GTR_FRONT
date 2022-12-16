@@ -17,17 +17,16 @@ function NavBar() {
     },
     {
       name: "Users",
+      responsive_to: "/users",
       submenu: true,
     },
     {
       name: "My Agenda",
-
       to: "/agenda",
       submenu: true,
     },
     {
       name: "Report",
-
       to: "/report",
     },
     // { name: "Model-form", to: "/model-form" },
@@ -66,8 +65,7 @@ function NavBar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <Link key="Home" to="/">
-                    {/* CONDICAO SE LOGADO VAI PARA /HOME */}
+                  <Link key="Home" to={loggedInUser ? "/home" : "/"}>
                     <div className="flex flex-shrink-0 items-center">
                       <svg
                         className="block h-8 fill-white w-auto lg:hidden hover:fill-orange"
@@ -75,8 +73,7 @@ function NavBar() {
                         height="24"
                         viewBox="0 0 70 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -89,8 +86,7 @@ function NavBar() {
                         height="24"
                         viewBox="0 0 70 24"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -113,8 +109,7 @@ function NavBar() {
                                   : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                 "px-3 py-2 rounded-md text-sm font-medium"
                               )
-                            }
-                          >
+                            }>
                             {item.name}
                           </NavLink>
                         ))}
@@ -124,13 +119,14 @@ function NavBar() {
 
                 {loggedInUser && (
                   <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    {loggedInUser && console.log(loggedInUser) && (
+                      <button
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    )}
 
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3">
@@ -151,8 +147,7 @@ function NavBar() {
                         enterTo="transform opacity-100 scale-100"
                         leave="transition ease-in duration-75"
                         leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
+                        leaveTo="transform opacity-0 scale-95">
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
@@ -161,8 +156,7 @@ function NavBar() {
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
-                                )}
-                              >
+                                )}>
                                 Your Profile
                               </Link>
                             )}
@@ -176,8 +170,7 @@ function NavBar() {
                                   (active ? "bg-gray-100" : "")
                                 }
                                 style={{ cursor: "pointer" }}
-                                onClick={handleLogout}
-                              >
+                                onClick={handleLogout}>
                                 Log out
                               </div>
                             )}
@@ -189,27 +182,29 @@ function NavBar() {
                 )}
               </div>
             </div>
-
-            <Disclosure.Panel className="sm:hidden">
-              <div className="space-y-1 px-2 pt-2 pb-3">
-                {navigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as="a"
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block px-3 py-2 rounded-md text-base font-medium"
-                    )}
-                    aria-current={item.current ? "page" : undefined}
-                  >
-                    {item.name}
-                  </Disclosure.Button>
-                ))}
-              </div>
-            </Disclosure.Panel>
+            {loggedInUser && (
+              <Disclosure.Panel className="sm:hidden">
+                <div className="space-y-1 px-2 pt-2 pb-3">
+                  {navigation.map((item) => (
+                    <NavLink
+                      key={item.name}
+                      to={
+                        "responsive_to" in item ? item.responsive_to : item.to
+                      }
+                      end
+                      className={({ isActive }) =>
+                        `block px-3 py-2 rounded-md text-base font-medium ${
+                          isActive
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                        }`
+                      }>
+                      {item.name}
+                    </NavLink>
+                  ))}
+                </div>
+              </Disclosure.Panel>
+            )}
           </>
         )}
       </Disclosure>
