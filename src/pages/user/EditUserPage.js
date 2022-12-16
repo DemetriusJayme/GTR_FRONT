@@ -110,21 +110,7 @@ function EditUserPage() {
       <h1>EDIT</h1>
       <section>
         <div>
-          <label>{user.name}</label>
-          <p>{user.registration}</p>
-          <p>{user.email}</p>
-
-          <div className="mt-1 flex items-center">
-            <span className="inline-block h-12 w-12 overflow-hidden rounded-full bg-gray-100">
-              <svg
-                className="h-full w-full text-gray-300 mr-2"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            </span>
-          </div>
+          
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="last-name"
@@ -142,6 +128,23 @@ function EditUserPage() {
               onChange={handleChange}
             />
           </div>
+          <div className="col-span-6 sm:col-span-3">
+            <label
+              htmlFor="last-name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Photo
+            </label>
+            <input
+              type="url"
+              name="Photo"
+              id="Photo"
+              placeholder="Enter profile picture url"
+              value={form.photo}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="password"
@@ -234,22 +237,6 @@ function EditUserPage() {
             </select>
           </div>
 
-          <fieldset>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="skills"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Skills
-              </label>
-              <input
-                type="text"
-                name="skills"
-                id="skills"
-                selected={form.skills}
-              />
-            </div>
-          </fieldset>
           <div className="area-button">
             {loggedInUser.user.role === "user" && (
               <button type="submit" className="btn-blue" onClick={handleSubmit}>
