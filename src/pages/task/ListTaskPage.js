@@ -104,13 +104,12 @@ function ListTaskPage() {
               <select
                 value={filterByStatus}
                 onChange={handleFilterByStatus}
-                className=" m-0"
-              >
+                className=" m-0">
                 <option value="active">Active</option>
                 <option value="rejected">Rejected</option>
                 <option value="pending">Pending</option>
                 <option value="done">Done</option>
-                <option value="archived">Archived</option>
+                <option value="archive">Archived</option>
                 <option value="started">Started</option>
               </select>
             </div>
@@ -157,8 +156,7 @@ function ListTaskPage() {
                           {task.members.map((member) => (
                             <li
                               className="whitespace-nowrap tag"
-                              key={member._id}
-                            >
+                              key={member._id}>
                               {member.name}
                             </li>
                           ))}
@@ -171,8 +169,7 @@ function ListTaskPage() {
                     <td
                       className={`px-2 ${
                         dayjs().isAfter(task.deadline) ? "text-red-600" : ""
-                      }`}
-                    >
+                      }`}>
                       {dayjs().to(task.deadline)}
                     </td>
                     <td className="px-2">

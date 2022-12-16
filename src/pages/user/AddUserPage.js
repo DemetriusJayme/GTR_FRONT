@@ -26,8 +26,8 @@ function AddUserPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await api.post("/user/create", form);
-      navigate("/profile");
+      let response = await api.post("/user/create", form);
+      navigate("/user/" + response.data._id);
       setForm({
         name: "",
         email: "",
@@ -53,8 +53,7 @@ function AddUserPage() {
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
+              className="block text-sm font-medium text-gray-700">
               Name
             </label>
             <input
@@ -83,8 +82,7 @@ function AddUserPage() {
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+              className="block text-sm font-medium text-gray-700">
               Password
             </label>
             <input

@@ -31,7 +31,6 @@ function ListUserPage() {
       <div className="lg:flex lg:items-center lg:justify-between mb-6">
         <div className="min-w-0 flex-1">
           <h1>My Team</h1>
-          <h1>My Team</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           {/* <span className="hidden sm:block">
@@ -58,8 +57,7 @@ function ListUserPage() {
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/profile")}
-            >
+              onClick={() => navigate("/profile")}>
               <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
               My Profile
             </button>
@@ -68,8 +66,7 @@ function ListUserPage() {
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/add-user")}
-            >
+              onClick={() => navigate("/add-user")}>
               <CheckIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
               Add User
             </button>
@@ -87,14 +84,12 @@ function ListUserPage() {
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                xmlns="http://www.w3.org/2000/svg">
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </div>
             <input
@@ -156,11 +151,11 @@ function ListUserPage() {
 
                         <td className="py-4 px-6">
                           <Link
-                            to={`/user/${user._id}`}
+                            to={`/profile`}
+                            state={{ user }}
                             type="button"
                             data-modal-toggle="editUserModal"
-                            className="links"
-                          >
+                            className="links">
                             Details
                           </Link>
                         </td>

@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { toast } from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import api from "../../api/api.js";
 import { AuthContext } from "../../contexts/authContext";
@@ -33,6 +34,7 @@ function LoginPage() {
 
       navigate("/home");
     } catch (error) {
+      toast.error(error.response.data.msg);
       console.log(error);
     }
   }
@@ -114,8 +116,7 @@ function LoginPage() {
           <NavLink
             key="signUp"
             to="/signup"
-            className="p-3 mt-6 cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white"
-          >
+            className="p-3 mt-6 cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white">
             Create your account
           </NavLink>
         </div>

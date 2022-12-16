@@ -20,13 +20,12 @@ function AddUserPage() {
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-    console.log(e.target.value);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await api.post("/user/create", form);
+      await api.post("/user/sign-up", form);
       navigate("/");
       setForm({
         name: "",
@@ -80,8 +79,7 @@ function AddUserPage() {
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                  className="block text-sm font-medium text-gray-700">
                   Name
                 </label>
                 <input
@@ -110,8 +108,7 @@ function AddUserPage() {
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                  className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
                 <input
@@ -138,8 +135,7 @@ function AddUserPage() {
                 <button
                   type="submit"
                   className="p-3 mt-6 cursor-pointer rounded-md bg-orange text-center text-white font-bold hover:bg-blue hover:text-white"
-                  onClick={handleSubmit}
-                >
+                  onClick={handleSubmit}>
                   Create your account
                 </button>
               </div>

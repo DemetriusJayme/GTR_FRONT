@@ -95,8 +95,9 @@ function DetailsTask() {
 
   async function handleUpdate(values) {
     try {
-      console.log(values);
-      let response = await api.put(`/task/${id}`, values);
+      const clone = { ...values };
+      delete clone._id;
+      let response = await api.put(`/task/${id}`, clone);
       toast.success(response.data.msg);
       setReload(!reload);
     } catch (error) {
@@ -106,7 +107,7 @@ function DetailsTask() {
 
   async function handleDelete() {
     try {
-      let response = await api.put(`/task/${id}`);
+      let response = await api.delete(`/task/${id}`);
       toast.success(response.data.msg);
       navigate("/task");
     } catch (error) {

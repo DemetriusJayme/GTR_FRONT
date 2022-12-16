@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate, NavLink } from "react-router-dom";
 import api from "../api/api.js";
 import { AuthContext } from "../contexts/authContext";
@@ -33,6 +34,7 @@ function LoginPage() {
 
       navigate("/home");
     } catch (error) {
+      toast.error(error.response.data.msg);
       console.log(error);
     }
   }
