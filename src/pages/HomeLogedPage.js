@@ -8,6 +8,10 @@ import {
   CalendarDaysIcon,
   DocumentChartBarIcon,
   BookOpenIcon,
+  PhoneIcon,
+  EnvelopeIcon,
+  IdentificationIcon,
+  BriefcaseIcon,
 } from "@heroicons/react/20/solid";
 
 function HomeLogedPage() {
@@ -29,8 +33,8 @@ function HomeLogedPage() {
 
   return (
     <>
-      <div className="lg:flex lg:items-center lg:justify-between mb-10">
-        <div className="min-w-0 flex-1 mt-8">
+      <div className="lg:flex lg:justify-between mb-10">
+        <div className="min-w-0 flex-1 ">
           <h3>
             Welcome, <span className="text-orange">{user.name}</span>
           </h3>
@@ -54,12 +58,18 @@ function HomeLogedPage() {
             </div>
           </div>
         </div>
-        <div className="md:flex mt-2 md:mt-0 flex-col content-end items-end text-sm text-blue2  ">
-          <div className="underline font-bold">About you:</div>
+        <div className="md:flex md:mt-0 flex-col   bg-gray-50 rounded-md p-4 text-sm text-blue2  ">
+          <div className="mb-1 font-bold">About you:</div>
 
-          <div>Email: {user.email}</div>
-          <div>Phone: {user.phone}</div>
-          <div>Registration: {user.registration}</div>
+          <div className="flex items-center">
+            <EnvelopeIcon className="h-4 w-4 mr-2" /> {user.email}
+          </div>
+          <div className="flex items-center">
+            <PhoneIcon className="h-4 w-4 mr-2" /> {user.phone}
+          </div>
+          <div className="flex items-center">
+            <IdentificationIcon className="h-4 w-4 mr-2" /> {user.registration}
+          </div>
         </div>
       </div>
       <div className="md:grid md:grid-cols-8 gap-2">
@@ -71,21 +81,21 @@ function HomeLogedPage() {
           <h4 className="mt-2 text-2xl font-bold">Tasks</h4>
         </NavLink>
         <NavLink
-          to="/task"
+          to="/users"
           className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
         >
           <UsersIcon className="h-12 w-12 mb2  " />
           <h4 className="mt-2 text-2xl font-bold">Users</h4>
         </NavLink>
         <NavLink
-          to="/task"
+          to="/agenda"
           className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
         >
           <CalendarDaysIcon className="h-12 w-12 mb2 " />
           <h4 className="mt-2 text-2xl font-bold">My Agenda</h4>
         </NavLink>
         <NavLink
-          to="/task"
+          to="/report"
           className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
         >
           <DocumentChartBarIcon className="h-12 w-12 mb2 " />
