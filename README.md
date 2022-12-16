@@ -7,6 +7,7 @@ Aplicação Front End construida em REACT e Back End em Node utilizando o framew
 ## Links
 Github Back End: https://github.com/MichelaCamboim/GTR_Server.git
 ### DEPLOY: https://gtr-project.netlify.app/
+#### Apresentação: https://docs.google.com/presentation/d/1v-2YwX85RUUzihdvvVfzB1DgiMQ2O1i2imlc5_SDp24/edit?usp=sharing
 
 
 # Solução desenvolvida por:
