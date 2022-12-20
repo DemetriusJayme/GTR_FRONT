@@ -33,26 +33,7 @@ function ListUserPage() {
           <h1>My Team</h1>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
-          {/* <span className="hidden sm:block">
-            <button type="button" className="btn">
-              <PencilIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
-                aria-hidden="true"
-              />
-              Group
-            </button>
-          </span>
-
-          <span className="ml-3 hidden sm:block">
-            <button type="button" className="btn">
-              <LinkIcon
-                className="-ml-1 mr-2 h-5 w-5 text-gray-500"
-                aria-hidden="true"
-              />
-              Users
-            </button>
-          </span>
- */}
+         
           <span className="sm:ml-3">
             <button
               type="submit"

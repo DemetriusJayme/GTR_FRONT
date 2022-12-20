@@ -1,12 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/authContext";
 
 import api from "../../api/api.js";
 
 function AddUserPage() {
-  const { loggedInUser } = useContext(AuthContext);
-
   const [reload, setReload] = useState(false);
   const navigate = useNavigate();
 
@@ -26,8 +23,16 @@ function AddUserPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      let response = await api.post("/user/create", form);
-      navigate("/profile", { state: { user: response.data } });
+      await api.post("/user/create", form);
+      navigate("/home");
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        role: "",
+      });
+      console.log(form);
+      setReload(!reload);
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +92,16 @@ function AddUserPage() {
               onChange={handleChange}
             />
           </div>
-
+          <div className="col-span-6 sm:col-span-3">
+            <label htmlFor="role" className="">
+              Role
+            </label>
+            <select name="role" onChange={handleChange} value={form.role}>
+              <option>Select an option</option>
+              <option value="supervisor">Supervisor</option>
+              <option value="user">User</option>
+            </select>
+          </div>
           <div className="flex mt-4 justify-end">
             <button type="submit" className="btn-blue" onClick={handleSubmit}>
               Create

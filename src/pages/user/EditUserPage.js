@@ -3,6 +3,12 @@ import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import api from "../../api/api";
 
+import {
+  PhoneIcon,
+  EnvelopeIcon,
+  IdentificationIcon,
+} from "@heroicons/react/20/solid";
+
 function EditUserPage() {
   const navigate = useNavigate();
   const { userId } = useParams();
@@ -36,9 +42,7 @@ function EditUserPage() {
     tasks: [],
   });
   const [reload, setReload] = useState(false);
-  // const status = ["Active", "Vacation", "Inactive"];
-  // const role = ["user", "supervisor"];
-  //  const allocated = ["true", "false"];
+  const [img, setImg] = useState();
 
   useEffect(() => {
     async function fetchUser() {
@@ -59,6 +63,24 @@ function EditUserPage() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
+  function handleImage(e) {
+    //console.log(e.target.files[0]);
+    setImg(e.target.files[0]);
+  }
+  async function handleUpload(e) {
+    try {
+      const uploadData = new FormData();
+      uploadData.append("file", img);
+
+      const response = await api.post("/fileUpload/upload", uploadData);
+
+      console.log(uploadData);
+
+      return response.data.url;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   /* 
   function updateTags(tags) {
     handleChange({ target: { name: "skills", value: tags } });
@@ -66,14 +88,15 @@ function EditUserPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const imgURL = await handleUpload();
     try {
       //clonando o form para que possamos fazer as alterações necessárias
       const clone = { ...form };
       delete clone._id;
 
-      await api.put("/user/edit", clone);
+      await api.put("/user/edit", { clone, photo: imgURL });
       setReload(!reload);
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +121,7 @@ function EditUserPage() {
       console.log("estou no handledelete");
 
       await api.delete(`/user/delete/${userId}`);
-      navigate("/profile");
+      navigate("/home");
     } catch (error) {
       console.log(error);
       alert("Algo deu errado no delete do user");
@@ -107,10 +130,27 @@ function EditUserPage() {
 
   return (
     <div>
-      <h1>EDIT</h1>
+      <div className="min-w-0 flex-1 ">
+        <h3>
+          Welcome to the <span className="text-orange">{user.name}</span> Edit
+          Page
+        </h3>
+      </div>
+      <div className="md:flex md:mt-0 flex-col   bg-gray-50 rounded-md p-4 text-sm text-blue2  ">
+        <div className="mb-1 font-bold">About you:</div>
+
+        <div className="flex items-center">
+          <EnvelopeIcon className="h-4 w-4 mr-2" /> {user.email}
+        </div>
+        <div className="flex items-center">
+          <PhoneIcon className="h-4 w-4 mr-2" /> {user.phone}
+        </div>
+        <div className="flex items-center">
+          <IdentificationIcon className="h-4 w-4 mr-2" /> {user.registration}
+        </div>
+      </div>
       <section>
         <div>
-          
           <div className="col-span-6 sm:col-span-3">
             <label
               htmlFor="last-name"
@@ -128,72 +168,88 @@ function EditUserPage() {
               onChange={handleChange}
             />
           </div>
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="last-name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Photo
-            </label>
-            <input
-              type="url"
-              name="Photo"
-              id="Photo"
-              placeholder="Enter profile picture url"
-              value={form.photo}
-              onChange={handleChange}
-            />
-          </div>
+          <label className="block text-sm font-medium text-gray-700">
+            Photo
+          </label>
 
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={form.password}
-              onChange={handleChange}
-            />
+          <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
+            <div className="space-y-1 text-center">
+              <label htmlFor="file-upload">
+                <input
+                  id="file-upload"
+                  name="file-upload"
+                  type="file"
+                  onChange={handleImage}
+                />
+              </label>
+            </div>
           </div>
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Work Hours
-            </label>
-            <input
-              type="number"
-              name="workHours"
-              placeholder="Type the Work hours"
-              id="workHours"
-              value={form.workHours}
-              onChange={handleChange}
-            />
+          <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
+            <div className="w-full">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={form.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="last-name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Phone
+              </label>
+              <input
+                type="number"
+                name="phone"
+                id="phone"
+                autoComplete="phone"
+                value={form.phone}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-          <div className="col-span-6 sm:col-span-3">
-            <label
-              htmlFor="last-name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Phone
-            </label>
-            <input
-              type="number"
-              name="phone"
-              id="phone"
-              autoComplete="phone"
-              placeholder="Enter the full phone"
-              value={form.phone}
-              onChange={handleChange}
-            />
+          <div className="gap-x-8 flex flex-wrap sm:flex-nowrap items-center">
+            <div className="w-full">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Work Hours
+              </label>
+              <input
+                type="number"
+                name="workHours"
+                id="workHours"
+                value={form.workHours}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-full">
+              <label
+                htmlFor="last-name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Time Zone
+              </label>
+              <input
+                type="number"
+                name="timezone"
+                id="timezone"
+                autoComplete="timezone"
+                value={form.timezone}
+                onChange={handleChange}
+              />
+            </div>
           </div>
-
           <div className="col-span-6 sm:col-span-3">
             <label htmlFor="department" className="">
               Department
@@ -244,7 +300,7 @@ function EditUserPage() {
               </button>
             )}
 
-            {loggedInUser.user.role !== "user" && (
+            {loggedInUser.user.email === "karen@email.com" && (
               <button
                 type="submit"
                 className="btn-blue"
@@ -256,11 +312,11 @@ function EditUserPage() {
             <button
               type="submit"
               className="btn-blue"
-              onClick={() => navigate("/users")}
+              onClick={() => navigate("/home")}
             >
               Cancel
             </button>
-            {loggedInUser.user.role !== "user" && (
+            {loggedInUser.user.email === "karen@email.com" && (
               <button
                 type="submit"
                 className="btn-blue"

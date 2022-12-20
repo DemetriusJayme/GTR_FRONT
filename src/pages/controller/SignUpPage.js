@@ -1,12 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../contexts/authContext";
 
 import api from "../../api/api.js";
 
 function AddUserPage() {
-  const { loggedInUser } = useContext(AuthContext);
-  console.log(loggedInUser);
   const [reload, setReload] = useState(false);
   const navigate = useNavigate();
 
@@ -14,25 +11,28 @@ function AddUserPage() {
     name: "",
     email: "",
     password: "",
-    confirmEmail: true,
-    role: "",
+    confirmPassword: "",
   });
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
+    console.log(e.target.value);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords are different, please try again");
+      return;
+    }
     try {
       await api.post("/user/sign-up", form);
-      navigate("/");
+      navigate("/login");
       setForm({
         name: "",
         email: "",
         password: "",
-        confirmEmail: true,
-        role: "",
       });
       console.log(form);
       setReload(!reload);
@@ -119,6 +119,22 @@ function AddUserPage() {
                   placeholder="Type the password"
                   id="password"
                   value={form.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="col-span-6 sm:col-span-3">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Type the password"
+                  id="confirmPassword"
+                  value={form.confirmPassword}
                   onChange={handleChange}
                 />
               </div>
