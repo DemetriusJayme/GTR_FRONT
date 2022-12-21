@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../contexts/authContext";
 import api from "../api/api";
 import { NavLink } from "react-router-dom";
 
@@ -11,10 +12,11 @@ import {
   PhoneIcon,
   EnvelopeIcon,
   IdentificationIcon,
-  BriefcaseIcon,
 } from "@heroicons/react/20/solid";
 
 function HomeLogedPage() {
+  const { loggedInUser } = useContext(AuthContext);
+
   const [user, setUser] = useState({});
   const [reload, setReload] = useState(false);
   console.log(setReload);
@@ -73,19 +75,21 @@ function HomeLogedPage() {
         </div>
       </div>
       <div className="md:grid md:grid-cols-8 gap-2">
+        {loggedInUser.user.role !== "user" && (
+          <NavLink
+            to="/users"
+            className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
+          >
+            <UsersIcon className="h-12 w-12 mb2  " />
+            <h4 className="mt-2 text-2xl font-bold">My Team</h4>
+          </NavLink>
+        )}
         <NavLink
           to="/task"
           className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
         >
           <ClipboardDocumentListIcon className="h-12 w-12 mb2 " />
           <h4 className="mt-2 text-2xl font-bold">Tasks</h4>
-        </NavLink>
-        <NavLink
-          to="/users"
-          className="system md:col-span-2 bg-gray-100 text-blue p-8 rounded-md mb-2  flex flex-col content-center items-center hover:bg-orange hover:text-white cursor-pointer"
-        >
-          <UsersIcon className="h-12 w-12 mb2  " />
-          <h4 className="mt-2 text-2xl font-bold">Users</h4>
         </NavLink>
         <NavLink
           to="/agenda"
